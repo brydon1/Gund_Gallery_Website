@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--MultipleRecords/ObjectList.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}%</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div class="container">
+        <div class="pageHeader">
+            <h1>Browse the Collection</h1>
+            <h2>%{Parent Record Name;Object Results}%</h2>
+        </div>
+
+        <div class="row">
+            <div class="col col-sm col-md-5 col-lg-4 col-xl-4 mr-auto">
+                <form id='popup' name='popup' method='get' action='%{Link;Objects_1;info;0;query=Current Selection;records=1}%'>
+                    <input type='hidden' name='query' id='query' value='%{Current Selection}%' />
+                    <select class="form-control" name='page' title='page' id='page' onchange='document.forms["popup"].submit()'>
+                        <!--#4dloop [Objects_1]-->
+                            <option value='<!--#4Dtext Selected Record number([objects_1])-->' <!--#4Dif (lFirstRec = Selected Record number([objects_1])) --> selected='selected' <!--#4Dendif-->>
+                                <!--#4Dtext ([Objects_1]Disp_Title +" - " +[Objects_1]Disp_Maker_1)-->
+                            </option>
+                        <!--#4dendloop -->
+                    </select>
+                </form>
+            </div>
+
+            <div class="col col-sm col-md-4 col-lg-4 col-xl-4"> <!-- display options -->
+                <div class="display-options" style="display:inline;">
+                    <div claass="navtxt">
+                        <a class="btn btn-default" href="%{Link;Objects_1;thumbnails;0;first=Current Record;query=Current Selection;records=20}%" aria-label="Go to Thumbnails view">
+                            <i class="fa fa-th" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div claass="navtxt">
+                        <a class="btn btn-default" href="%{Link;Objects_1;portfolio;0;first=Current Record;query=Current Selection;records=12}%" aria-label="Go to Portfolio view">
+                            <i class="fa fa-th-large" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div claass="navtxt">
+                        <a class="btn btn-primary" disabled="disabled" href="#" aria-label="Stay on list view">
+                            <i class="fa fa-th-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        %{Include pagenavigation.inc}%
+
+        <p class="small text-muted" style="margin-bottom:0;">
+            <em>Click on a column heading to sort the list.</em>
+        </p>
+    </div>
+
+    <div style="position: relative;">
+        %{Include FilterBox.html}%
+
+        <div class="container">
+            <a name="main"></a>
+            <!-- list start -->
+            <table class="table table-sm table-striped" cellpadding="0" cellspacing="0">
+                <!-- list headings start -->
+                <tr align=bottom>
+                    <td class="list-heading">
+                        <a href="%{Link;Objects_1;list;0;first=Current Record;query=Current Selection;sort=9}%" title="Sort records by Title">Title</a>
+                    </td>
+                    <td class="list-heading">
+                        <a href="%{Link;Objects_1;list;0;first=Current Record;query=Current Selection;sort=7}%" title="Sort records by Artist">Artist</a>
+                    </td>
+                    <td class="list-heading">
+                        <a href="%{Link;Objects_1;list;0;first=Current Record;query=Current Selection;sort=52}%" title="Sort records by Medium & Support">Medium &amp; Support</a>
+                    </td>
+                    <td class="list-heading">
+                        <a href="%{Link;Objects_1;list;0;first=Current Record;query=Current Selection;sort=61}%" title="Sort records by Creation Date">Creation Date</a>
+                    </td>
+                    <!--#4Dif gsFunc_IsLoggedIn-->
+                        <td class="list-heading">&nbsp;</td>
+                    <!--#4Dendif-->
+                </tr>
+                <!-- list headings end -->
+
+                <!--#4DEVAL (gsFunc_SetSelectedRecord(->[Objects_1]; gsFunc_GetCount("First Record")))-->  <!-- loads the first record -->
+                <!--#4DEVAL $i:=gsFunc_GetCount("First Record")-->                          <!-- set temp counter for the loop -->
+
+                <!--The following will be repeated for each record in the Object List.-->
+                <!--#4DLOOP ($i <= gsFunc_GetCount("Last Record"))-->                       <!-- loop based on the temp counter -->
+                    <!--#4DEVAL $i:=$i+1-->                                                 <!-- increment the temp counter -->
+                    <tr valign="top">
+                        <td>
+                            <a href="<!--4Dtext gsFunc_Link("Objects_1;info;0;first=Current Record;query=Current Selection;records=1")-->" title="view object description">
+                                <i><!--#4Dtext [Objects_1]Disp_Title--></i>
+                            </a>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <a href="/artist-maker/info/<!--4Dtext [Objects_1]_Disp_Maker_ID-->" title="view artist description">
+                                <!--#4Dtext [Objects_1]Sort_Artist-->
+                            </a>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <!--#4Dtext [Objects_1]Disp_Medium-->&nbsp;
+                        </td>
+                        <td>
+                            <!--#4Dtext [Objects_1]Disp_Create_DT-->&nbsp;
+                        </td>
+%{SKIP START}%
+                        <!--#4Dif gsFunc_IsLoggedIn-->
+                            <td class="list-row smalltxt">
+                                <a href="javascript:addToPort(,'',%{_ID}%);">Add to portfolio</a>
+                                &nbsp;&gt;
+                                %{if(Editing Portfolio)}%
+                                    &gt;&nbsp;
+                                    <a href="%{RemoveFromPortfolio}%&display=LST">Remove from portfolio</a>
+                                %{end if}%
+                            </td>
+                        <!--#4Dendif-->
+%{SKIP END}%
+                    </tr>
+                    <!--#4DEVAL NEXT RECORD([Objects_1])-->                                 <!-- load the next record -->
+                <!--#4DENDLOOP-->
+
+            </table>
+            <!-- list end -->
+        </div>
+    </div>
+
+    <div class="container">
+        %{Include selectiondescription.inc}%
+        %{Include view_selection_as.inc}%
+
+        <br>
+        %{Include formaddtoport.inc}%
+        <br>
+        <br>
+
+        %{Include addobjtoportfolio.inc}%
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

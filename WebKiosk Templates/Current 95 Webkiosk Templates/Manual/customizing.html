@@ -1,0 +1,1580 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>Customizing the Kiosk</h1>
+
+<a href="#preferences">Setting Preferences</a>&nbsp;|&nbsp;
+<a href="#users">User Accounts</a>&nbsp;|&nbsp;
+<a href="#templates">Customizing Templates</a>&nbsp;|&nbsp;
+<a href="#javascript">Javascript</a>&nbsp;|&nbsp;
+<a href="#filtering">Filtering</a>&nbsp;|&nbsp;
+<a href="#forms">Forms</a>
+
+<br><br>
+
+Virtually every aspect of the EmbARK Web Kiosk can be customized to give the kiosk the look and feel you want, including a wide range of preference settings and HTML templates that can be edited.
+
+<h4>Note</h4>
+<ul>
+<li>You do not have to change any of the preference settings or customize any of the HTML pages in order to use the kiosk.  Therefore, all of the procedures in this section should be considered optional.
+</ul>
+
+<a name="preferences"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Setting Preferences</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	To set preferences at any time after installing the kiosk, choose <b>Preferences</b> from the EmbARK Web Kiosk <b>File</b> menu or click the <b>Preferences</b> button on the splash screen.
+
+	<br><br>
+
+	The Preferences dialog box will appear, containing six separate tabs; click any tab to display different preference settings.  After changing preferences, click <b>Save</b> to close the Preferences dialog box.  Your settings will be saved in a file called <b>Preferences.txt</b> in the EmbARK Web Kiosk <b>Templates</b> folder.
+
+	<br><br>
+
+	The following sections describe each of the individual settings.
+
+	<h4>Notes</h4>
+	<ul>
+	<li>No Preferences adjustments should be required for the kiosk to run. These are all optional configurations for customizing a kiosk site.
+	</ul>
+
+	<a name="general_tab"></a>
+	<h3>General Tab</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The General Tab contains settings that pertain to the server.<br>
+		<img src="images/preferences_general.gif" width="778" height="601" border="1" vspace="6" alt="Preferences - General Tab">
+
+		<br><br>
+
+		<a name="default_page"></a>
+		<b>Default Page</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			This setting specifies the relative URL to which a visitor will be forwarded if they request the kiosk web root without a specific page (e.g. http://my.kiosk.com/). This should usually be set to whatever functions as the site's &quot;home page&quot;.
+
+			<br><br>
+
+			The default value is <b>default.htm</b>.  To set Browse the Collections as the default, enter "IT_-1.htm". To set the Portolio page as the default, enter "portfolioindex.htm".
+
+		</td></tr></table>
+
+
+		<a name="convert_url"></a>
+		<b>Convert URLs to active links</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			This setting enables the translation of plain text into HTML.  HTTP or FTP addresses are converted to live links; carriage returns are converted to their equivalent HTML code so that they render on the web page.
+						<br><br>
+
+			The default value is <b>checked</b>.
+
+		</td></tr></table>
+
+		<a name="field_names"></a>
+		<b>Viewed table and field names</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			This setting allows the template designer to use the "Viewed" table and field names from EmbARK when customizing the Templates.  Prior to EmbARK 6.0, this was the standard method for Template design.  However, as internal field names always remain fixed, using them ensures that data will not suddenly disappear from the Kiosk if a field is unexpectedly changed.
+			<br><br>
+			The best place to view internal field names is in EmbARK by going to the <b>File</b> menu, selecting "File and Field Names", then viewing the internal field name column (on the left).
+
+			<br><br>
+
+			The default value is <b>unchecked</b>.
+
+		</td></tr></table>
+
+		<a name="images_url"></a>
+		<b>Media Directory URL</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			If your images are stored on a separate web server, enter the URL for the folder here (for example, http://www.myServer.com/KioskImages/).
+			
+			<br><br>
+
+			The default value is <b>/Media/</b>. This setting makes use of the internal <a href="setup_server.html#webfolder">WebFolder</a>.
+			
+		</td></tr></table>
+
+		<a name="images_folder"></a>
+		<b>Media Directory</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			The Media Directory is the fully qualified local path to the Images directory. It is used by the Thumbnail/Preview Export process to determine where the image files should be sent. (See <a href="setup_server.html#generate_thumbnails">Generating Thumbnails and Previews</a> for more information.)
+
+			<br><br>
+
+			The default value is the local path to the Media subdirectory of the EmbARK Web Kiosk directory.  Click the <b>Browse</b> button to navigate to the Media folder inside of the <b>WebFolder</b> and then click <b>Choose</b> to select it.  Note: UNC file paths are not supported.
+		</td></tr></table>
+
+		<a name="graphics_url"></a>
+		<b>Graphics URL</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			If your kiosk graphics are stored on a separate server, enter the URL for the folder here (for example, http://www.myServer.com/KioskGraphics/).
+
+			<br><br>
+
+			The default value is <b>/graphics/</b>.
+			
+		</td></tr></table>
+
+		<a name="single_directory"></a>
+		<b>Store all images in a single directory.</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			If you prefer to copy images to the web server but can not maintain the original image path as originally linked to EmbARK, Kiosk can be configured to flatten the filepath directory structure and look for all files at the root of the Images, Thumbnails, Previews and Zoom folders.
+
+			<br><br>
+
+			The default value is <b>unchecked</b>.
+		</td></tr></table>
+
+		<a name="smtp_server"></a>
+		<b>SMTP Server</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			If you anticipate using the SUBMITEMAIL function, enter the name of your SMTP Server here.  Note: Support of mail servers is not covered under the EmbARK Technical support agreement.  Some users have found success installing an SMTP mail server application on the same machine as the kiosk application.
+		</td></tr></table>
+
+		<a name="submitfile_delimiters"></a>
+		<b>SubmitFile Delimiters</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			If you anticipate using the SUBMITFILE function (for building <a href="customizing.html#forms">forms</a>, enter the ascii values for delimiters for the text file here.
+
+			<br><br>
+
+			By default, the file will be tab delimited: 9 (tab) between fields, and 13 (carriage return) between records.
+		</td></tr></table>
+
+		<a name="datafilepath"></a>
+		<b>Datafile</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			The path to the datafile that kiosk is publishing is displayed.
+
+		</td></tr></table>
+
+		<a name="reset_for_embark"></a>
+		<b>Reset for EmbARK Button</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			It is bad practice to open a datafile in EmbARK after it has been opened in the EmbARK Web Kiosk. It can cause unexpected problems or data loss. In the kiosk you should always use a <i>copy</i> of the EmbARK datafile.
+
+			<br><br>
+
+			There is a flag in the datafile that tells EmbARK when a datafile has been opened by the kiosk. This is designed to help prevent accidental datafile swaps.
+
+			<br><br>
+
+			However, there may be occasions when it is necessary to open a kiosk datafile in EmbARK. In these cases, clicking <b>Reset for EmbARK</b> will reset this flag.
+
+		</td></tr></table>
+
+		<a name="fast_indexes"></a>
+		<b>Fast Indexes</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			This button triggers the remaking of indices that are optimized for query speed.
+
+			<br><br>
+
+			The first time you open any copy of a datafile in the kiosk, you will be prompted (unless <a href="#startup_tab">Startup Defaults</a> have been turned on) to convert traditional indices to fast indices. If you cancel that process at startup, you can trigger it later by clicking this button.
+
+			<br><br>
+
+			(See <a href="setup_server.html#initialization">Datafile Initialization</a> for more details.)
+		</td></tr></table>
+
+		<a name="open_log"></a>
+		<b>Open Log</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			The <b>Connection Log</b> displays the most recent hits to the kiosk. It opens automatically at startup. If you close the log window, clicking this button will reopen it.
+		</td></tr></table>
+
+
+		<a name="export_images"></a>
+		<b>Export Images</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			Clicking this button triggers the kiosk to verify that thumbnails and previews exist for each web accessible surrogate, index tree and portfolio image in the datafile, and to generate the images that are missing.
+
+			<br><br>
+
+			The first time you open any copy of a datafile in the kiosk, you will be prompted (unless <a href="#startup_tab">Startup Defaults</a> have been turned on) to run this process. (See <a href="setup_server.html#initialization">Datafile Initialization</a> for more details.)
+
+			<br><br>
+
+			(See <a href="setup_server.html#generate_thumbnails">Generating Thumbnails and Previews</a> for more details.)
+
+		</td></tr></table>
+
+		
+		<a name="reset_defaults"></a>
+		<b>Reset to Defaults</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Clicking <b>Reset to Defaults</b> applies the default settings for all kiosk preferences, overwriting any changes you have made.
+
+			<br><br>
+
+			<h4>Notes</h4>
+			<ul>
+			<li>The default settings are automatically saved as they are loaded into the Preferences form. Previous settings can not be retrieved.
+			</ul>
+
+		</td></tr></table>
+
+
+		<a name="web_server"></a>
+		<b>Web Server Prefs</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			This button provides access to the full set of 4D web server settings.  Most of these settings should not be changed unless otherwise instructed.  The primary reason to click this button is if you need to reset the port id on which the web server operates.  This is sometimes necessary when you have multiple web serving applications running off of the same machine. The button will automatically take you to the page where you can change the <b>TCP Port</b>.  This setting specifies the port on which the Kiosk will operate.  Typically, it will run on the default port "80".  After changing the number, click YES to the prompt to restart the web server.
+			<br><br>
+			On Macintosh OS X, ports 0-1023 are reserved for the "root" user.  In order to use a port within this range, a system administrator will need to respond to the prompt to Authenticate.  After verification, restart the Web Kiosk application.  Note:  This same function can be accomplished by using the Pseudo utility.
+			<br><br>
+			The Web Server settings may also be used to allocate more memory (RAM) to the application.  GO to the Database -> Data Management section and set the <b>Minimum Size</b> and <b>Maximum Size</b> (dependant upon the amount of RAM available on your server).
+
+
+		</td></tr></table>
+	</td></tr></table>
+
+	
+	<a name="searchconfig_tab"></a>
+	<h3>Search Config Tab</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The Search Config tab contains settings that pertain to the various Search options that are available in the default Kiosk templates.<br>
+		<img src="images/preferences_searchconfig.gif" width="778" height="601" border="1" vspace="6" alt="Preferences - Search Config Tab">
+
+		<br><br>
+		
+		<a name="search_results_max"></a>
+		<b>Maximimum # of records in search results</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Enter a maximum number of search results to display per page.  Users will be able to click navigation buttons to view subsequent pages.
+
+			<br><br>
+	
+			The default value is <b>5000</b>.
+
+		</td></tr></table>
+		
+		<a name="max_records_message"></a>
+		<b>Message to display when too many records are found.</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			The text typed in this box will display when the user performs a search that has results exceeding the value in the Maximimum # of Records in Search Results box below.  Typically, this message should be written to inform the user to perform a more specific search that will return a smaller number of records.
+
+
+		</td></tr></table>
+
+		<a name="defaultsortobject"></a>
+		<b>Default object sort field</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Select an object field from the popup.  When a search is performed, objects will be sorted by this field by default.  This value can be overwritten by setting a <a href="kiosktags.html#sort">Sort</a> parameter on the search form.
+
+			<br><br>
+
+			The default value is <b>Display Title</b>.
+			
+		</td></tr></table>
+	
+		<a name="defaultsortartist"></a>
+		<b>Default object artist field</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Select an object field from the popup.  When a search is performed, objects will be sorted by this field by default. 
+
+			<br><br>
+
+			The default value is <b>Sort Name</b>.
+			
+		<a name="maximum_qs_values"></a>
+		<b>Maximum # of values to display in Quick Search popups</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Enter a maximum number of values in the box.  If the number of values exceeds what you enter here, choices will be displayed according to the starting letter or number.
+
+			<br><br>
+
+			The default value is <b>100</b>.
+		</td></tr></table>
+		
+		<a name="blank_keyword"></a>
+		<b>Text for blank Keyword boxes</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			This text will display in the Keywords Found and Keywords Selected boxes when no keywords are found or selected
+
+			<br><br>
+
+			The default value is <b>- - - - - - - - - - - - - - - - - - - -</b>.
+		</td></tr></table>
+		
+		<a name="maximum_keywords"></a>
+		<b>Maximum # of keywords to display</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Enter a number in the box.  If a Find Keywords command would return more than this number of keywords, the user will be prompted to enter additional letters to narrow the search criteria.
+
+			<br><br>
+
+			The default value is <b>25</b>.
+		</td></tr></table>
+
+		<a name="update_keywords"></a>
+		<b>Update Keyword Lists</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			Clicking <b>Update Keyword Lists</b> causes the kiosk to loop through each keyword in the datafile to determine which ones are linked to web accessible objects. This enables the keyword search to display only those keywords that will return results.
+
+			<br><br>
+
+			The first time you open any copy of a datafile in the kiosk, you will be prompted (unless <a href="#startup_tab">Startup Defaults</a> have been turned on) to run this process. (See <a href="setup_server.html#initialization">Datafile Initialization</a> for more details.)
+
+		</td></tr></table>
+
+
+		<a name="custsearchdefault"></a>
+		<b>Text search default</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			This Boolean setting determines whether the values entered for the <a href="customizing.html#custom_search">Custom Search</a> will be queried as an <b>equal</b> (exact match) or <b>contains</b>.
+
+		</td></tr></table>
+
+		<a name="artist_obj_descriptor"></a>
+		<b>Artist's Objects Selection Descriptor</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Enter a text value to display in the Selection description that displays with the Artist's Objects kiosk tag, e.g. <b>Related to</b> will be inserted before the artist name, Picasso, to create "Related to Picasso".
+
+		</td></tr></table>
+		
+		<a name="portfolio_sel_descriptor"></a>
+		<b>Portfolio Selection Descriptor</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Enter a text values to display in the Selection description that displays with the <b>{Portfolio}</b> kiosk tag, e.g. <b>Portfolio</b> will be inserted before the name of the portfolio grouping.  This setting is useful if you wish to use a term other than "Portfolio" on your Kiosk. The pluralized version of the term is used to display the portfolio description at the top of the SharedPortfolioIndex.htm page (aka Community Portfolios).
+
+		</td></tr></table>
+
+
+	</td></tr></table>
+	
+	
+	<a name="searchfields_tab"></a>
+	<h3>Search Fields Tab</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+	
+			The Search Fields tab provides all the search field selection functionality that was previously located in EmbARK System Administration. The popup allows for configuration of Quick Search, Object Advanced Saerch, and Artist Advanced Search.<br>
+			<img src="images/preferences_searchfields.gif" width="778" height="601" border="1" vspace="6" alt="Preferences - Search Fields Tab">
+			
+			<br><br>
+			
+		<a name="Quick_Search_Fields"></a>
+		<b>Quick Search</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+		Select Quick Search from the search popup.  Select fields from the Available Fields list, then click the <b>Add</b> button. The field will move to the Selected Fields column (and will no longer display on the Available Fields column).  To remove, follow the process in reverse and click the <b>Remove</b> button.
+		
+		<br><br>
+		<a name="minimum_size"></a>
+		<b>Minimum Search Term Size</b>: Enter a numeric value to set the minimum number of characters a word must have to be included in the index and be searchable.
+		
+		<br><br>
+		
+		Note: <a href="prepare_database.html#stop_words">Stop Words</a> entered in EmbARK Quick Search setup will also be filtered out of the search list.
+
+		</td></tr></table>
+		
+		<a name="ObjAdvanced_Search_Fields"></a>
+		<b>Object Advanced Search</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+		Select Object Advanced Search from the search popup.  Select fields from the Available Fields list, then click the <b>Add</b> button. The field will move to the Selected Fields column (and will no longer display on the Available Fields column).  To remove, follow the process in reverse and click the <b>Remove</b> button. 
+		
+		</td></tr></table>
+		<br><br>
+	
+		<a name="number_fields_object"></a>
+		<b>Number of Fields to Display</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+		Any number of Object Advanced Search fields may be added to the Selected Fields column.  The Number of Fields to Display box controls how many will be displayed on the actual search form.  Any additional Selected Fields may be listed to support <a hrefappendix.html#dynamic_portfolios>dynamic portfolios</a>.
+
+			<br><br>
+
+			The default value is <b>6</b>.
+		</td></tr></table>
+		
+		<a name="ArtistAdvanced_Search_Fields"></a>
+		<b>Artist Advanced Search</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+		Select Artist Advanced Search from the search popup.  Select fields from the Available Fields list, then click the <b>Add</b> button. The field will move to the Selected Fields column (and will no longer display on the Available Fields column).  To remove, follow the process in reverse and click the <b>Remove</b> button. 
+
+		</td></tr></table>
+		<br><br>
+	
+		<a name="number_fields_artist"></a>
+		<b>Number of Fields to Display</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+		Any number of Artist Advanced Search fields may be added to the Selected Fields column.  The Number of Fields to Display box controls how many will be displayed on the Artist Biographies form.  
+
+			<br><br>
+
+			The default value is <b>6</b>.
+		</td></tr></table>
+		
+	
+		<a name="update_search"></a>
+		<b>Update Search Lists</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			For enhanced performance, both the Quick Search and Advanced Search depend on word lists that get generated for only web accessible records. These lists should be updated every time you update the kiosk datafile.
+
+			<br><br>
+
+			Also, the first time you open any copy of a datafile in the kiosk, you will be prompted (unless <a href="#startup_tab">Startup Defaults</a> have been turned on) to run the update. (See <a href="setup_server.html#initialization">Datafile Initialization</a> for more details.)
+
+			<br><br>
+
+			However, if you bypass these updates, clicking this button updates word lists for both the Quick Search and the Advanced Search (objects and artist biographies).
+
+		</td></tr></table>
+	
+		
+	</td></tr></table>
+	
+	
+	<a name="tables_tab"></a>
+	<h3>Tables Tab</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Information on this tab determines how many records will display on each of these tables. For each page type, you can specify how many rows (the number of records up and down) and columns (the number of records left to right) should display on each page. For example, if the Portfolio Index has '4' for 'Rows' and '2' for 'Columns', the Portfolio Index in the kiosk will show 8 portfolio records per page: 2 across, and 4 down.<br>
+		<img src="images/preferences_tables.gif" width="778" height="601" border="1" vspace="6" alt="Preferences - Tables Tab">
+
+		<br><br>
+
+		The default values are:
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<td bgcolor="#cccc99" width="50%">&nbsp;</td>
+				<td align="center" bgcolor="#cccc99" width="25%"><b><font color="#333366"># Rows</font></b></td>
+				<td align="center" bgcolor="#cccc99" width="25%"><b><font color="#333366">#Columns</font></b></td>
+			</tr>
+			<tr>
+				<td><b>Portfolio Index</b></td>
+				<td align="center">4</td>
+				<td align="center">2</td>
+			</tr>
+			<tr>
+				<td><b>Portfolio Thumbnails</b></td>
+				<td align="center">2</td>
+				<td align="center">3</td>
+			</tr>
+			<tr>
+				<td><b>Artist's Objects Thumbnails</b></td>
+				<td align="center">2</td>
+				<td align="center">3</td>
+			</tr>
+			<tr>
+				<td><b>Object Thumbnails</b></td>
+				<td align="center">2</td>
+				<td align="center">4</td>
+			</tr>
+			<tr>
+				<td><b>Detail Images</b></td>
+				<td align="center">3</td>
+				<td align="center">3</td>
+			</tr>
+			<tr>
+				<td><b>Surrogate Images</b></td>
+				<td align="center">3</td>
+				<td align="center">3</td>
+			</tr>
+			<tr>
+				<td><b>Edit Portfolio</b></td>
+				<td align="center">5</td>
+				<td align="center">1</td>
+			</tr>
+			<tr>
+				<td><b>Index Tree</b></td>
+				<td align="center">&nbsp;</td>
+				<td align="center">2</td>
+			</tr>
+			<tr>
+				<td><b>List View</b></td>
+				<td align="center">25</td>
+				<td align="center">&nbsp;</td>
+			</tr>
+			<tr>
+				<td><b>Search Results</b></td>
+				<td align="center">8</td>
+				<td align="center">&nbsp;</td>
+			</tr>
+	</td></tr></table>
+
+	<br><br>
+
+		<a name="disable_tables"></a>
+		<b>Disable Tables Checkboxes</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Deselect the checkbox in front of a particular table to disable the automatic insertion of table row and table cell tags on the generated web page.  This setting is particularly useful in conjunction with CSS coding.  The Row and Column settings will still control the maximum number of values that display per page.
+		</td></tr></table>
+
+	<br><br>
+	
+		<a name="include_primary"></a>
+		<b>Include primary image</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			As each Object and Artist record has a <b>primary</b> display surrogate image, it is best to not include that record in any <a href="kiosktags.html#flow">display loops</a> for <b>Additional Images</b>.  The default value is <b>unchecked</b>.
+			
+		</td></tr></table>
+		
+	</td></tr></table>
+	
+	<a name="security_tab"></a>
+	<h3>Security Tab</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+		<img src="images/preferences_security.gif" width="778" height="601" border="1" vspace="6" alt="Preferences - Security Tab">
+
+		<br><br>
+
+		<a name="security_type"></a>
+		<b>Type (Kiosk/Source Image)</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			You can set separate levels of security for (1) viewing any kiosk page and (2) displaying any Full View pages by entering information in any of the three columns on the right. (See next three items.)
+		</td></tr></table>
+
+		<a name="ip_only"></a>
+		<b>IP Only</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			If this box is checked, users must come from a valid IP address (as listed in the <a href="#restrict_ip">Restrict Access to IP Addresses</a> box) in order to view kiosk pages.
+		</td></tr></table>
+
+		<a name="password"></a>
+		<b>Password</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Enter a password in the field to require users to enter the password before viewing any kiosk or Full View page.
+		</td></tr></table>
+
+		<a name="both"></a>
+		<b>Both</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			If this box is checked, users must come from a valid IP address and provide a password in order to view kiosk or Full View pages.  If it is not checked, only visitors from invalid IP addresses will be asked for a password.
+		</td></tr></table>
+
+		<a name="restrict_ip"></a>
+		<b>Restrict Access to IP Addresses starting with:</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			To add a new IP Address to the list, click the <b>Add</b> button, then enter the address at the prompt. Note that IP Address security operates as a 'begins with' restriction. So entering a value of '123.456', for example, would allow in anyone whose IP address begins with those numbers.
+
+			<br><br>
+
+			To remove a value from the list, click on it to select it, then click the <b>Remove</b> button.
+
+		</td></tr></table>
+
+		<a name="block_ip"></a>
+		<b>Block access to these IP Addresses:</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			To add a new IP Address to the list, click the <b>Add</b> button, then enter the address at the prompt. Note that IP Address security operates as a 'begins with' restriction. So entering a value of '123.456', for example, would allow in anyone whose IP address begins with those numbers.  This feature is particularly useful for blocking search engines from your site.  However, it is best used in conjunction with appropriate firewall settings and/or a <i>robots.txt</i> file (for further info, visit the <a href="http://support.gallerysystems.com" target=_blank>Web Kiosk Support Center</a>).
+
+			<br><br>
+
+			To remove a value from the list, click on it to select it, then click the <b>Remove</b> button.
+
+		</td></tr></table>
+
+		<a name="timeout"></a>
+		<b>Timeout</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			Enter a time period by entering a number in the text field, and choosing a unit of time from the list next to it.  After a password-enabled connection has been idle for the amount of time shown, the user will be required to re-enter the password before continuing.
+		</td></tr></table>
+
+	</td></tr></table>
+
+	<a name="startup_tab"></a>
+	<h3>Startup Tab</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		<img src="images/preferences_startup.gif" width="568" height="454" border="1" vspace="6" alt="Preferences - Startup Tab">
+
+		<br><br>
+
+		<a name="use_saved_settings"></a>
+		<b>Use Saved Settings at Startup</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			Every time you open a new copy of a datafile in the kiosk, you will be prompted to run through a series of initialization procedures. (See <a href="setup_server.html#initialization">Datafile Initialization</a> for details.)
+
+			<br><br>
+
+			On the <b>Startup</b> tab, you can set default settings for each prompt. The checkboxes in the box correspond to the startup prompts (detailed in <a href="setup_server.html#initialization">Datafile Initialization</a>). Check a box to specify that you <i>do</i> want a process to run when a new datafile is opened; uncheck a box to specify that you <i>do not</i> want a process to run.
+
+			<br><br>
+
+			Then check the 'Use saved settings at startup' box to specify that these options should be used at startup in place of the prompts.
+
+		</td></tr></table>
+
+		<a name="alerts_off"></a>
+		<b>Turn Off Alerts</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			Check this box to specify that alerts should not be thrown on the server. This can help with unattended servers that get restarted automatically.
+
+		</td></tr></table>
+
+		<a name="enable_execute"></a>
+		<b>Enable Execute</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			This feature is for advanced users only.  It provides the option to execute 4DSCRIPT that can be added to the templates.  For more information, please contact EmbARK Technical Support.
+
+		</td></tr></table>
+
+	<a name="extra_pref"></a>
+	<h3>Extra Preference Settings</h3>
+	
+All preference settings are stored in a text file called <b>Preferences.txt</b> located in the <b>Templates</b> directory.  Some additional settings can only be adjusted by modifying the Preferences.txt file.  
+
+<br><br>
+<ul>
+<li><a name="session_state"></a><b>Session State:</b> Changing the <b>Session State</b> value from "1" to "0" will turn off the Web Kiosk's default session tracking functionality.  Note: This change should made with great care.  There are limited circumstances in which it is beneficial and it is not recommended if any type of searching is enabled.</li>
+<li><a name="wild_card"></a><b>Default Search Wildcard:</b> By default, the <b>&#64;</b> symbol is the search wildcard.  This value may be entered in the Quick Search box or used to create custom query strings with <a href="appendix.html#dynamic_portfolios">dynamic portfolios</a>.</li>
+</ul>
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="users"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>User Accounts</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	You can create accounts that give specific users permission to log on to the kiosk and create personal portfolios. You may also give specific users permission to share some of their portfolios with the general public. These portfolios are available to guest kiosk users through the Community Portfolios section (or "Shared Portfolio Index").
+
+	<a name="create"></a>
+	<h3>Creating new user accounts</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		<ol>
+		<li>In the EmbARK Web Kiosk, choose <b>User Management</b> from the <b>File</b> menu or click the on-screen <b>Manage Users</b> button.<br>
+			The User Management dialog opens.<br>
+			<img src="images/user_management.gif" width="673" height="521" border="1" vspace="1" alt="User Management Dialog"><br>
+		<li>Type a username and password in the boxes provided at the top of the User Management window.
+		<li>If this user should be able to share portfolios, check the &quot;<b>Can Share Portfolios</b>&quot; box.
+		<li>Click the <b>Save New</b> button.<br>
+			The username will be added to the user list below. If the user has permission to share portfolios, a squiggley symbol will appear next to the username.
+		<li>Click <b>Done</b> to save your changes.
+		</ol>
+
+		<u>Import Method</u>
+		<ol>
+		<li>Using Excel or a text editor, create three columns of data: User Name, Password, Can Share.  The Can Share column should be either "Yes" or "No".  If using a text editor, enter a tab between each value.
+		<li>Save the data as an ASCII text file.
+		<li>In the User Management window, click the <b>Import Users</b> button.
+		<li>Navigate to the text file.  The user accounts will be imported.
+		<li>If duplicate user accounts are identified, an error log will be generated.
+		</ol>
+
+	</td></tr></table>
+
+	<a name="deactive"></a>
+	<h3>Deactivate users</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		<ol>
+		<li>In the EmbARK Web Kiosk, choose <b>User Management</b> from the <b>File</b> menu.
+		<li>In the <b>User List</b>, click on the username to select it.
+		<li>Click the <b>Deactivate</b> button. An &quot;<b>x</b>&quot; will appear to the left of the user name.  By deactivating an account, access to this user's shared portfolios will be disabled but the content will not be deleted.
+		<li>To reactivate the user, select the use name and click the <b>Reactivate</b> button.
+		<li>Click <b>Done</b> to save your changes.
+		</ol>
+
+	</td></tr></table>
+
+	<a name="delete"></a>
+	<h3>Deleting users</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		<ol>
+		<li>In the EmbARK Web Kiosk, choose <b>User Management</b> from the <b>File</b> menu.
+		<li>In the <b>User List</b>, click on the username to select it.
+		<li>Click the <b>Delete</b> button.
+		<li>Click <b>Done</b> to save your changes.
+		</ol>
+
+	</td></tr></table>
+
+	<a name="rename"></a>
+	<h3>Renaming Users</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		<ol>
+		<li>In the EmbARK Web Kiosk, choose <b>User Management</b> from the <b>File</b> menu.
+		<li>In the <b>User List</b>, click on the username to select it.
+		<li>Click the <b>Rename</b> button.<br>
+			EmbARK Web Kiosk will give you an alert, asking if you are sure.
+		<li>Click <b>OK</b> to the alert.<br>
+			A data-entry window will open with the current username highlighted.
+		<li>Type the new username and click <b>OK</b>.<br>
+			The name will be updated in the User List.
+		<li>Click <b>Done</b> to save your changes.
+		</ol>
+
+	</td></tr></table>
+
+	<a name="password"></a>
+	<h3>Changing Passwords</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		<ol>
+		<li>In the EmbARK Web Kiosk, choose <b>User Management</b> from the <b>File</b> menu.
+		<li>In the <b>User List</b>, click on the username to select it.
+		<li>Click the <b>Reset Password</b> button.<br>
+			EmbARK Web Kiosk will give you an alert, asking if you are sure.
+		<li>Click <b>OK</b> to the alert.<br>
+			A data-entry window will open with the current username highlighted.
+		<li>Type the new password and click <b>OK</b>.
+		<li>Click <b>Done</b> to save your changes.
+		</ol>
+
+	</td></tr></table>
+
+	<a name="privileges"></a>
+	<h3>Changing User Privileges</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		<ol>
+		<li>In the EmbARK Web Kiosk, choose <b>User Management</b> from the <b>File</b> menu.
+		<li>In the <b>User List</b>, double-click a username to change privileges for sharing portfolios.<br>
+			A squiggley symbol next to the username signifies permission to share portfolios. Double-clicking will add a squiggley symbol if there was none before, or will remove an existing squiggly symbol.
+		<li>Click <b>Done</b> to save your changes.
+		</ol>
+
+	</td></tr></table>
+
+	<a name="update"></a>
+	<h3>Updating the Datafile</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		User data, such as the user accounts and portfolios, is saved in the datafile. Therefore, there needs to be a mechanism for transferring this information from one datafile to another when you open a new copy of the datafile in the kiosk. This is accomplished through an export/import process.
+
+	<br><br>
+
+		<b>Manual Update of User Accounts</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			You may conduct the export/import manually when you copy over a new version of your datafile.
+
+			<ol>
+			<li>With the old datafile open in the Kiosk, open <b>User Management</b>.
+			<li>Click the <b>Export Data</b> button.<br>
+				EmbARK Web Kiosk will prompt you to select a folder.  
+			<li>Select the <b>UserPortData</b> folder at the root of the EmbARK Web Kiosk directory.<br>
+				Three files will be created: agents.txt, portfolios.txt and objport.txt. These files hold all the user account and portfolio information.
+			<li>Quit out of the kiosk.
+			<li>Open the kiosk with the new copy of the datafile.
+			<li>Open <b>User Management</b>.
+			<li>Click the <b>Import Data</b> button.<br>
+				EmbARK Web Kiosk will alert you that any existing user data will be replaced. Do not run this process on a datafile that already holds valid user data. This should only be run on new datafile copies.
+			<li>Click <b>OK</b> to the Alert.<br>
+				EmbARK Web Kiosk will prompt you to select a folder.
+			<li>Select the folder which you used in step 3 above.<br>
+				EmbARK imports all the user account and portfolio data.
+			</ol>
+
+		</td></tr></table>
+
+		<b>Auto-export of User Accounts</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			Alternatively, you may configure the kiosk to automatically export user data every time it is closed. It is strongly recommended that you use this feature if you are implementing the user portfolio screens.
+			<ol>
+			<li>In EmbARK Web Kiosk, open <b>User Management</b>.
+			<li>Check the box for &quot;<b>Auto-export on Quit</b>&quot;.<br>
+				EmbARK will prompt you to select a folder.
+			<li>Select a folder to which you would like to send the export files.<br>
+				Three files will be created: agents.txt, portfolios.txt and objport.txt. These files hold all the user account and portfolio information.
+			<li>Click the <b>Done</b> button to save this setting.
+			</ol>
+
+			<h4>Notes</h4>
+			<ul>
+			<li>It is strongly recommended that every institution that implements the user module turn on the auto-export.  You only need to set this once; it is saved in the kiosk Preferences. Having this feature enabled greatly minimizes the chance that user data will be lost in datafile updates. Without this feature, it is easy to forget to export user data before deleting a datafile.  Kiosk will only auto-import data the first time the datafile is opened. If the Kiosk server has unexpectedly shut-down due to power failure and was unable to properly export user data, this prevents user data from being overwritten.
+			<li>If the Kiosk is running as an <a href="appendix.html#service">automatic service</a>, the standard auto-export will not function properly (because the application does not detect that it is being stopped).  The <b>Also every ___ minutes</b> option will ensure that Kiosk exports user data on a regular basis, which ensures that it is there when the service stops and restarts.
+
+			<br><br>
+			<li>Hold down the 'Alt' or 'Option' key while clicking the 'Import Data' button to ask the kiosk to prompt you for the folder containing your user export files.
+			<li>The <b>Field delimiter</b> and <b>Record delimiter</b> boxes allow for format control of the exported user port data.  The default values of <b>3</b> and <b>4</b> are used because these ASCII values are unlikely to exist in data entered by users (whereas a Record Delimiter of <b>13</b> (carriage return) could be entered into user portfolio notes and would break the structure of the import file.  Accordingly, with the defaults, it is difficult for human eyes to read the exported files.
+			</ul>
+
+		</td></tr></table>
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="templates"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Customizing Templates</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	EmbARK Web Kiosk pages are based on HTML template files that are merged with information from your EmbARK datafile.  If you have experience working with HTML, you can easily edit the kiosk templates to create a look that is unique to your institution.
+
+	<a name="development_mode"></a>
+	<h3>Development Mode</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Under standard operation, you can only view the results of changes that you make in the HTML templates by closing and restarting the kiosk.  By running the kiosk in development mode, however, you can view changes to the templates by clicking Refresh or Reload in your browser.
+
+		<br><br>
+
+		To switch the kiosk to development mode, follow these steps:
+		<ol>
+		<li>Open the EmbARK Web Kiosk application.
+		<li>Choose <a href="customizing.html#preferences"><b>Preferences</b></a> from the <b>File</b> menu or splash screen.<br>
+			The EmbARK Web Kiosk Preferences dialog box appears.
+		<li>Click to put an '<b>X</b>' in the <b>Development Mode</b> box at the top of the dialog box.
+		<li>To remove the kiosk from development mode, click to remove the '<b>X</b>' in the checkbox.  (On Macintosh, <i>command</i>-D also toggles the Development Mode checkbox on and off.  <i>Ctrl</i>-D in Windows.)
+		<li>Click <b>Save</b> or <b>Cancel</b> to close the Preferences dialog box.<br>
+			Even if you click <b>Cancel</b>, the Development Mode setting is remembered.
+		</ol>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Be sure to remove the Development Mode setting before posting the kiosk &quot;live.&quot;  Failing to do so could result in crashes or slow performance of the EmbARK Web Kiosk.
+		</ul>
+	</table>
+
+	<a name="kioskpages"></a>
+	<h3>Kiosk Pages</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		You can create additional web pages that will function as part of your kiosk.
+
+		<br><br>
+
+		These pages will be served as static pages, independent of kiosk features.  User record selections will not be maintained across these pages, and no access control will be applied.
+
+
+		<br><br>
+
+		If you create custom pages that you would like to have treated as kiosk pages (so that user selections are maintained or password protection applied), you must put these pages in the <b>Kiosk Pages</b> folder (subfolders are acceptable).   In order to access these pages properly, the URL must have &quot;Kiosk&quot; in the place of Kiosk Pages folder name.  For example, the URL to access the Custom Search page is <b>http://my.server.com/kiosk/search.htm</b>. In addition, every link that is contained in a Kiosk Pages file must end with <a href="kiosktags.html#sessionid">?sid={SessionId}</a> or <a href="kiosktags.html#sequence">?sid<span class=GramE>={</span>SessionId}&amp;x={Sequence}</a> to work properly.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>If you are running a standard server in addition to the EmbARK Web Kiosk, consider putting custom static pages and images on the other server.  The EmbARK Web Kiosk specializes in serving dynamic content.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="intro_pages"></a>
+	<h3>Creating Introductory Pages</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		You can design new HTML pages that lead into the kiosk main menu (e.g. MainMenu.htm in the Kiosk Pages folder), or link to it from your institution’s existing site.  To apply the kiosk password or IP address restrictions to these pages, however, you must save them in the <a href="#kioskpages">Kiosk Pages</a> folder.
+
+	</td></tr></table>
+
+	<a name="editing"></a>
+	<h3>Editing Template Pages</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Although the basic Kiosk page types (Object and Artist Info pages, Portfolio Index, Index Tree, search pages, and so on, contained in the Templates folder) cannot be changed, the design of the pages and most of the information displayed on them can be customized.  For example, you can add design elements such as a navigation bar or heading with your institution’s name at the top of the page, or add links to other pages in your institution’s website or to the kiosk pages for specific objects or artists.
+
+		<br><br>
+
+		You can use any standard HTML or client-side scripting (e.g. JavaScript, cascading style sheets) in any of the template pages.
+
+		<br><br>
+
+		<b>Basic Editing Procedure</b>
+		<ol>
+		<li>Launch the Kiosk on your computer with a prepared copy of the datafile.
+		<li>Allow the Kiosk to proceed through all of the start-up prompts.  Wait for the red start-up screen to display.
+		<li>Go to <a href="customizing.html#preferences">Preferences</a> and click the Development Mode checkbox.
+		<li>Launch a web browser and go to http://127.0.0.1 if working on a local machine or enter the ip address of the server machine.  This will load the default Kiosk page. You can also click the <b>TEST</b> button on the red startup screen.
+		<li>Make a backup copy of the Templates folder.
+		<li>To make changes to the header or left bar, modify the <b>header.inc</b> <a href="#include_files">include file</a>.
+		<li>To make changes to the body of other pages, identify the name of the template file.  This is easily accomplished by using the <b>View Source</b> command in your browser.  The template name is displayed at the top of the source in comment tags.
+		
+			<br><br>
+	
+			<img src="images/template.gif" width="739" height="414" border="1" vspace="1" alt="Identify Template with View Source"><br><br>
+		<br><br>
+		
+		<li>Navigate to the desired template and open the file with your preferred text editor such as WordPad, TextEdit, Dreamweaver, etc.
+		<li>Carefully make adjustments to the code.  Save changes.
+		<li>Reload the browser to see the effect of the code changes.
+		<li>Repeat with addtional templates as desired.
+		</ol>
+
+		<br><br>
+
+			<a name="mergefield"></a>
+		<b>Merging Data Fields from the EmbARK Database</b>
+		<ol>
+		<li>Open a template such as <b>objectinfo.htm</b>.  <b>Be sure that the file opens in a PLAIN text editor (not RICH text).</b>
+		<li>Locate the block of code for a display field that should be changed or duplicated.  See example in screenshot below.
+		
+		<br><br>
+			<img src="images/fieldcode.gif" width="853" height="365" border="1" vspace="1" alt="Editing Display Field on a Template"><br><br>
+		<br><br>
+		
+		<li>Typically, a field will have conditional <a href="kiosktags.html#if">IF and ENDIF</a> tags that controls whether the field will display if empty.  Change the TABLE and FIELD NAME as necessary.
+		<li>There may or may not be a <b>field label</b> for the value.  The field label does not have to be an identical match to the field name in the EmbARK data.
+		<li>The <b>internal table and field name</b> from EmbARK must be included.  To determine the internal name, it is best to access EmbARK Setup and check the <b>File and Field Names</b> section.  
+		
+		<br><br>
+			<img src="images/ffnames.gif" width="744" height="545" border="1" vspace="1" alt="EmbARK Setup: File and Field names"><br><br>
+		<br><br>
+		
+		<li>Save changes to the template, then refresh the browser window to confirm the modification.
+		</ol>
+		
+		
+		
+		<br><br>
+		<h4>Notes</h4>
+		<ul>
+		<li>Before editing any of the template pages, be sure to make a backup copy so you can restore the original pages in the event of any problems.
+		<li>You should not edit complex scripts within the kiosk search pages (for example, SearchScripts.htm) unless you are a skilled HTML/JavaScript programmer.
+		</ul>
+
+		
+	</td></tr></table>
+
+	<a name="custom_templates"></a>
+	<h3>Creating Custom Templates</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		In addition to the default templates provided with the EmbARK Web Kiosk, you can create additional custom templates. The only limitation to these templates is that they can only display information from a single record at a time.
+
+		<br><br>
+
+		To make a custom template:
+		<ol>
+		<li>Create a subfolder called &quot;Custom&quot; in the Templates folder.
+		<li>Create a web page to display either object or artist information.
+		<li>Name this page with a file extension *.htm and put it in the new Custom folder.
+		<li>To create a link to this page, use the {Custom} metatag which is described in more detail below (in &quot;Adding Page Links&quot;).
+		</ol>
+
+	</td></tr></table>
+
+	<a name="custom_search"></a>
+	<h3>Custom Search</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The Custom Search function allows for the creation of the most flexible search form possible with EmbARK Web Kiosk.  It is the most <a href="http://www.ada.gov/stdspdf.htm"target=_blank>ADA-compliant</a> of the search screens. What types of things can Custom Search do?
+		<br><br>
+		<ul>
+			<li>Search a single object table field.
+			<li>Search a combination of a specified group of object table fields (using the <b>Combo</b> command.
+			<li>Search a system date field (with a calendar graphic pop-up enabled with javascript).
+			<li>Search a historic date field like <b>Creation Date</b> with <i>early</i> and <i>late</i> date ranges.
+			<li>Search an Agent field.
+			<li>Search a number field.
+			<li>Display a popup of list of unique catalog values for a field (uses <a href="4dtags.html#getdistinctvalues">GetDistinctValues</a>).
+			<li>Dispaly a hierarchical popup list of values for hierarchical fields like Region-Continent - Country - State - City - Neighborhood or the Class System fields.
+		</ul>
+	<br><br>
+	
+			<img src="images/custom_search.gif" width="854" height="646" border="1" vspace="1" alt="Custom Search"><br><br>
+		<br><br>
+
+		To edit Custom Search:
+		<ol>
+		<li>Locate the <b>search.htm</b> template in the <a href="customizing.html#kioskpages"><b>Kiosk Pages</b></a> folder.
+		<li>Set the <a href="customizing.html#custsearchdefault">Custom Search default</a> preference to either <b>equal to</b> (exact match) or <b>contains</b> (more general).  The Contains option will provide more search results.
+		<li>Replicate sections of the search code as necessary to create the desired search configuration.  The best technique is to find the code in the template that works in the manner desired, then replicate it with simple <b>copy</b> and <b>paste</b>. 
+			<ul>
+			<li>Adjust the internal field name(s) as necessary.
+			<li>Make sure that <b>SearchField</b> and <b>SearchValue</b> ids are unique.
+			</ul>
+				<br><br>
+			<img src="images/customsearchcode.gif" width="815" height="352" border="1" vspace="1" alt="Custom Search HTML code"><br><br>
+				<br><br>
+			</ul>
+		</ol>
+
+	</td></tr></table>
+	<a name="include_files"></a>
+	<h3>Include Files</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Server-side include files enable you to put commonly-used blocks of code in separate files that can then be inserted into web pages. They greatly simplify kiosk maintenance because they eliminate the need to duplicate the same code in multiple template files.
+
+		<br><br>
+
+		For example, if you have a block of code that draws the same navigation bar across the top of every page, you should put that code block into a separate include file called NavBar.inc. Then in each template, you only need to include the tag: {Include NavBar.inc}. When the kiosk processes this page, it will replace the tag with all the code in NavBar.inc before it sends the page to the browser. When you need to edit the navigation bar, just make the change in the single include file and it will automatically apply across all kiosk pages.
+
+		<br><br>
+
+		<b>Creating Include Files</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			Include Files can contain any amount of HTML or scripting. They do not need to stand on their own as web pages. Standard practice is to name include files with a file extension of ‘.inc’. We recommend that you follow this standard, although it is not required for the EmbARK Web Kiosk.
+
+			<br><br>
+
+			Save all include files in the <b>Templates:Include Files</b> folder. 
+
+		</td></tr></table>
+
+		<b>Using Include Files</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			To use an include file in a web page, just use the tag ‘{Include MyPage.inc}’, where ‘MyPage.inc’ is the full name of the file you wish to include.
+
+		</td></tr></table>
+
+		<b>Editing Include Files</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			In most cases, changes to Include Files will display automatically. However, it may be necessary to restart the Web Kiosk application to see certain types of changes.
+			
+		</td></tr></table>
+
+	</td></tr></table>
+
+	<a name="user_portfolios"></a>
+	<h3>User Portfolios</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		In the default kiosk templates, the ‘Logon’ button gives users the opportunity to log in to the kiosk to create personal portfolios. The kiosk administrator controls access to this module by creating accounts for privileged users. (See <a href="#create">Creating new user accounts</a>.)
+
+		<br><br>
+
+		Once logged in, a user may create personal object portfolios, change his or her password, sort objects in a portfolio, add portfolio notes, and possibly share portfolios. All required templates for these actions are found in the Templates:Users folder. Some auxiliary templates are also included in the Kiosk Pages folder.
+
+		<br><br>
+
+		The user module is intentionally designed to be as flexible as possible. The information in the following table can be used by advanced web designers to customize the user portfolio workflow. Remember that all URLs should be followed by ${SessionID}. The variable information should be tagged on to the very end of the URL in the format: ?variableName=this+is+my+first+variable’s+value&variableName2=this+is+my+second+ variable’s+value. That is, the variable name and value should be separated by an equal sign; words within the value should be separated by a plus sign; and multiple variables should be separated by an ampersand.
+
+		<br><br>
+
+		<b>User Portfolio URLs</b>
+
+		<br><br>
+
+		The following table describes how to format URLs for User Portfolio requests.
+
+		<br><br>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Action</font></b></td>
+				<td valign="top" bgcolor="#cccc99"><b><font color="#333366">URL</font></b></td>
+				<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Variables</font></b></td>
+			</tr>
+			<tr>
+				<td valign="top"><b>Save Portfolio Properties</b></td>
+				<td valign="top">/USavP</td>
+				<td valign="top">
+					<ul>
+					<li>name (optional): the new name for the portfolio
+					<li>shared: a value of 1 signifies that the portfolio should be shared; any other value denotes that the portfolio should not be shared
+					<li>notes: the portfolio notes
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top"><b>Save Portfolio Sort Order</b></td>
+				<td valign="top">/USavS</td>
+				<td valign="top">
+					<ul>
+					<li>object: a series of object IDs, in the desired sort order, each separated from the other by an asterisk (*).
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top"><b>Add object to a portfolio</b></td>
+				<td valign="top">/UAdd{portfolioID} *{objectID}</td>
+        <td valign="top">To create a new portfolio, use portfolioID of 0, and include a form variable called &quot;name&quot;, which contains the name for the new portfolio.
+
+        <br><br>
+
+        If *{objectID} is not passed or objectID is -1, the entire current selection will be added to the portfolio.
+
+        <br><br>
+
+        If objectID is 0, no objects will be added to the portfolio. (This can be used to create new, blank portfolios.)
+				</td>
+			</tr>
+			<tr>
+				<td valign="top"><b>Change user password</b></td>
+				<td valign="top">/Pass</td>
+				<td valign="top">
+					<ul>
+					<li>oldPassword: the old password
+					<li>newPassword: the new password
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top"><b>Log in</b></td>
+				<td valign="top">/USER</td>
+				<td valign="top">
+					<ul>
+					<li>username: the username
+					<li>password: the password
+					</ul>
+				</td>
+			</tr>
+		</table>
+
+	</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>	
+	<a name="css"></a>
+	<h3>Cascading Style Sheets (CSS)</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+The look-and-feel of an EmbARK Web Kiosk site relies heavily on the use of a <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets" target=_blank>cascading style sheet</a> called <b>kioskstyles.css</b>.  This css file is located in the <a href="setup_server.html#webfolder">webfolder</a> directory.  Kioskstyles.css defines the way that nearly every design aspect of the site will display. You can make use of the existing elements or create your own. Web developer tools such as <a href="http://getfirebug.com/" target=_blank>firebug</a> can be of great assistance when identifying which lines of a css file are controlling the display of a page element.
+				
+			<br><br>
+
+			<br><br>
+			<img src="images/kioskstyles.gif" width="621" height="633" border="1" vspace="1" alt="Kioskstyles.css">
+			<br><br>
+
+The screenshot below demonstrates how a class is defined in the Kioskstyles.css file, then applied to a text element in the ObjectInfo.htm template.  If the values for the class are altered in the css file, it will update the display for all elements that have been defined with that class.
+	
+			<br><br>
+			<img src="images/cssclass.gif" width="678" height="298" border="1" vspace="1" alt="CSS class definitions">
+			<br><br>
+			
+Designing with CSS is extremely powerful.  Please consult other online resources for more detailed information.
+		<br>
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>	
+
+	
+	<a name="javascript"></a>
+	<h3>Javascript</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Functionality of the Web Kiosk can be enhanced greatly with the integration of javascript libraries (such as <a href="http://jquery.com" target=_blank>jQuery</a>). Libraries should be saved to the <b>scripts</b> folder inside the <a href="setup_server.html#webfolder">WebFolder</a> directory.  The default templates provide a number of examples.
+		
+		<br><br>
+		
+		<ul>
+			<li><a href="appendix.html#zoomify">Zoomify</a> HTML 5</li>
+			<li><a href="http://highslide.com/" target=_blank>Highslide Image Viewer</a></li>
+			<li><a href="https://github.com/jquery/globalize#parseDate" target=_blank>Globalize</a>: Processes a system date to display in Month Day Year in proper regional sequence.</li>
+			<li>Datetimepicker: Displays a calendar pop-up on the Custom Search template from Kiosk Pages.</li>
+			<li>Filterbox: Script that enables Web Kiosk filtering script (<b>FilterBox.html</b> in <b>Templates:Include Files</b>).</li>
+		</ul>
+
+		<br><br>
+		Note: Integration of javascript libraries is an advanced Web Kiosk customization.  Gallery Systems can not guarantee that any particular javascript library will be compatible with EmbARK Web Kiosk.  We can only provide limited assistance to obtain the data values required by the script.
+		<br>
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>	
+
+	<a name="filtering"></a>
+	<h3>Filtering</h3>
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+	
+	The <b>FilterBox.html</b> snippet can be placed on any object display template.  It allows the current selection of objects to be narrowed by one of the filter values (essentially performing a new search and updating the <a href="kiosktags.html#selectionname">Selection Name</a>). The number of matching object records available for each field value is displayed in parentheses. By default, the <b>Filter Results</b> box is closed, but mousing over the box will expand it and all field categories within it.  Double-click a field category header to collapse just that section.  <br><br>	
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Fields with a limited set of values are preferred for the Filtering function (screen space is limited).</li>
+		<li>Filtering will not work properly if special characters such as parentheses are present in the data values. Filters make use of the <a href="4dtags.html#getdistinctvalues">GetDistinctValues</a> function.
+		<li>It is not possible to select more than one value per field category.</li>
+		<li>It is not possible to <b>undo</b> a filter, though the browser back button will likely work.</li>
+		</ul>
+	
+			<br><br>
+			<img src="images/filter.gif" width="599" height="702" border="1" vspace="1" alt="Object record filtering">
+			<br><br>
+	
+	The display of the FilterBox may be altered by editing the <b>FilterBox.html</b> <a href="customizing.html#include_files">include file</a>. (Include files do not normally have a <i>.html</i> file extension, but this snippet includes display formatting.)  Additional functionality of the filter is controlled via the <b>filterbox.js</b> <a href="customizing.html#javascript">javascript</a> file.
+	
+	<br><br>
+	
+	To add or remove a field category from the FilterBox, simply open FilterBox.html.  Remove or duplicate the section of code shown below.  If adding a new field, change the highlighted text values to match the internal object field name.
+	
+	<br><br>
+				<img src="images/filtertemp.gif" width="959" height="539" border="1" vspace="1" alt="FilterBox.html Template Editing"><br><br>
+
+
+
+	
+
+		<br><br>
+		
+	
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>	
+		
+	<a name="forms"></a>
+	<h3>Forms</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The following sections describe forms that can be added to any page to add features such as searches and feedback forms.
+
+		<br><br>
+
+		<b>Search Forms</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+			The Contains (aka "QuickSearch") and Date searches can be included on any page, even non-kiosk pages. Just insert a form on the page that includes the elements described below.
+
+			<br><br>
+
+			The elements of a Contains Search form are as follows:
+
+			<br><br>
+
+			<table cellpadding="5" cellspacing="0" border="1" width="100%">
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form name</font></b></td>
+					<td valign="top">Contains</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form action</font></b></td>
+					<td valign="top"> /4DACTION/HANDLECGI/CTN1${SessionID}</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form method</font></b></td>
+					<td valign="top">POST</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Input field name</font></b></td>
+					<td valign="top">theKW</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Selection Type object name</font></b></td>
+					<td valign="top">RefineSearch</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Selection Type allowed values</font></b></td>
+					<td valign="top">NewSelection, AddToCurrent, Within Current</td>
+				</tr>
+			</table>
+
+			<br><br>
+
+			The elements of a Date Search form are as follows:
+
+			<br><br>
+
+			<table cellpadding="5" cellspacing="0" border="1" width="100%">
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form name</font></b></td>
+					<td valign="top">Date</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form action</font></b></td>
+					<td valign="top"> /4DACTION/HANDLECGI/DATES${SessionID}</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form method</font></b></td>
+					<td valign="top">POST</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Search Type object name</font></b></td>
+					<td valign="top">SearchType</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Search Type allowed values</font></b></td>
+					<td valign="top"><b>1</b> [= &quot;is circa&quot;],
+						<b>2</b> [= &quot;is earlier than&quot;],
+						<b>3</b> [= &quot;is later than&quot;]
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Input field name</font></b></td>
+					<td valign="top">value1</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Hidden input field</font></b></td>
+					<td valign="top"><b>name</b>: lineCount<br>
+						<b>value</b>: 1</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Selection Type object name</font></b></td>
+					<td valign="top">RefineSearch</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Selection Type allowed values</font></b></td>
+					<td valign="top">NewSelection, AddToCurrent, Within Current</td>
+				</tr>
+			</table>
+
+		</td></tr></table>
+
+		<b>E-mail Feedback Forms</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			You can also add forms that allow visitors to send comments via email.
+
+			<br><br>
+
+			If the page that contains the form is a kiosk page (i.e. in either the Templates or Kiosk Pages folder), you can hide input fields and use field tags to have the kiosk automatically insert data from the record the user is currently accessing. You can provide visible input fields for users to enter information about the record that gets sent (along with the hidden data) in an email.
+
+			<br><br>
+
+			The components of this form are as follows:
+
+			<br><br>
+
+			<table cellpadding="5" cellspacing="0" border="1" width="100%">
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form action</font></b></td>
+					<td valign="top"><b>/4DACTION/SubmitEmail/Subject</b>
+						<br><br>
+						where ‘subject’ is the subject of the email that gets sent. (Note: with some simple JavaScript, you could allow the user to enter this.) If you omit the subject, a default of ‘EmbARK Web Kiosk Feedback’ will be used. (Note: if you omit the subject, your action should end with a ‘/’.)
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form method</font></b></td>
+					<td valign="top"><b>POST</b></td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Required Input Fields</font></b></td>
+					<td valign="top">
+						<ul>
+						<li><b>vFromEmail</b>: the email address that the message should come from
+						<li><b>vToEmail</b>: the email address that the message should be sent to
+						<li><b>numImputs</b>: the number of input/label fields (see below)
+						<i>Example:</i> &lt;input type= &quot;hidden&quot; name= &quot;numInputs&quot; value= &quot;5&quot;&gt;
+						<li><b>SubmitDone</b>: the value should be a URL link to be executed after the email is sent; for example, a page saying &quot;thank you for your feedback,&quot; or your main menu)<br>
+						<i>Example:</i> &lt;input type= &quot;hidden&quot; name= &quot;SubmitDone&quot; value= &quot;/Kiosk/Thanks.htm&quot;&gt;
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Optional Input Fields</font></b>
+						<br><br>
+						The format of the email will be:<br>
+						Label1: Input1<br>
+						Label2: Input2<br>
+						Label3: Input3<br>
+						etc......</td>
+					<td valign="top">
+						<ul>
+						<li><b>Label1</b>, <b>Label2</b>, ... <b>Label20</b><br>
+						(Note: You must include a label for each input field.)
+						<li><b>Input1</b>, <b>Input2</b>, ... <b>Input20</b><br>
+						(Note: you must include as many input fields as specified in the numInputs field, and these must be numbered sequentially, starting with 1.)
+						</ul>
+					</td>
+				</tr>
+			</table>
+
+		</td></tr></table>
+
+		<b>Text File Feedback Forms</b>
+
+		<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+			You can also add forms that visitors can use to send comments that will get collected in a tab delimited text file called Feedback.txt in the EmbARK Web Kiosk folder on the server.  (The delimiters for this text file are set in the kiosk <a href="#submitfile_delimiters">Preferences</a>.)
+
+			<br><br>
+
+			If the page that contains the form is a kiosk page (i.e. in either the Templates or Kiosk Pages folder), you can hide input fields and use field tags to have the kiosk automatically insert data from the record the user is currently accessing. Then provide visible input fields for them to enter information about the record that gets sent (along with the hidden data) in an email.
+
+			<br><br>
+
+			The components of this form are as follows:
+
+			<br><br>
+
+			<table cellpadding="5" cellspacing="0" border="1" width="100%">
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form action</font></b></td>
+					<td valign="top"><b>/4DACTION/SubmitFile/</b></td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Form method</font></b></td>
+					<td valign="top"><b>POST</b></td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Required Input Fields</font></b></td>
+					<td valign="top">
+						<ul>
+						<li><b>numImputs</b>: the number of input/label fields (see below)
+						<i>Example:</i> &lt;input type= &quot;hidden&quot; name= &quot;numInputs&quot; value= &quot;5&quot;&gt;
+						<li><b>SubmitDone</b>: the value should be a URL link to be executed after the email is sent; for example, a page saying &quot;thank you for your feedback,&quot; or your main menu)<br>
+						<i>Example:</i> &lt;input type= &quot;hidden&quot; name= &quot;SubmitDone&quot; value= &quot;/Kiosk/Thanks.htm&quot;&gt;
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" bgcolor="#cccc99"><b><font color="#333366">Optional Input Fields</font></b></td>
+					<td valign="top"><b>Input1</b>, <b>Input2</b>, ... <b>Input20</b>
+
+						<br><br>
+
+						(Note: you must include as many input fields as specified in the numInputs field, and these must be numbered sequentially, starting with 1.)
+<br><br>
+By default, the data submitted is saved to a text file called <b>Feedback.txt</b> in the root of the EmbARK Web Kiosk directory. It may be worthwhile to create a mechanism to automatically email this file to specific users for review (this is not a Kiosk function).
+					</td>
+				</tr>
+			</table>
+
+		</td></tr></table>
+
+		<br><br>
+		
+		Interested in a good forms alternative? <a href="http://www.htmlcommentbox.com/" target=_blank>HTMLCommentBox</a> is quick and easy to implement (just a few lines of automatically generated code!).  It uses Google integration for verification of posted comments.
+		
+		<br><br>
+		
+	</td></tr></table>
+
+</td></tr></table>
+
+
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>

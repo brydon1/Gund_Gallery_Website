@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Portfolios/list.htm-->
+<html lang="en">
+<head>
+    <title>%{Include title.inc}%</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div class="container"> <!-- title and navigation -->
+        <h1>Browse the Portfolios</h1>
+        <p class="lead">
+            Click any image below to begin browsing through the portfolio.
+        </p>
+
+        <div class="row">
+            <div class="col col-sm col-md-5 col-lg-4 col-xl-4 mr-auto">
+                <form id='popup' name='popup' title='popup' method='get' action='%{Link;Objects_1;portfolio;records=12}%'>
+                    <input type='hidden' name='records' value='9' />
+                    <select class="form-control" name='query' id='query' title='query' onchange='document.forms["popup"].submit()'>
+                        <!--#4DEVAL gsFunc_AllFilteredRecords(->[Portfolios]; ->[Portfolios]Port_Name)-->
+                        <!--#4dloop [Portfolios]-->
+                            <option value='Portfolios=<!--#4Dtext [Portfolios]_Port_ID-->' <!--#4Dif (lFirstRec = Selected Record number([Portfolios])) --> selected='selected' <!--#4Dendif-->>
+                                <!--#4Dtext ([Portfolios]Port_Name)-->
+                            </option>
+                        <!--#4dendloop -->
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        %{Include pagenavigation.inc}%
+
+    </div>
+
+    <div style="position: relative;">
+        <div class="container-fluid">
+            <a name="main"></a>
+
+            <!--#4DEVAL (gsFunc_SetSelectedRecord(->[Portfolios]; gsFunc_GetCount("First Record")))-->  <!-- loads the first record -->
+            <!--#4DEVAL $i:=gsFunc_GetCount("First Record")-->                          <!-- set temp counter for the loop -->
+
+            <!-- The following will repeat for each record in the page. -->
+            <div class="row galleryGrid">
+                <!--#4DLOOP ($i <= gsFunc_GetCount("Last Record"))-->                       <!-- loop based on the temp counter -->
+                    <!--#4DEVAL $i:=$i+1-->                                                 <!-- increment the temp counter -->
+                    <div class="col text-center">
+                        <div class="card hoverOutline" style="width:128px; margin-bottom:10px;">
+                            <div class="card-img-top text-center" style="max-width:128px;max-height:128px;">
+                                <a href="<!--4Dtext gsFunc_Link("Objects_1;portfolio;0;records=12;query=Portfolios=[Portfolios]_Port_ID")-->" >
+                                    <!--#4Dif (gsFunc_HasImage(->[Portfolios]))-->
+                                        <img src="<!--#4Dvar gsFunc_GetImage (->[Portfolios];"Thumbnail Url")-->"
+                                             class="rounded"
+                                             height="<!--#4Dvar gsFunc_GetImage (->[Portfolios];"Proportional Height max 128")-->"
+                                             width="<!--#4Dvar gsFunc_GetImage (->[Portfolios];"Proportional Width max 128")-->"
+                                             alt="Cover thumbnail for <!--#4Dtext ([Portfolios]Port_Name)-->" />
+                                     <!--#4Delse-->
+                                        <img src="/graphics/DefaultThumbnail.gif"
+                                             alt="Thumbnail for missing image of <!--#4Dtext [Portfolios]Port_Name-->" />
+                                     <!--#4Dendif-->
+                                </a>
+                            </div>
+                            <div class="border-top text-center px-2">
+                                <p class="card-title">
+                                    <a class="noColor" href="<!--4Dtext gsFunc_Link("Objects_1;portfolio;0;records=12;query=Portfolios=[Portfolios]_Port_ID")-->" style="text-decoration:none;">
+                                        <!--#4Dtext ([Portfolios]Port_Name)-->
+                                    </a>
+                                    <br/>
+                                    <small class="card-text text-muted">
+                                        <!--#4Dtext ([Portfolios]PortSize)--> record(s)
+                                    </small>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--#4DEVAL NEXT RECORD([Portfolios])-->                                 <!-- load the next record -->
+                <!--#4DENDLOOP-->
+            </div>
+        </div>
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

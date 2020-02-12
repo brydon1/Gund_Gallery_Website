@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Acquisitions/List.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}% - Acquisition</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div class="container"> <!-- title and navigation -->
+        <h1>Acquisitions</h1>
+
+
+        <div class="row">
+            <div class="col col-sm col-md-5 col-lg-4 col-xl-4 mr-auto">
+                <form id='popup' name='popup' method='get' action='%{Link;Acquisition;info;0;query=Current Selection;records=1}%'  style="text-align:center;">
+                    <input type='hidden' name='query' id='query' value='%{Current Selection}%' />
+                    <select class="form-control" name='page' id='page' title='page' onchange='document.forms["popup"].submit()'>
+                        <!--#4DEVAL (gsFunc_SetSelectedRecord(->[Acquisition]; 1))-->  <!-- loads the first record -->
+                        <!--#4dloop [Acquisition]-->
+                            <option value='<!--#4Dtext Selected Record number([Acquisition])-->' <!--#4Dif (lFirstRec = Selected Record number([Acquisition])) --> selected='selected' <!--#4Dendif-->>
+                                <!--#4Dtext [Acquisition]acq_Name-->
+                            </option>
+                            <!--#4dendloop -->
+                    </select>
+                </form>
+            </div>
+        %{Include pagenavigation.inc}%
+
+    </div>
+
+    <div style="position: relative;">
+        <div class="container-fluid">
+            <a name="main"></a>
+
+            <div class="row ">
+                %{Start Loop}%
+                    <div class="col">
+                        <div class="card hoverOutline" style="width:200px; margin-bottom:10px;">
+                            <div class="card-img-top text-center" style="max-width:200px;max-height:200px;">
+                                <a href="%{link;Acquisition;info;0;records=1;first=Current Record}%">
+                                    %{If(Has Image)}%
+                                        <img src="%{preview}%" height="%{thumbnail height*1.25}%" width="%{thumbnail width*1.25}%" alt="" />
+                                    %{Else}%
+                                        <img src="/graphics/DefaultPreview.gif" alt="" />
+                                    %{EndIf}%
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    %{[Acquisition]Acq_Name}%
+                                </h5>
+
+                                <p class="card-text small">
+                                    %{[Acquisition]acq_date}% <br />
+                                    Status: %{[Acquisition]acq_status}%<br />
+                                    %{if([Acquisition]acq_basis != "")}%
+                                        Type: %{[Acquisition]acq_basis}%
+                                    %{End If}%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                %{End Loop}%
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        %{Include selectiondescription.inc}%
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

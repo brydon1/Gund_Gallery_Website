@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Objects-1/artist-objects.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}%</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.kiosk-grid').isotope();
+        });
+    </script>
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+    %{Include FilterBox.html}%
+
+    <div class="container">
+        <div class="pageHeader">
+            <h2>%{Parent Record Name;Object Results}%</h2>
+        </div>
+        %{Include quicksearch.inc}%
+        %{Include activerecords.inc}%
+    </div>
+
+    <div id="head" class="container">
+        <div class="resultsHeader">
+            %{Include pagenavigation.inc}%
+
+            <!-- display options start -->
+            <div class="display-options">
+                <div class="navtxt">
+                    <i class="fa fa-th"></i>
+                </div>
+                <div class="navtxt">
+                    <a href="%{Link;Objects_1;portfolio;0;first=Current Record;query=Current Selection;records=12}%">
+                        <i class="fa fa-th-large"></i>
+                    </a>
+                </div>
+                <div class="navtxt">
+                    <a href="%{Link;Objects_1;list;0;first=Current Record;query=Current Selection;records=25}%">
+                        <i class="fa fa-th-list"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- display options end -->
+
+        <form id='popup' name='popup' method='get' action='%{Link;Objects_1;info;0;query=Current Selection;records=1}%'>
+            <input type='hidden' name='query' id='query' value='%{Current Selection}%' />
+
+            <select name='page' id='page' onchange='document.forms["popup"].submit()'>
+                %{Start loop(Current Selection)}%
+                    <option value='%{Loop Index}%' %{If(First Record=Loop Index)}% selected='selected' %{End if}%>
+                        %{[Objects_1]Disp_Title}% - %{[Objects_1]Disp_Maker_1}%
+                    </option>
+                %{End loop}%
+            </select>
+        </form>
+        <br>
+        <br>
+        <!-- The following will repeat for each record in the page.-->
+
+        <div class="contentWrap">
+            <div class="row kiosk-grid">
+                %{Start Loop}%
+                    <div class="col-lg-3 col-md-4 col-sm-6 grid-item">
+                        <div class="artobj-thumbnail">
+                            <a href="%{Link;Objects_1;info;0;first=Current Record;query=Current Selection;records=1}%" onmouseover="self.status = 'Display Object Description';return true" onmouseout="self.status = '';return true" title="Display Object Description">
+                                <img src="%{thumbnail}%" height="%{thumbnail height}%" width="%{thumbnail width}%" alt="" />
+                            </a>
+                            <br />&nbsp;
+                        </div>
+                        <div class="artobj-label">
+                            %{If([Objects_1]Disp_Title!="")}%
+                                <a href="%{Link;Objects_1;info;0;first=Current Record;query=Current Selection;records=1}%" onmouseover="self.status = 'Display Object Description';return true" onmouseout="self.status = '';return true" title="Display Object Description">
+                                    <i>%{[Objects_1]Disp_Title}%</i>
+                                </a>
+                                <br />
+                            %{End If}%
+
+                            <!-- {If([Objects_1]Disp_Maker_1!="")}<a href="{Link;Artist_Maker;info;[Artist_Maker]_Artist_ID;records=1}">{[Objects_1]Disp_Maker_1}</a><br/>{End If}-->
+
+                            %{Start Loop [Object_Artist]}%
+                                <a href="%{Link;Artist_Maker;info;[Artist_Maker]_Artist_ID;records=1}%">
+                                    %{[Artist_Maker]Full_Name}%,
+                                </a>
+                                %{if ([Artist_Maker]Disp_Maker_Life != "")}%
+                                    %{[Artist_Maker]Disp_Maker_Life}%<br />
+                                %{end if}%
+
+                            %{End Loop}%
+
+                            %{If([Objects_1]Disp_Medium!="")}%
+                                %{[Objects_1]Disp_Medium}%<br />
+                            %{End If}%
+
+                            %{If([Objects_1]Display2!="")}%
+                                %{[Objects_1]Display2}%<br />
+                            %{End If}%
+
+                            %{if(Logged In)}%
+                                <span class="smalltxt">
+                                    <a href="javascript:addToPort(,'',%{_ID}%);">Add to portfolio</a>
+                                    &nbsp;&gt;
+                                    %{if(Editing Portfolio)}%
+                                        &lt;&nbsp;
+                                        <a href="/urem0*%{_ID}%??display=POR">Remove from portfolio</a>
+                                    %{end if}%
+                                </span>
+                            %{end if}%
+                        </div>
+                    </div>
+                %{End Loop}%
+            </div>
+
+            %{Include formaddtoport.inc}%
+
+            %{Include selectiondescription.inc}%
+
+            <br>
+            <br>
+
+            %{Include addobjtoportfolio.inc}%
+        </div>
+
+        %{Include footer.inc}%
+</body>
+
+</html>

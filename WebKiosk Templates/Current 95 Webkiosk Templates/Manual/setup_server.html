@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	ol {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>Setting Up the Server</h1>
+
+<a href="#install">Installing the Kiosk</a>&nbsp;|&nbsp;
+<a href="#start">Starting the Kiosk</a>&nbsp;|&nbsp;
+<a href="#media_management">Media Management</a>&nbsp;|&nbsp;
+<a href="#test">Testing the Kiosk</a>
+
+<br><br>
+
+
+This section describes tasks that will be completed on the computer hosting the kiosk.  Any computer that can run EmbARK is capable of being a kiosk server.
+
+<a name="install"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Installing the Kiosk</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	To install the kiosk software along with your EmbARK data, follow these steps:
+	<ol>
+	<li>Run the EmbARK Web Kiosk installer on the server.
+	<li>Copy the EmbARK datafile to a folder that is on or accessible to the server.
+	<li>Copy the image files to the folder labeled Images within the <b>EmbARK Web Kiosk\WebFolder\Media</b> folder on the server.<br>
+	Alternatively, the kiosk can use images stored on a separate web server if you enter the URL in the Preferences dialog box. [See <a href="#media_management">Media Management</a> for details.]
+	</ol>
+
+	<br>
+
+	<h4>Notes</h4>
+	<ul>
+	<li>If you will be running the EmbARK Web Kiosk on a remote server, you may want to set kiosk preferences and customize the HTML templates (see <a href="customizing.html">Customizing the Kiosk</a>) on a local computer.  After the initial development, copy the kiosk files along with your EmbARK data and images to the remote server.
+	<li>It is possible to share a single set of images between EmbARK and the EmbARK Web Kiosk. Please contact EmbARK Support for assistance if you would like to configure your network this way.
+	<li>On Windows systems, the kiosk may be set to run as an automatic service. Please read the <a href="appendix.html">Appendix</a> of this document or visit the <a href="http://support.gallerysystems.com">Kiosk Support Center</a> for further details.
+	<li>On most Windows systems, it is best to install Web Kiosk to the root of the <b>C:\</b> drive instead of <b>Program Files</b>.  Installing to this location helps to avoid security conflicts related to <a href="http://en.wikipedia.org/wiki/User_Account_Control" target=_blank>User Account Control</a> settings.
+	<li>If available, Windows users should use the <b>Run as Admin</b> function to install application files. This can be found in the contextual menu loaded by right-clicking the installer file.
+	
+	
+	</ul>
+</td></tr></table>
+
+<a name="start"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Starting the Kiosk</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	To start the kiosk, follow these steps on the server computer:
+	<ol>
+	<li>Double-click the EmbARK Web Kiosk executable (application) file. <br>
+	<li>The first time you launch the kiosk, you will be asked to select a datafile. Select the datafile you copied over from EmbARK.<br>
+	Subsequently, when you launch the program, it should find this datafile automatically, as long as it always has the same name and is in the same directory.
+	<li>EmbARK Web Kiosk (version 9.0 and later) requires that you enter a registration number.  Kiosk will automatically prompt that this be entered. You can obtain your serial number on the Account Info tab of the <a href="http://support.gallerysystems.com" target=_blank>EmbARK Support Center</a>.  If you do not have a serial number, simply click the <b>Demo Mode</b> button; Kiosk will run for 1 hour at a time and then require a restart for continued use.
+	<li>The first time you open a new copy of a datafile from EmbARK, the kiosk will run through a series of initialization processes. [See <a href="#initialization">Datafile Initialization</a> for details.]
+	<li>The program may take a few minutes to initialize.  When the red EmbARK Web Kiosk screen and connection log open, the kiosk is ready to send pages.
+	</ol>
+
+	<br>
+	<h4>Notes</h4>
+	<ul>
+	<li>You can access the main kiosk page (<b>default.htm</b> in the EmbARK Web Kiosk folder) directly by clicking the on-screen TEST button.  Alternatively, you may enter the IP address or domain name of the server as the URL from any machine on the local network.
+	<li>If there is another web application running on the same machine, you may see the message "The database cannot be published."  In this case, stop the other application or configure Web Kiosk to run on an <a href="#alternate_port">alternate port</a>.
+	<li>In some cases, a Windows security protocal called Data Execution Prevention (DEP) will prevent the Kiosk application from launching.  To correct this, the EmbARK_Web_Kiosk.exe application must be added to the list of exceptions.
+	</ul>
+
+	<br><br>
+
+	<a name="initialization"></a>
+	<h3>Datafile Initialization</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The first time a datafile is opened with the kiosk -- or if you open a datafile in the kiosk after having opened it in EmbARK -- the kiosk goes through a serious of initialization processes which include updating search indices and generating thumbnails.
+
+		<br><br>
+
+		Some of these processes can take a long time, and during development there may be occasions when you want to skip all or some of them.
+
+		<br><br>
+
+		By default, you will be prompted for each process at startup and have the option of clicking <b>OK</b> to run the process or <b>Cancel</b> to skip it. Following is a list of the prompts with a description of what they do:
+
+		<br><br>
+
+		<ol>
+
+		<li><b>Would you like to convert EmbARK's traditional indices to the Web Kiosk fast indices?</b><br>
+		4D, the database upon which EmbARK and the kiosk are built, provides a range of index formats that can be optimized for data entry or for searching. Since both functions are important in EmbARK, the EmbARK indices run middle-of-the-road. However, very little data entry happens in the kiosk; it primarily queries the datafile. Therefore, optimizing indices for searching can enhance kiosk performance.
+
+		<br><br>
+
+		Clicking <b>OK</b> to this prompt causes the kiosk to drop indices for fields that are used in kiosk searches, then recreate them, optimized for queries. The impact will vary across datafiles and servers. For large datafiles this process can take a long time, but also have a greater impact.
+
+		<br><br>
+
+		If you click <b>Cancel</b> to this option but decide that you want to convert the indices later, you can do so by clicking the '<b>Fast Indexes</b>' button in <b>Preferences</b>.
+
+		<br><br>
+
+		<li><b>Would you like to update keyword flags?</b><br>
+
+		Clicking <b>OK</b> to this prompt causes the kiosk to loop through each keyword in the datafile to determine which ones are linked to web accessible objects. This enables the keyword search to display only those keywords that will return results.
+
+		<br><br>
+
+		This process can take a long time, but is only necessary for sites that use the keyword search feature.
+
+		<br><br>
+
+		<li><b>Would you like to verify thumbnails and previews?</b><br>
+
+		Clicking <b>OK</b> to this prompt causes the kiosk to verify that a thumbnail and preview image exists for each web accessible surrogate, portfolio or index tree image, and to create those that are missing. See <a href="#generate_thumbnails">Generating Thumbnails and Previews</a> for details.
+
+		<br><br>
+
+		If you click <b>Cancel</b> to this option but decide that you want to export thumbnails and previews later, you can do so by clicking the '<b>Export Images</b>' button in <b>Preferences</b>.
+
+		<br><br>
+
+		<li><b>Would you like to update the Advanced Search value lists?</b><br>
+
+		Clicking <b>OK</b> to this prompt causes the kiosk to update the Advanced Search value lists.
+
+		<br><br>
+
+		If you click <b>Cancel</b> to this option but decide that you want to update search lists later, you can do so by clicking the '<b>Update Search Lists</b>' button in <b>Preferences</b>. This updates both Advanced Search and Quick Search lists.
+
+		<br><br>
+
+		<li><b>Would you like to update the Quick Search value lists?</b><br>
+
+		Clicking <b>OK</b> to this prompt causes the kiosk to update the Quick Search word lists. This update enables the "Quick Search" as accessed in the left button bar on the Web Kiosk site.
+
+		<br><br>
+
+		If you click <b>Cancel</b> to this option but decide that you want to update search lists later, you can do so by clicking the '<b>Update Search Lists</b>' button on the Search Fields tab of <b>Preferences</b>. This updates both Advanced Search and Quick Search lists.
+
+		</ol>
+
+		<br>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>In <b>Preferences</b> you can set default answers for all of these Startup prompts. Then the kiosk will automatically run or not run each of these initialization processes when opening a new datafile, without prompting you. [See <a href="customizing.html#startup_defaults">Startup Defaults</a> for details.]
+		</ul>
+
+	</td></tr></table>
+
+	<br>
+
+	<a name="alternate_port"></a>
+	<h3>Configuring the Kiosk to run at an alternate port</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		If the kiosk must share an IP address with another web server (IIS or Apache for example), follow these steps to configure the kiosk to use an alternate port.  If the Kiosk is running on the same port as another web server, the message "The database cannot be published." will display on start-up.
+
+		<ol>
+		<li>Launch the Web Kiosk.  Click the <b>Preferences</b> button on the start-up screen.
+		<li>On the General tab, click the button that says <b>Web Server Prefs</b>.
+		<li>Click to the Web tab.  It should default to the <b>Configuration</b> sub-tab by default.
+		<li>In the TCP Port number box, enter the new port number.<br>
+			If you are unsure what port numbers are allowed, try entering 1025.
+		<li>Close the <b>OK</b> box button. The Kiosk may present a prompt about restarting the web server.  
+		</ol>
+			<img src="images/webserverprefs.gif" width="566" height="176" border="1" vspace="6" alt="Customizing TCP port in Web Server Prefs"><br>
+		<br>
+
+		You can now access the main kiosk page by clicking the TEST button or entering the IP address or domain name of the server, followed by a colon and the new port number (for example, <b>http://www.ourkiosk.com:1025</b>).
+
+	</td></tr></table>
+
+</td></tr></table>
+
+
+<a name="webfolder"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>WebFolder (HTML Root)</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	WebFolder is the "root" directory for the site.  Generally speaking, any content that will display on the site will be located in the WebFolder. <br><br>
+
+	This includes:
+	<ul>
+		<li>Media: images, thumbnails, previews, and Zoomify images.</li>
+		<li>Graphics: interface elements such as buttons</li>
+		<li>Scripts: custom javascript files</li>
+		<li>Help: pop-up help files</li>
+		<li><a href="xmlshare.html">XML Data Sharing</a> templates</li>
+
+		<br><br>
+		
+		<h4>Notes</h4> 
+		
+		<br><br>
+		
+		The <b>WebFolder</b> directory is located at the same level as the EmbARK Web Kiosk application structure file.
+		<ul>
+		<li>File location (Windows): Located at "EmbARK_Web_Kiosk\Database\webfolder"</li>
+		<li>File location (Macintosh): Located at the same level as the EmbARK Web Kiosk application</li>
+		</ul>
+		
+		<br><br>
+		
+		Note: If the site loads with the default <b>4D Web Server</b> page, it is likely that the location of the WebFolder needs to be reset.  This can be accomplished by going to <b>Web Server Prefs</b> on the <a href="customizing.html#preferences">Preferences</a> page.  Click the ellipsis ("...") to browse to the appropriate location.
+		
+		
+		<img src="images/webfolder.gif" width="729" height="876" border="1" vspace="6" alt="Customizing WebFolder root location"><br>
+		
+		<br><br>
+</td></tr></table>
+
+
+<a name="media_management"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Media Management</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	The kiosk, like EmbARK, is designed to handle 3 sizes for each linked media file:
+	<ul>
+	<li>Thumbnail: a 128 pixel (on longest side) rendition of the media.
+	<li>Preview: a 300 pixel (on longest side) rendition of the media.
+	<li>Source File: the original source file that was acquired (linked) into EmbARK.
+	</ul>
+
+	<br>
+
+	In order for <i>any</i> image to appear in the kiosk, the following must be true:
+	<ul>
+	<li>The file must be online in EmbARK. [See page 3-16 of the EmbARK User's Guide for more information about online and offline images.]
+	<li>A directory named '<b>Images</b>' must appear in the file path, <i>as it is stored in EmbARK</i>. [See <a href="prepare_database.html#image_location">Image Location</a> for more detail about the EmbARK Images directory.]
+	</ul>
+
+	<h4>Notes</h4>
+	<ul>
+	<li>When pixel sizes are given for images, they signify the dimension for the longest side of the image. The kiosk tags {<a href="kiosktags.html#thumbnailheight">Thumbnail Height</a>} and {<a href="kiosktags.html#thumbnailwidth">Thumbnail Width</a>} calculate the dimensions for both sides based on the size of the original source image.
+	</ul>
+
+	<br>
+
+	<a name="source_files"></a>
+	<h3>Source Files</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+		In order for Source Files to display in the kiosk, the following must be true:
+		<ul>
+		<li>A directory whose contents exactly mirror the EmbARK Images directory (that is, the 'web accessible' contents of this directory) must be hosted by a web server. By default, this directory is the 'Images' folder which is created by default inside the <b>EmbARK Web Kiosk\WebFolder\Media\</b> directory. Just copy the contents of your EmbARK Images directory into this kiosk Images directory.
+		<li>The <a href="customizing.html#image_url">Media Directory Url</a> in preferences must be set to the URL for the kiosk Images directory, and it must end in a forward slash (/). By default, this is set to '<b>/Media/</b>', which is the URL for the Images directory in the EmbARK Web Kiosk folder.
+		</ul>
+
+		<br>
+
+		[See {<a href="kiosktags.html#imagepath">Image Path</a>} Notes for a more technical description of why all this is necessary.]
+
+	</td></tr></table>
+
+	<a name="previews"></a>
+	<h3>Previews</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		In order for Previews to display in the kiosk, the following must be true:
+		<ul>
+		<li>A directory named '<b>Previews</b>' must exist in the kiosk Media directory.
+		<li>The contents of the Previews directory must exactly mirror the contents of the Images directory.
+		<li>All the preview files must have an extension of '<b>.jpg</b>'.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="thumbnails"></a>
+	<h3>Thumbnails</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		In order for Thumbnails to display in the kiosk, the following must be true:
+		<ul>
+		<li>A directory named '<b>Thumbnails</b>' must exist in the kiosk Media directory.
+		<li>The contents of the Thumbnails directory must exactly mirror the contents of the Images directory.
+		<li>All the thumbnail files must have an extension of '<b>.jpg</b>'.
+		<li>For each portfolio image, there must be a file in the Thumbnails directory whose name is 'Portfolio' followed by the internal ID of the Portfolio record, with a file extension of '.jpg'. For example, if Portfolio #15 has an image linked to it, there should be a file in the Thumbnails directory called Portfolio15.jpg.
+		<li>For each Index Tree image, there must be a file in the Thumbnails directory whose name is 'IndexTree' followed by the internal ID of the branch, with a file extension of '.jpg'. For example, if Index Tree branch #15 has an image linked to it, there should be a file in the Thumbnails directory called IndexTree15.jpg.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="generate_thumbnails"></a>
+	<h3>Generating Thumbnails and Previews</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Any batch image processor should be able to generate thumbnails and previews that meet the requirements described above.
+
+		<br><br>
+
+		For convenience, an image processor is also built into the kiosk application.
+
+		<br><br>
+
+		The thumbnail/preview export tool runs automatically at startup, as described in <a href="#initialization">Datafile Initialization</a>. Following are details about how to run the tool manually:
+		<ol>
+		<li>Click the <b>Preferences</b> button on the splash screen.
+		<li>Click the <b>Export Images</b> button in Preferences.
+			<ul>
+			<li>The kiosk will loop through all web accessible surrogates in your datafile to verify that each image has both a thumbnail and a preview; and that each portfolio or index tree image has a thumbnail.
+			<li>If a thumbnail or preview image does not already exist, the kiosk will create it, also creating the appropriate subdirectories.
+			<li>The kiosk creates the thumbnails and previews by exporting the thumbnail and preview images that are stored in the datafile. It does not reference the original source file.
+			</ul>
+		<li>The thumbnail/preview export does not allow the following characters anywhere in the image paths. If it encounters any of these characters, you will be prompted at the end of the export to create a log. This log will report which images were not exported due to illegal characters or other failures.
+			<ul>
+			<li>*
+			<li>?
+			<li>&quot;
+			<li>&lt;
+			<li>&gt;
+			<li>|
+			<li>\
+			<li>/
+			<li>:
+			</ul>
+		</ol>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>If a thumbnail or preview image already exists, the kiosk does not regenerate it unless the modification date of the image in the datafile is more recent. As a result, the export process will take a long time the first time it runs, when it needs to generate all the images, but subsequently should run quickly. So even if you generate your own thumbnails and previews with another tool, the kiosk export is a good tool for verifying that no thumbnails or previews are missing.
+		<li>EmbARK's Source Management Rename feature can help eliminate illegal characters in filenames, though it does not handle folder names. [See <a href="prepare_database.html#convert_filenames">Converting Image Filenames</a> for more details.]
+		<li>If you need to rename directories in order to eliminate illegal characters, remember that this will throw all its images offline in EmbARK. You should use EmbARK's Source Management 'Update' feature (on the <b>Thumbnails</b> screen) to bring them back online in a batch.
+		<li>Whenever possible, rename files through EmbARK's Source Management feature. Otherwise, any images you rename manually will go offline in EmbARK, and you can only bring them back online by relinking them one-by-one.
+		</ul>
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="test"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Testing the Kiosk</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	For testing and demonstration purposes, you can browse your kiosk pages on the server computer even if it is not connected to the Internet.
+
+	<br><br>
+
+	To do this on either Macintosh or Windows computers, open the kiosk program, then click the TEST button on the splash screen.  The default web browser on the server computer will automatically launch an URL of <b>http://127.0.0.1</b> (and it will append a custom TCP port number if necessary).  You may also use <b>http://loopback</b> on Windows or <b>http://localhost</b> on Macintosh computers.
+
+	<h4>Notes</h4>
+	<ul>
+	<li>If you have configured the kiosk to run on an alternate port, you must append this port to the IP address, separated by a colon. For example, <b>http://127.0.0.1:1025</b> will open a kiosk running on port 1025 of the same machine.
+	<li>You can access the kiosk from another machine on the local network by entering the IP address or machine name of the server.
+	</ul>
+
+</td></tr></table>
+
+<br><br>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>

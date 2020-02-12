@@ -1,0 +1,2265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>Kiosk Tags</h1>
+
+<a href="#display">Displaying Information</a>&nbsp;|&nbsp;
+<a href="#navigation">Navigation</a>&nbsp;|&nbsp;
+<a href="#buttons">Buttons</a>&nbsp;|&nbsp;
+<a href="#required">Required Section Tags</a>&nbsp;|&nbsp;
+<a href="#htmltranslation">HTML Translation</a>
+
+<br><br>
+
+Kiosk tags are special codes inserted in the templates between squiggly brackets { }. These tags are parsed by the kiosk in order to generate a web page with information from your EmbARK datafile. These tags enable you to create a single template that gets merged with data from many different database records to create the many web pages of your site. The web pages that contain actual database information in them never get stored on the web server. They are generated 'on-the-fly' as the kiosk parses these tags in the templates.
+
+<br><br>
+
+The kiosk parses tags in order from the beginning of the template file to the end. All of these tags are processed before any standard <a href="4dtags.html">4D tags</a>.
+
+<br><br>
+
+The sections below describe the syntax and behavior of specific tags.
+
+<a name="display"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Displaying Information</h2>
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<a name="_id"></a>
+	<h3>_ID</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active record, returns the internal ID of that record.
+
+	</td></tr></table>
+
+	<a name="port_name"></a>
+	<h3>[Portfolios]Port_Name</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<font color="#990000">[deprecated]</font>
+		If there is an active portfolio record (for example, in the record loop of the portfolio index page), returns the name of that portfolio.
+
+		<br><br>
+
+		This tag has been replaced by &quot;<a href="#portfolioname">Portfolio Name</a>&quot;.
+
+	</td></tr></table>
+
+	<a name="tablefield"></a>
+	<h3>[Table]Field</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the data from the specified field in the active record. The &quot;Table&quot; name may be either the <i>viewed</i> (as it appears in EmbARK) or the <i>internal</i> file name (most easily viewed through EmbARK Setup). The Table name must be in square brackets. The &quot;Field&quot; name may also be either the <i>viewed</i> field or <i>internal</i> field name. 
+
+		<br><br>
+
+ 		Please adjust the Preference setting on the General tab as appropriate.  (See <a href="customizing.html#field_names">User-defined Field Names</a> for more information.)
+
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{[Object]Display Title} displays the title for the active object record, assuming that &quot;Object&quot; is the viewed name of the Object file in EmbARK, and &quot;Display Title&quot; is the viewed name of the title field.  The alternate for internal field names would be {[Objects_1]Disp_Title}.
+
+	</td></tr></table>
+
+	<a name="branchtext"></a>
+	<h3>Branch Text</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active index tree &quot;Message Text&quot; record (for example, in the Index Tree Message page), returns the full text for the active record. <a href="#htmltranslation">HTML Translation</a> is applied to the text.
+
+	</td></tr></table>
+
+	<a name="branchtitle"></a>
+	<h3>Branch Title</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active index tree record (for example, in the record loop of the Index Tree page), returns the title of the active record (or &quot;branch&quot;).
+
+	</td></tr></table>
+
+
+	<a name="concat"></a>
+	<h3>Concat</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns values from the specified fields, concatenated with the character specified.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[required]</td>
+				<td valign="top" nowrap>Concatenation Character</td>
+				<td valign="top">You must specify, in quotation marks, the concatenation character that will be inserted between field values.</td>
+			</tr>
+			<tr>
+				<td valign="top">[required]</td>
+				<td valign="top" nowrap>Field list</td>
+				<td valign="top">After the concatenation character, you must specify a semi-colon-delimited list of fields whose information you wish to concatenate. The format for including a field is the same as for <a href="#tablefield">[Table]Field</a>.</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The syntax for this tag is: {Concat(&quot;concatenation character&quot;;[Table]Field1;[Table]Field2)}.
+		<li>The concatenation character is only used when there is field data to display on either side of it. This tag is the simplest way to create a comma-separated list of values (for example), without winding up with two consecutive or hanging commas.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="currentrecord"></a>
+	<h3>Current Record</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		This tag returns the number of the active record within the record selection. For example, {Current Record} would return &quot;5&quot; for the 5th object in an open portfolio.
+
+		<h4>Example</h4>
+		<ul>
+		<li>Currently Viewing Record #{Current Record} of {Records}
+		</ul>
+
+	</td></tr></table>
+
+	<a name="detailcaption"></a>
+	<h3>Detail Caption</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active detail record (as in the record loop of the Details template), displays the caption for the active record. <a href="#htmltranslation">HTML Translation</a> is applied to the caption.
+
+	</td></tr></table>
+
+	<a name="imageheight"></a>
+	<h3>Image Height</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the height of the source file linked to the active record, expressed in pixels, as that height was recorded in EmbARK at the time of the media &quot;Acquire&quot;.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Arithmetic</td>
+				<td valign="top">Arithmetic may be performed on the image height by including an operand and numeric value after &quot;Image Height&quot;.
+
+				<br><br>
+				Allowed operands are:
+				<ul>
+				<li>+ (addition)
+				<li>- (subtraction)
+				<li>* (multiplication)
+				<li>/ (division)
+				</ul>
+				</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Information will only display for object images if &quot;Image Web Access&quot; is turned on.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Image Height * .5} will return half the image height, in bytes.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="imagename"></a>
+	<h3>Image Name</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the filename of the source file linked to the active record.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Information will only display for object images if &quot;Image Web Access&quot; is turned on.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="imagepath"></a>
+	<h3>Image Path</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If the current record has a primary image linked to it in EmbARK (and, in the case of objects, &quot;Image Web Access&quot; is turned on), this tag returns the URL to the source image; otherwise, it returns the URL to the &quot;blank&quot; graphic.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>&quot;No image&quot; graphic</td>
+				<td valign="top">You may provide the name of a default graphic to be used when a record does not have its own image. This image should be in the root Graphics directory. Append its name to the end of the tag, separated with a semi-colon.</td>
+			</tr>
+      <tr>
+        <td valign="top">[optional]</td>
+        <td valign="top" nowrap>&quot;File Extension</td>
+        <td valign="top">You may specify a file extension for the image path. If the filename includes an extension, it will be replaced with the extension you specify; otherwise the extension you specify will be tacked on to the end of the name. Pass an empty parameter to strip the file extension.</td>
+      </tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The Image Path will be built relative to the &quot;Images URL&quot; from Preferences.
+		<li>The kiosk will search the full source file path, <i>as it exists in EmbARK</i>, for a directory named &quot;Images&quot;. If this directory name does not appear in the file path, the image path will not be generated properly.
+		<li>The remaining source file path after the &quot;Images&quot; directory is converted to a relative URL and tacked on to the end of the Image URL, which is set in Preferences.
+		<li>The &quot;blank&quot; graphic is expected to live in the directory for the &quot;Graphics URL&quot; from Preferences, and be named &quot;blank.gif&quot;.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>&lt;img src=&quot;{Image Path;NoImageDefault.gif}&quot;&gt;<br>
+    Inserts the relative path to the source file if it exists; otherwise inserts "NoImageDefault.gif".
+    <li>&lt;img src="&quot;{Image Path;Blank.bmp;jpg}&quot;&gt;<br>
+    Inserts the relative path to the source file, converting the file extension to 'jpg'.
+    <li>&lt;img src="&quot;{Image Path;Blank.gif;}&quot;&gt;<br>
+    Inserts the relative path to the source file, with the file extension stripped off. (This can be useful for integrating with <a href="http://www.zoomify.com" target=_blank>Zoomify</a> which requires that the file extensions be removed.)
+		</ul>
+
+	</td></tr></table>
+
+	<a name="imagerotation"></a>
+	<h3>Image Rotation</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the thumbnail rotation of the primary media linked to the active record.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Arithmetic</td>
+				<td valign="top">Arithmetic may be performed on the image rotation by including an operand and numeric value after &quot;Image Rotation&quot;.
+
+				<br><br>
+				Allowed operands are:
+				<ul>
+				<li>+ (addition)
+				<li>- (subtraction)
+				<li>* (multiplication)
+				<li>/ (division)
+				</ul>
+				</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Information will only display for object images if &quot;Image Web Access&quot; is turned on.
+		<li>The thumbnail rotation in EmbARK is only used for images whose source files are not oriented properly. The rotation signifies the degree rotation from the source file, which is not oriented properly, to the thumbnail, which is oriented properly.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Image Rotation - 90} will return the thumbnail rotation minus 90 degrees.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="imagesize"></a>
+	<h3>Image Size</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the size of the source file linked to the active record, expressed in bytes, as that size was recorded in EmbARK at the time of the media &quot;Acquire&quot;.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Arithmetic</td>
+				<td valign="top">Arithmetic may be performed on the image size by including an operand and numeric value after &quot;Image Size&quot;.
+
+				<br><br>
+				Allowed operands are:
+				<ul>
+				<li>+ (addition)
+				<li>- (subtraction)
+				<li>* (multiplication)
+				<li>/ (division)
+				</ul>
+				</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Information will only display for object images if &quot;Image Web Access&quot; is turned on.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Image Size + 8} will return the image size, as recorded in EmbARK, plus 8 bytes.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="imagetype"></a>
+	<h3>Image Type</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the file type for the source file linked to the active record, as that type was recorded in EmbARK at the time of the media &quot;Acquire&quot;.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Information will only display for object images if &quot;Image Web Access&quot; is turned on.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="imagewidth"></a>
+	<h3>Image Width</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the width of the source file linked to the active record, expressed in pixels, as that width was recorded in EmbARK at the time of the media &quot;Acquire&quot;.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Arithmetic</td>
+				<td valign="top">Arithmetic may be performed on the image width by including an operand and numeric value after &quot;Image Width&quot;.
+
+				<br><br>
+				Allowed operands are:
+				<ul>
+				<li>+ (addition)
+				<li>- (subtraction)
+				<li>* (multiplication)
+				<li>/ (division)
+				</ul>
+				</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Information will only display for object images if &quot;Image Web Access&quot; is turned on.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Image Width / 3} will return a third of the image width, in bytes.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="keywordpath"></a>
+	<h3>KeywordPath</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns list of all the keywords linked to the active object record, using the full paths, concatenated with a semicolon or the character(s) you specify. This list is processed through <a href="#htmltranslation">HTML Translation</a>. The list will be sorted alphabetically by the full path.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Concatenation Character</td>
+				<td valign="top">You may append a custom concatenation character to override the default concatenation character of a semicolon. Everything that appears after &quot;KeywordPath&quot; will be inserted between each keyword in the list.</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The keyword path will be formatted just as it is in EmbARK, with a colon separating levels of the path.
+		</ul>
+
+		<h4>Example</h4>
+		<ul>
+		<li>{KeywordPath} -- Returns a list formatted as:<br>
+			vehicle:boat; building:lighthouse; seascape
+		<li>{KeywordPath &lt;br&gt;} -- Returns a list formatted as:<br>
+			vehicle:boat&lt;br&gt;building:lighthouse&lt;br&gt;seascape<br>
+			... which displays as:<br>
+			building:lighthouse<br>
+			seascape<br>
+			vehicle:boat
+		</ul>
+
+	</td></tr></table>
+
+	<a name="keywords"></a>
+	<h3>Keywords</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns list of all the keywords linked to the active object record, concatenated with a semicolon or the character(s) you specify. This list is processed through <a href="#htmltranslation">HTML Translation</a>.The list will be sorted alphabetically.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Concatenation Character</td>
+				<td valign="top">You may append a custom concatenation character to override the default concatenation character of a semicolon. Everything that appears after &quot;Keywords&quot; will be inserted between each keyword in the list.</td>
+			</tr>
+		</table>
+
+
+		<h4>Example</h4>
+
+			{if ([Keywords])}
+  				  <b>Keywords:</b>
+  				  <ul>
+          				  {Start Loop [Keywords]}
+ 					   <li>{[Keywords]word}  {if ([Keywords]Notes != "")} -- {[Keywords]Notes}{end if}</li>
+       				  {End Loop}
+    				  </ul>
+			{end if}
+
+	</td></tr></table>
+
+	<a name="lastrecord"></a>
+	<h3>Last Record</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		This tag returns the number of the last record on the current page. For example, if the user is on the first page of thumbnails for a portfolio, and each page has 6 thumbnails on it, {Last Record} will return &quot;6&quot;.
+
+		<h4>Example</h4>
+		<ul>
+		<li>Currently Viewing Records {Current Record} to {Last Record} of {Records}
+		</ul>
+
+	</td></tr></table>
+
+	<a name="message"></a>
+	<h3>Message</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Some special pages - particularly in the user portfolio area - generate success or error messages. The Message tag returns these messages.
+
+	</td></tr></table>
+
+	<a name="moddate"></a>
+	<h3>Mod Date</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Displays the date as recorded in the most recent log entry in the EmbARK datafile.  This tag allows the web designer to relate the currency of the displayed content (without having to manually update the date).
+
+	</td></tr></table>
+
+
+
+	<a name="notes"></a>
+	<h3>Notes</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Displays all of the <i>public access</i> notes linked to the active object.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Label Concatenation Character</td>
+				<td valign="top">You may provide the character(s) to be used between a note label and the note text. By default, a colon is used.</td>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Notes Concatenation Character</td>
+				<td valign="top">You may provide the character(s) to be used between multiple notes linke dto an object by appending it to the tag (separated by a semicolon). This parameter must always be second; so in order to provide a Notes Concatenation Character, you must also provide the Label Concatenation Character. By default, a double line break (&lt;br&gt;&lt;br&gt;) is used.</td>
+			</tr>
+
+
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Only those notes that have been marked for &quot;Public Access&quot; will display.
+		<li>Only those notes that actually have a value for the active object will display.
+		<li>The notes will display in alphabetical order, according to the field name.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Notes} - Displays all public access notes linked to the active object, with a colon between the note label and text, and a blank line between multiple notes. An example may look like this:
+			<br><br>
+			Commentary: A rooster stands on the branch of an evergreen tree beneath the morning sun which seems to have risen too high in the sky.
+			<br><br>
+			Marks: The signature, &quot;Shin'enkan Jakuchu sei,&quot; and the relatively rare square intaglio seal, &quot;To Jokin-in,&quot; affixed below are in common with the signature and seal on &quot;White Cockatoo and Pine&quot; (Museum of Fine Arts, Boston).
+			<br><br>
+
+		<li>{Notes; - ;&lt;hr&gt;} - Displays all public access notes linked to the active object, with a dash between the note label and text, and a horizontal rule between notes. An example may look like this:
+			<br><br>
+			Commentary - A rooster stands on the branch of an evergreen tree beneath the morning sun which seems to have risen too high in the sky.
+			<hr>
+			Marks - The signature, &quot;Shin'enkan Jakuchu sei,&quot; and the relatively rare square intaglio seal, &quot;To Jokin-in,&quot; affixed below are in common with the signature and seal on &quot;White Cockatoo and Pine&quot; (Museum of Fine Arts, Boston).
+			<br><br>
+		<li>{[Object Notes]Note_Name} - Specific Note fields may be displayed by using the tag {[Object Notes]} and then appending the note name, e.g. {[Object Notes]Commentary}. 
+		</ul>
+
+	</td></tr></table>
+
+	<a name="portfolioname"></a>
+	<h3>Portfolio Name</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active portfolio record (for example, in the record loop of the portfolio index page), returns the name of that portfolio.
+
+	</td></tr></table>
+
+	<a name="portfolionotes"></a>
+	<h3>Portfolio Notes</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active portfolio record (for example, in the record loop of the portfolio index page), returns the notes for that portfolio, exactly as they appear in EmbARK.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This tag displays the portfolio notes <i>without</i> <a href="#htmltranslation">HTML Translation</a>. This makes it appropriate for use in form input boxes, for example (where carriage returns are preferable to html markup).
+		</ul>
+
+	</td></tr></table>
+
+	<a name="portfoliosize"></a>
+	<h3>Portfolio Size</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active portfolio record (for example, in the record loop of the portfolio index page), returns the number of objects in that portfolio.
+
+	</td></tr></table>
+
+	<a name="portowner"></a>
+	<h3>PortOwner</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active portfolio record (for example, in the record loop of the portfolio index page), returns the name of the agent who created this portfolio. If the agent record is marked confidential in EmbARK, returns &quot;[confidential]&quot;.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Confidential</td>
+				<td valign="top">If &quot;PortOwner&quot; is followed by a semi-colon, EWK will return the text following the colon if the portfolio owner's Agent record is marked confidential. If this parameter is omitted, the default value of &quot;[confidential]&quot; is used.</td>
+			</tr>
+		</table>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{PortOwner; <i>(anonymous)</i>}
+		</ul>
+
+	</td></tr></table>
+
+	<a name="preview"></a>
+	<h3>Preview</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If the current record has a primary image linked to it in EmbARK (and, in the case of objects, &quot;Image Web Access&quot; is turned on), this tag returns the URL to the preview image; otherwise, it returns the URL to the &quot;blank&quot; graphic.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>&quot;No image&quot; graphic</td>
+				<td valign="top">You may provide the name of a default graphic to be used when a record does not have its own image. This image should be in the root Previews directory. Append its name to the end of the tag, separated with a semi-colon.</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>All previews are expected to be JPEG files, with a file extension of &quot;.jpg&quot;.
+		<li>The Preview URL consists of the &quot;Media Directory URL&quot; from Preferences followed by &quot;Previews&quot;. (In other words, the previews are expected to be in a directory named &quot;Previews&quot; inside the main kiosk Media directory.)
+		<li>The kiosk will search the full source file path, <i>as it exists in EmbARK</i>, for a directory named &quot;Images&quot;. If this directory name does not appear in the file path, the preview link will not be generated properly.
+		<li>The remaining source file path after the &quot;Images&quot; directory is converted to a relative URL and tacked on to the end of the Preview URL. Therefore, the Previews file directory must be structured exactly as the Images directory is. (If you use the kiosk's preview export tool, it builds this directory structure for you automatically.)
+		<li>The &quot;blank&quot; graphic is expected to live in the directory for the &quot;Graphics URL&quot; from Preferences, and be named &quot;blank.gif&quot;.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>&lt;img src=&quot;{Preview;NoImageDefault.gif}&quot;&gt;
+		</ul>
+
+	</td></tr></table>
+
+	<a name="raw"></a>
+	<h3>Raw</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Renders the contents of a field without doing any HTML translation for links, carriage returns, multiple spaces, etc.
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Raw([Objects_1]Info_Page_Comm)} will present the Display Comments data exactly as entered in the field.  
+		</ul>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This is one means by which Unicode data can be displayed on the Kiosk.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="records"></a>
+	<h3>Records</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		This tag returns the number of records in the current selection for the active table or for the requested record type.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Record Type</td>
+				<td valign="top">To display the number of records in either the object or artist table even when the desired table is not active, append a semicolon and the name of the desired record type.</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Pages that display no record data (for example, the search pages) do not load any records and so do not have an automatic record type association. In order to display record counts on these pages, you <i>must</i> specify a record type.
+		</ul>
+
+		<h4>Example</h4>
+		<ul>
+		<li>{Records}
+		<li>{Records; Object}
+		<li>{Records; Artist}
+		</ul>
+
+	</td></td></table>
+
+
+	<a name="related"></a>
+	<h3>Related Objects</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		When used in conjunction with the {Start Loop} and {End Loop} tags, the Parent - Child - Sibling object relationships as defined in EmbARK may be displayed.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Example</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Condition</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top" nowrap>{Start Loop([Related Objects])}</td>
+				<td valign="top">Loops through all related objects</td>
+				<td valign="top"></td>
+			</tr>
+			<tr>
+				<td valign="top" nowrap>{Start Loop([Related Objects]=="Parent")}</td>
+				<td valign="top">Loops specifically through the parent records.  There should only be one.</td>
+				<td valign="top">{If(Has Parent)}</td>
+			</tr>
+			<tr>
+				<td valign="top" nowrap>{Start Loop([Related Objects]=="Child")}</td>
+				<td valign="top">Loops specifically through children records.</td>
+				<td valign="top">{If(Has Children)}</td>
+			</tr>
+			<tr>
+				<td valign="top" nowrap>{Start Loop([Related Objects]=="Sibling")}</td>
+				<td valign="top">Loops specifically through all sibling records.  This includes objects that were specifically linked as siblings and those that share the same parent.</td>
+				<td valign="top">{If(Has Sibling)}</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Each {Start Loop} must have an equivalent {End Loop} statement.
+		<li>Each (If} must have an equivalent {End if} statement.
+		</ul>
+
+
+	</td></td></table>
+
+
+	<a name="selectionname"></a>
+	<h3>Selection Name</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<todo task="document selection name logic"/>
+
+		Returns the Selection Name for the current record selection. This name is built automatically every time a new result set is generated (e.g. when a new search is run or a portfolio list is opened). <a href="#htmltranslation">HTML Translation</a> is applied to the value.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The selection names are generated automatically according to logic that is built into the kiosk. They should be used as a shortcut for describing the record selection. They do not allow for customization.
+		<li>Selection Names can get very long, particularly if the &quot;Add to Current Selection&quot; and &quot;Search only Current Selection&quot; features are used.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="sequence"></a>
+	<h3>Sequence</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns a sequential number. Each time this tag is called, it will increment the 'sequence' value by 1; at 999999999 it rolls back down to 1. This tag can be used at the end of a URL, prefixed by an asterix (*), as a way of generating 'unique' URLs, to ensure that pages get reloaded every time the user clicks into them.
+
+		<br><br>
+
+		Using the HTML 'Expires' metatag should accomplish the same effect.
+
+	</td></tr></table>
+
+	<a name="sessionid"></a>
+	<h3>SessionID</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the Session ID for the current user.
+
+		<br><br>
+
+		Each time a user initially connects in to the kiosk, they are assigned a unique Session ID, which must be encoded in every URL in the site. The kiosk extracts this ID from each URL, and uses it to track users across multiple page hits. In order for a user's record selection to be maintained as they link between pages in the kiosk, this ID must be encoded in every URL they click.
+
+		<br><br>
+
+		The {SessionID} is typically used in conjunction with the {Sequence} tag.  It should always occur at the end of the URL as follows: <b>?sid<span class=GramE>={</span>SessionId}&amp;x={Sequence}</b>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>&lt;a href="/kiosk/contact.htm?sid<span class=GramE>={</span>SessionId}&amp;x={Sequence}"&gt;Contact Us&lt;/a&gt;
+		</ul>
+
+		<br><br>
+	
+		In the case of a &lt;form&gt; element, the {SessionID} and {Sequence} are typically entered as an &lt;input type&gt;.
+
+		<h4>Examples</h4>
+		<ul>
+		<li>&lt;input type=&quot;hidden&quot; name=&quot;sid&quot; value=&quot;{SessionID}&quot;/&gt;
+		</ul>
+
+		<br><br>
+	</td></tr></table>
+	
+	<a name="sort"></a>
+	<h3>Sort</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		A drop-list of possible sort fields may be configured on each of the search screens.  The user's search results will be sorted as specified.  The table below provides a list of the internal field ids needed to code the sort fields.
+		<p>
+		Example:<br>
+<p class=MsoPlainText>&lt;<span class=SpellE>tr</span>&gt;&lt;td&gt;&lt;p&gt;&lt;strong&gt;Sort
+results by:&amp;<span class=SpellE>nbsp</span>;&lt;/strong&gt;&lt;/td&gt;&lt;td&gt;&lt;select
+name=&quot;sort&quot;&gt;&lt;option
+value=&quot;9&quot;&gt;Title&lt;/option&gt;&lt;option
+value=&quot;7&quot;&gt;Artist&lt;/option&gt;&lt;option
+value=&quot;52&quot;&gt;Medium &amp;amp; Support&lt;/option&gt;&lt;option
+value=&quot;62&quot;&gt;Creation Date&lt;/option&gt;&lt;/select&gt;&lt;/p&gt;&lt;/td&gt;&lt;/<span
+class=SpellE>tr</span>&gt;<o:p></o:p></p>
+
+		<table width="200">
+			<tr><td><b>Field ID</b></td><td><b>Field Name</b></td></tr>
+<tr><td>2</td><td>Object Type</td></tr>
+<tr><td>7</td><td>Sort Artist</td></tr>
+<tr><td>8</td><td>Display Artist</td></tr>
+<tr><td>9</td><td>Display Title</td></tr>
+<tr><td>15</td><td>Class System</td></tr>
+<tr><td>16</td><td>Class 1</td></tr>
+<tr><td>17</td><td>Class 2</td></tr>
+<tr><td>18</td><td>Class 3</td></tr>
+<tr><td>32</td><td>Object Name</td></tr>
+<tr><td>33</td><td>Full Title</td></tr>
+<tr><td>39</td><td>Temp ID</td></tr>
+<tr><td>53</td><td>Medium</td></tr>
+<tr><td>55</td><td>Support</td></tr>
+<tr><td>57</td><td>Color</td></tr>
+<tr><td>58</td><td>Technique</td></tr>
+<tr><td>59</td><td>Orientation</td></tr>
+<tr><td>61</td><td>Creation Date</td></tr>
+<tr><td>62</td><td>_Start Date</td></tr>
+<tr><td>68</td><td>Period</td></tr>
+<tr><td>69</td><td>Century</td></tr>
+<tr><td>70</td><td>Creation Place 1</td></tr>
+<tr><td>71</td><td>Creation Place 2</td></tr>
+<tr><td>72</td><td>Style</td></tr>
+<tr><td>75</td><td>Department</td></tr>
+<tr><td>76</td><td>Collection</td></tr>
+<tr><td>83</td><td>Legal Status</td></tr>
+<tr><td>101</td><td>Height</td></tr>
+<tr><td>109</td><td>Current Location</td></tr>
+<tr><td>110</td><td>Creation Place 3</td></tr>
+<tr><td>111</td><td>Creation Place 4</td></tr>
+<tr><td>112</td><td>Creation Place 5</td></tr>
+<tr><td>113</td><td>Historic</td></tr>
+<tr><td>150</td><td>Copyright Type</td></tr>
+		</table>
+<p>
+	</td></tr></table>
+
+	<a name="sortorder"></a>
+	<h3>Sort Order</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		In the User Portfolio Sort page only, if there is an active portfolio record, returns the sort order for the active portfolio.
+
+	</td></tr></table>
+
+	<a name="thumbnail"></a>
+	<h3>Thumbnail</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If the current record has a primary image linked to it in EmbARK (and, in the case of objects, &quot;Image Web Access&quot; is turned on), this tag returns the URL to the thumbnail image; otherwise, it returns the URL to the &quot;blank&quot; graphic. The <b>{thumbnail}</b> tag may also be used to display the embedded thumbnails associated with index tree and portfolio branches.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>&quot;No image&quot; graphic</td>
+				<td valign="top">You may provide the name of a default graphic to be used when a record does not have its own image. This image should be in the root Thumbnails directory. Append its name to the end of the tag, separated with a semi-colon.</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>All thumbnails are expected to be JPEG files, with a file extension of &quot;.jpg&quot;.
+		<li>The Thumbnail URL consists of the &quot;Media Directory URL&quot; from Preferences followed by &quot;Thumbnails&quot;. (In other words, the thumbnails are expected to be in a directory named &quot;Thumbnails&quot; inside the main kiosk Media directory.)
+		<li>The kiosk will search the full source file path, <i>as it exists in EmbARK</i>, for a directory named &quot;Images&quot;. If this directory name does not appear in the file path, the thumbnail link will not be generated properly.
+		<li>The remaining source file path after the &quot;Images&quot; directory is converted to a relative URL and tacked on to the end of the Thumbnail URL. Therefore, the Thumbnails file directory must be structured exactly as the Images directory is. (If you use the kiosk's thumbnail export tool, it builds this directory structure for you automatically.)
+		<li>Index Tree branches and Portfolios do not link to source file records in EmbARK as other record types do; they exist only as thumbnails stored in the datafile. The kiosk export tool generates thumbnails for these records in the root of the Thumbnails folder. It creates names for these thumbnails by appending the internal ID of the record to &quot;IndexTree&quot; or &quot;Portfolio&quot;. (For example, Portfolio #62 will likely have a thumbnail image URL of http://your.domain.name/media/thumbnails/portfolio62.jpg.)
+		<li>The &quot;blank&quot; graphic is expected to live in the directory for the &quot;Graphics URL&quot; from Preferences, and be named &quot;blank.gif&quot;.
+		</ul>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>&lt;img src=&quot;{Thumbnail;NoImageDefault.gif}&quot;&gt;
+		</ul>
+
+	</td></tr></table>
+
+	<a name="thumbnailheight"></a>
+	<h3>Thumbnail Height</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the height of the thumbnail image linked to the active record, if any. This height is calculated from the dimensions of the linked source media, assuming a thumbnail that is 128 pixels on the longest side.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Arithmetic</td>
+				<td valign="top">Arithmetic may be performed on the thumbnail height by including an operand and numeric value after &quot;Thumbnail Height&quot;.
+
+				<br><br>
+				Allowed operands are:
+				<ul>
+				<li>+ (addition)
+				<li>- (subtraction)
+				<li>* (multiplication)
+				<li>/ (division)
+				</ul>
+				</td>
+			</tr>
+		</table>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Thumbnail Height / 2} will return half the thumbnail height; that is, the height of a thumbnail for the linked image that is 64 pixels on the longest side.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="thumbnailwidth"></a>
+	<h3>Thumbnail Width</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the width of the thumbnail image linked to the active record, if any. This width is calculated from the dimensions of the linked source media, assuming a thumbnail that is 128 pixels on the longest side.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Arithmetic</td>
+				<td valign="top">Arithmetic may be performed on the thumbnail width by including an operand and numeric value after &quot;Thumbnail Width&quot;.
+
+				<br><br>
+				Allowed operands are:
+				<ul>
+				<li>+ (addition)
+				<li>- (subtraction)
+				<li>* (multiplication)
+				<li>/ (division)
+				</ul>
+				</td>
+			</tr>
+		</table>
+
+		<h4>Examples</h4>
+		<ul>
+		<li>{Thumbnail Width * .5} will return half the thumbnail width; that is, the width of a thumbnail for the linked image that is 64 pixels on the longest side.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="username"></a>
+	<h3>Username</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the name of the currently-logged in user, if any.
+
+	</td></tr></table>
+
+	<a name="zoom"></a>
+	<h3>Zoom</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Many EmbARK Web Kiosk users have integrated the <a href="http://www.zoomify.com" target=_blank>Zoomify</a> tool for online image zooming.  The template <i>zoomobject.htm</i> in the Custom sub-folder has code for displaying Zoomify images using Web Kiosk tools.  The Zoom images may be stored within the Media directory along with Images, or they may be located on an alternate web server.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The Zoom URL consists of the &quot;Media Directory URL&quot; from Preferences followed by &quot;Zoom&quot;. (In other words, the Zoomify images are expected to be in a directory named &quot;Zoom&quot; inside the main kiosk Media directory.)
+		<li>The kiosk will search the full source file path, <i>as it exists in EmbARK</i>, for a directory named &quot;Images&quot;. If this directory name does not appear in the file path, the Zoomify link will not be generated properly.  The Kiosk will be directed to the <b>Zoom</b> folder instead of the Images folder.
+		<li>The remaining source file path after the &quot;Images&quot; directory is converted to a relative URL and tacked on to the end of the Zoom URL. Therefore, the Zoom file directory must be structured exactly as the Images directory is. (If you use EmbARK's Zoom tool in Source Management to build a batch script for processing, it builds this directory structure for you automatically.)
+		</ul>
+
+		<h4>Examples</h4>
+		Note: The code below is the portion that can be adjusted on the zoomobject.htm template.
+<br><br>
+		<ul>
+		<li>ZoomifyImagePath={Zoom;blank.gif;}
+		<li>ZoomifyImagePath=http://www.alternate_server.com/{Zoom;blank.gif;}
+		</ul>
+
+	</td></tr></table>
+
+
+</td></tr></table>
+
+<a name="navigation"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Navigation</h2>
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<a name="notesbutton"></a>
+	<h3>Notes Button</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If a portfolio record is loaded and has a value in the Notes field, this tag displays a clickable button for displaying the Portfolio Notes page.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The button graphic is located in the kiosk Graphics folder and is called &quot;portnotes.gif&quot;. It can be modified with an image editor.
+		<li>If the user clicks the Portfolio Notes button, the &quot;portfolionotes.htm&quot; template opens to display the full notes.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="portfolionotelink"></a>
+	<h3>Portfolio Note Link</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active portfolio record, returns a URL for opening the Portfolio Notes page.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This tag returns a URL whether the current portfolio has Notes or not. If you use this tag for custom portfolio notes navigation, you should write code to check for the existence of a Notes value so that you don't send users to an empty page.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="fieldnumber"></a>
+	<h3>Field Number</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the field number of the passed field.
+
+		<h4>Parameters</h4>
+
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[required]</td>
+				<td valign="top" nowrap>Field Name</td>
+				<td valign="top">The <i>viewed</i> field name, as it exists in EmbARK, for the active file.
+				</td>
+			</tr>
+		</table>
+
+	<h4>Examples</h4>
+		<ul>
+		<li>{field number(disp_title)} returns a field number of 9 for the Display Title field in the Objects table.
+		</ul>
+
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This is an advanced tag that is very rarely useful.
+		<li>This tag only processes field names for the &quot;active&quot; table.
+		</ul>
+	</td></tr></table>
+
+	<a name="objectinfo"></a>
+	<h3>Object Info</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<b>If there is an active object record</b>, returns a URL for opening the Object Description page for this object. The URL is formatted with the Object ID, so it is a direct link to this object and independent of user session. The user's Session ID is appended to the end of the URL.
+
+		<br><br>
+
+		Otherwise, <b>if the current page is an object page</b>, returns a URL for opening the Object Description page for the current object in the record selection. Since there is no active object, this URL only specifies a record relative to the user's current object selection, so it is dependent on the current user session. The user's Session ID and a Sequence tag are appended to the end of the URL.
+
+		<br><br>
+
+		Otherwise, returns a pound symbol (#).
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The 'relative' URL, which is dependent on the user's selection, can be recognized by the asterix which appears in the URL after &quot;OBJ&quot;. This URL should not be copied into hard-coded links since it will not work outside the context of the current selection.
+		<li>The non-relative URL can not be bookmarked or copied into a hard-coded link because it is not dependent on user selection. However, if you hard-code this (or any) link, be sure to remove the user's Session ID (i.e. everything after and including the dollar sign (?sid)).  For one good solution, see the <a href="appendix.html">Appendix</a> for how bookmarking can be accomlished with <a href="http://www.addthis.com" target=_blank>AddThis</a>.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="artistinfo"></a>
+	<h3>Artist Info</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<b>If the active record type is Artist</b>, returns a URL for opening the Artist Description page for the current artist. The URL is formatted with the Artist ID, so it is a direct link to this artist and independent of user session. The user's Session ID is appended to the end of the URL.
+
+		<br><br>
+
+		Otherwise, <b>if the current record type is Object-Artist</b> (i.e. if this tag is in an artist loop on an object page), returns a URL for opening the Artist Description page for the artist linked to the current Object-Artist record. The URL is formatted with the Artist ID, so it is a direct link to this artist and independent of user session. The user's Session ID is appended to the end of the URL.
+
+		<br><br>
+
+		Otherwise, <b>if the current record type is Object</b> (i.e. this tag is used to create a generic 'View Artist(s)' link on the object page):
+		<ul>
+		<li>If there is a single artist link for this object, returns a URL for opening an Artist Description page the linked artist. The URL is formatted with the Artist ID, so it is a direct link to this artist and independent of user session. The user's Session ID is appended to the end of the URL.
+		<li>If there are multiple artist links for this object, returns a URL which when clicked executes a search for all artist linked to this object and returns the results in a standard artist search results page.
+		<li>Otherwise, returns a pound symbol (#).
+		</ul>
+
+		<br>
+
+		Otherwise, returns a pound symbol (#).
+
+	</td></tr></table>
+
+	<a name="details"></a>
+	<h3>Details</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If Image Web Access is turned on for the current object and this object has at least one detail record linked to it, returns a URL for opening the first page of details linked to the current object. The user's Session ID is appended to the end of the URL.
+
+		<br><br>
+
+		Otherwise, returns a pound symbol (#).
+
+	</td></tr></table>
+
+	<a name="surrogates"></a>
+	<h3>Surrogates</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If Image Web Access is turned on for the current object and this object has at least one web accessible surrogate record linked to it, returns a URL for opening the first page of surrogates linked to the current object. The user's Session ID is appended to the end of the URL.
+
+		<br><br>
+
+		Otherwise, returns a pound symbol (#).
+
+	</td></tr></table>
+
+	<a name="objectthumbnails"></a>
+	<h3>Object Thumbnails</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	    Returns a URL for viewing the current selection of object records in the thumbnail view. The user's Session ID and a <a href="#sequence">Sequence Number</a> are appended to the end of the URL.
+
+	    <br><br>
+
+	    The thumbnails URL does not contain any information about the record selection itself. It is <i>always</i> dependent on the user's current session. A bookmarked thumbnail URL will likely not work.
+
+	</td></tr></table>
+
+	<a name="artistobjects"></a>
+	<h3>Artist's Objects</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+        <b>If the active record type is Object</b>, and there is at least one Object-Artist record linked to this object's <i>primary</i> artist which links to a <i>web-accessible</i> object, returns a URL for opening a Thumbnails page of all web-accessible Objects linked to this artist.
+
+        <br><br>
+
+        Otherwise, <b>if the active record type is Artist</b>, and there is at least one Object-Artist record linked to this artist which links to a <i>web-accessible</i> object, returns a URL for opening a Thumbnails page of all web-accessible Objects linked to this artist.
+
+        <br><br>
+
+        Otherwise, returns a pound symbol (#).
+
+	</td></tr></table>
+
+	<a name="listartists"></a>
+	<h3>List Artists</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Sort Field</td>
+				<td valign="top">You may optionally specify the list sort field by adding the <i>viewed</i> field name, as it exists in EmbARK, after a dash. Note that this field must be an artist field.</td>
+		    </tr>
+		</table>
+
+        <h4>Notes</h4>
+        <ul>
+        <li>You must use the file name &quot;Artists&quot; with this tag. Using a customized file name may not work.
+        </ul>
+
+        <h4>Examples</h4>
+        <ul>
+        <li>&lt;a href="{List Artists}"&gt;view artist list&lt;/a&gt;
+        <li>&lt;a href="{List Artists-Sort Name}"&gt;view artist list, sorted by name&lt;/a&gt;
+        </ul>
+
+	</td></tr></table>
+
+	<a name="listobjects"></a>
+	<h3>List Objects</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Sort Field</td>
+				<td valign="top">You may optionally specify the list sort field by adding the <i>viewed</i> field name, as it exists in EmbARK, after a dash. Note that this field must be an object field.</td>
+		    </tr>
+		</table>
+
+        <h4>Notes</h4>
+        <ul>
+        <li>You must use the file name &quot;Objects&quot; with this tag. Using a customized file name may not work.
+        </ul>
+
+        <h4>Examples</h4>
+        <ul>
+        <li>&lt;a href="{List Objects}"&gt;view object list&lt;/a&gt;
+        <li>&lt;a href="{List Objects-Display Title}"&gt;view object list, sorted by title&lt;/a&gt;
+        </ul>
+
+	</td></tr></table>
+
+
+	<a name="bfullview"></a>
+	<h3>Full View</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+        If the active record is an object, artist, detail image or surrogate, and this record has a source image linked to it, returns a URL for opening the Full View page for this record.
+
+        <br><br>
+
+        Otherwise, returns a pound symbol (#).
+
+        <h4>Notes</h4>
+        <ul>
+        <li>In the case of object records, Image Web Access must be turned on for the active record for a URL to be returned.
+        <li>In the case of artist records, Web Access must be turned on for the active record for a URL to be returned.
+        </ul>
+	</td></tr></table>
+
+	<a name="popupusers"></a>
+	<h3>Popup;Users</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Inserts a list of &lt;OPTION&gt; tags for the kiosk users who have created shared portfolios. Each OPTION has a user ID as the VALUE, and the corresponding user NAME as the display text.
+
+		<br><br>
+
+		This tag is intended to be used in an &lt;SELECT&gt; tag which opens a &quot;Community Portfolios&quot; page with portfolios for the selected user.
+
+		<h4>Example</h4>
+		<ul>
+		<li>&lt;select name=&quot;userPopup&quot; onChange=&quot;showUser(this,{SessionID});&quot;&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;- - - Select a user - - -<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;option&gt;* All Users<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{popup;users}<br>
+		&lt;/select&gt;
+
+		<br><br>
+		... where &quot;showUser&quot; is the JavaScript included in the default kiosk &quot;SharedPortfolioIndex.htm&quot; template; it builds a URL for opening a list of portfolios created by the selected user, then sends that request to the kiosk server.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="popup"></a>
+	<h3>Popup</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Builds a popup of all the records in the current selection (object, artist or portfolio). The popup includes JavaScript and form HTML code for jumping to the appropriate record when a value is selected from the list.
+
+		<br><br>
+
+		If the page layout contains multiple records, selected a record from the popup will jump to the page that has that record first on the page.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Page Type</td>
+				<td valign="top">You may specify, after a semicolon, what page layout the selected record should open in. The allowed values are:
+				<ul>
+				<li><b>portfolio</b>
+				<li><b>full view</b>
+				<li><b>artist objects</b>
+				<li><b>object info</b>
+				<li><b>artist info</b>
+				<li><b>object list</b>
+				<li><b>artist list</b>
+				<li><b>object thumbs</b>
+				<li><b>edit portfolio</b>
+				</ul>
+
+				<br>
+
+				If no Page Type is provided, it defaults to the search results page.
+
+				<br><br>
+
+				If the current page is a Portfolio Index, it defaults to a Portfolio Index page.
+				</td>
+			</tr>
+				<td>[optional]</td>
+				<td>Customize</td>
+				<td>Example: Customize the display fields in the popup list.
+				
+				<br><br>
+				
+				{Popup;Object Info;&lt;&lt;[Objects_1]Disp_Title&gt;&gt; -&lt;&lt;[Objects_1]Disp_Maker_1&gt;&gt;}
+				
+				<br><br>
+				
+				Note: the width of the popup may be controlled using the <a href="
+				customizing.html#css">kioskstyles.css</a> style sheet.
+				
+				</td>
+			<tr>
+			</tr>
+		</table>
+
+	</td></tr></table>
+
+	<a name="previous"></a>
+	<h3>Previous</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If the user has a selection of records open and is beyond the first page, returns a URL for opening the previous page of records in the same page layout.
+
+		<br><br>
+
+		Otherwise, returns a pound symbol (#).
+
+		<h4>Example</h4>
+		<ul>
+		<li>&lt;a href=&quot;{previous}&quot;&gt;Go Back One Page&lt;/a&gt;
+		</ul>
+
+	</td></tr></table>
+
+	<a name="next"></a>
+	<h3>Next</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If the user has a selection of records open, and there are more records in the selection beyond what currently displays, returns a URL for opening the next page of records in the same page layout.
+
+		<br><br>
+
+		Otherwise, returns a pound symbol (#).
+
+		<h4>Example</h4>
+		<ul>
+		<li>&lt;a href=&quot;{previous}&quot;&gt;Next Page of Records&lt;/a&gt;
+
+	</td></tr></table>
+
+	<a name="firstpage"></a>
+	<h3>First Page</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If the user has a selection of records open and is beyond the first page, returns a URL for opening the first page of records in the same page layout.
+
+		<br><br>
+
+		Otherwise, returns a pound symbol (#).
+
+		<h4>Example</h4>
+		<ul>
+		<li>&lt;a href=&quot;{first}&quot;&gt;Page 1&lt;/a&gt;
+		</ul>
+
+	</td></tr></table>
+
+	<a name="lastpage"></a>
+	<h3>Last Page</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If the user has a selection of records open, and there are more records in the selection beyond what currently displays, returns a URL for opening the last page of records in the same page layout.
+
+		<br><br>
+
+		Otherwise, returns a pound symbol (#).
+
+		<h4>Example</h4>
+		<ul>
+		<li>&lt;a href=&quot;{last}&quot;&gt;Last Page&lt;/a&gt;
+
+	</td></tr></table>
+
+	<a name="portfolio"></a>
+	<h3>Portfolio</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		If there is an active portfolio record, returns a URL to open the active portfolio's objects in a Portfolio page layout.
+
+		<br><br>
+
+		Otherwise, returns a URL for opening the current record selection in the Porfolio page layout, with the current record at the top of the page.
+
+		<h4>Example</h4>
+		<ul>
+		<li>&lt;a href=&quot;{Portfolio}&quot;&gt;{Portfolio Name}&lt;/a&gt;
+		</ul>
+
+	</td></tr></table>
+
+	<a name="custom"></a>
+	<h3>Custom</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns a link for opening a custom template page layout.
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[required]</td>
+				<td valign="top" nowrap>Page Name</td>
+				<td valign="top">Provide the name of the custom template, preceeded by a semicolon (without a space).
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>SelectedRecord</td>
+				<td valign="top">Use '<b>Current</b>' to specify that the currently active record should be opened in the custom template. Otherwise, provide the desired record number (relative to the selection).
+				<br><br>
+				This parameter should be separated from the other by a semicolon, without a space.
+				<br><br>
+				Defaults to &quot;Current&quot;.
+				</td>
+			</tr>
+		</table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The filename of the custom template may not have any periods in it, except for the period before the file extension.
+		<li>It is important that the Custom tag be placed on a page with the same record type as the custom page template. For example, if the Custom template is an object template, the Custom tag must be used on an object layout.
+		<li>All custom templates must have the file extension &quot;.htm&quot;.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="parentlink"></a>
+	<h3>ParentLink</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns a URL to the Index Tree branch that is above (or &quot;parent&quot; to) the current branch. The user's Session ID and a Sequence Number are appended to the end of the URL.
+
+		<br><br>
+
+		This tag is only relevant in the Index Tree template.
+
+	</td></tr></table>
+
+	<a name="indextree"></a>
+	<h3>Index Tree (aka "Browse the Collection")</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns a URL for the active index tree branch. This URL either opens the next Index Tree branch, opens an Index Tree text message page, or opens a Portfolio of Objects, depending on what action has been configured for the button in EmbARK.
+
+		<br><br>
+
+		This tag is only relevant in the Index Tree template.
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="buttons"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Buttons</h2>
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<font color="#990000">[deprecated]</font>
+
+	<br><br>
+	Each of the following tags returns the name of a button graphic for the page type identified in the tag. These tags have all been deprecated in light of new <a href="#if">{if}</a> tag options that provide a higher degree of control.
+
+	<br><br>
+
+	'<b>OnImage</b>' will be returned when the button should be 'active'; '<b>OffImage</b>', when the button should be 'grayed out'.
+
+	<h4>Parameters</h4>
+	All of the button tags can take the following optional parameters.
+
+	<table cellpadding="5" cellspacing="0" border="1" width="100%">
+		<tr>
+			<th bgcolor="#cccc99">&nbsp;</th>
+			<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+			<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+		</tr>
+		<tr>
+			<td valign="top">[optional]</td>
+			<td valign="top" nowrap>OnImage</td>
+			<td valign="top">The name of the graphic to use as the 'active' button. The default graphic name is provided in each description below.
+			<br><br>
+			Must be preceeded by a dash (-), with no space.
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">[optional]</td>
+			<td valign="top" nowrap>OffImage</td>
+			<td valign="top">The name of the graphic to use as the 'inactive' button. The default graphic name is provided in each description below.
+			<br><br>
+			Must be preceeded by a pound symbol (#), with no space.
+			</td>
+		</tr>
+	</table>
+
+	<h4>Notes</h4>
+	<ul>
+	<li>All button graphics must be located at the Graphics URL which is set in <a href="customizing.html#graphics_url">Preferences</a>.
+	</ul>
+
+	<a name="bartinfo"></a>
+	<h3>bArtInfo</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: artist.gif
+		<li><b>OffImage</b>: noartist.gif
+		</ul>
+
+	</td></tr></table>
+
+	<a name="bobjinfo"></a>
+	<h3>bObjInfo</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: object.gif
+		<li><b>OffImage</b>: noobject.gif
+		</ul>
+
+	</td></tr></table>
+
+	<a name="bartobj"></a>
+	<h3>bArtObj</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: object.gif
+		<li><b>OffImage</b>: noobject.gif
+		</ul>
+
+	</td></tr></table>
+
+	<a name="bdetails"></a>
+	<h3>bDetails</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: details.gif
+		<li><b>OffImage</b>: nodetails.gif
+		</ul>
+
+	</td></tr></table>
+
+	<a name="bsurrogates"></a>
+	<h3>bSurrogates</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: details.gif
+		<li><b>OffImage</b>: nodetails.gif
+		</ul>
+
+	</td></tr></table>
+
+	<a name="bfull"></a>
+	<h3>bFull</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: full.gif
+		<li><b>OffImage</b>: nofull.gif
+		</ul>
+
+	</td></tr></table>
+
+	<a name="bnext"></a>
+	<h3>bNext</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: next.gif
+		<li><b>OffImage</b>: blank.gif
+		</ul>
+
+	</td></tr></table>
+
+	<a name="bprevious"></a>
+	<h3>bPrevious</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		See <a href="#buttons">Buttons</a> for details.
+
+		<br><br>
+
+		<ul>
+		<li><b>OnImage</b>: goback.gif
+		<li><b>OffImage</b>: blank.gif
+		</ul>
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="flow"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Flow Control</h2>
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<a name="loop"></a>
+	<h3>Start Loop, End Loop</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		These two tags frame a block of HTML for displaying information from a linked record. The HTML will be repeated in the web page, once for each linked record.
+
+		<br><br>
+
+		If the active record is an Object, these tags loop through linked Artists; if the active record is an Artist, these tags loop through linked Objects.
+
+		<h4>Parameters</h4>
+
+		Concatenate the following parameters with semicolons. These parameters are used in the Start Loop tag.
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Query Limit</td>
+				<td valign="top">The maximum number of records to loop through.
+				<br><br>
+				Must be preceeded by a space.
+				<br><br>
+				This parameter only takes effect if one of the other parameters is also provided.
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Loop Table</td>
+				<td valign="top">To loop through records other than object-artist, provide the file name for the linked table here.
+				<br><br>
+				For example:<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Start Loop [Marks]}...{End Loop}<br>
+				would loop through all the Marks records linked to the active object record.
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Query Condition</td>
+				<td valign="top">If a <b>Loop Table</b> parameter exists, this condition is used to filter the linked records; otherwise, this condition is used to retrieve records for display.
+				<br><br>
+				<b>Syntax</b>: [Table]Field==&quot;Value&quot;<br>
+				<i>- or -</i><br>
+				[Table]Field!=&quot;Value&quot;<br><br>
+				... where &quot;==&quot; signifies &quot;equals&quot;, and &quot;!=&quot; signifies &quot;does not equal&quot;.
+				<br><br>
+				This parameter currently supports only string comparisons.
+				</td>
+							<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>Sort Condition</td>
+				<td valign="top">If a <b>Loop Table</b> parameter exists, this condition is used to sort the linked records
+				<br><br>
+				<b>Syntax</b>: Order by [Table]Field Direction Indicator<br>
+				<br><br>
+				Examples:<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order by [Dimensions]Dimen_Subject ><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order by [Dimensions]Dimen_Subject <<br>
+				</td>
+			</tr>
+			</tr>
+		</table>
+		
+		<br><br>
+		
+		<b>Loop Example</b>: <br><br>
+		{Start Loop([Dimensions]Dimen_Subject!="";Order by [Dimensions]Dimen_Subject >)}<br>
+        &lt;li&gt;&lt;b&gt;Subject:&lt;/b&gt; {[Dimensions]Dimen_Subject} &lt;b&gt;Measured by:&lt;/b&gt; {[Dimensions]Measured_by~[Agents]Sort_Name} &lt;b&gt;Dimensions:&lt;/b&gt; {[Dimensions]Disp_Dimen}<br>
+		{if ([Dimensions]Remarks!="")}&lt;b&gt;Remarks:&lt;/b&gt; {[Dimensions]Remarks}{End if}<br>
+		{End Loop}
+	
+	
+	</td></tr></table>
+
+	<a name="portfoliolist"></a>
+	<h3>Start Portfolio List, End Portfolio List</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		These two tags frame a block of HTML that will repeat for each web accessible portfolio in the database. (<a href="portfolio_list_note">*</a>)
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top" nowrap>User Flag</td>
+				<td valign="top">Append the word 'personal' to loop through all the portfolios for the currently-logged-in user, rather than all published portfolios.
+				</td>
+			</tr>
+		</table>
+
+		<a name="portfolio_list_note"></a>
+		<h4>Notes</h4>
+		<ul>
+		<li>For the non-personal portfolio list, any portfolio whose name begins with &lt;!-- --&gt; will be omitted. This is merely a trick which allows portfolios to be published for the Index Tree only, but omitted from generic portfolio lists.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="if"></a>
+	<h3>If, Else, End If</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		These tags define blocks of a template that either display or are omitted, dependent on whether a particular condition is TRUE or FALSE.
+
+		<br><br>
+
+		<b>Syntax</b>
+
+		<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+			{if(<i>condition</i>)}<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Block of code to display if the condition is TRUE.<br>
+			{else}<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Block of code to display if the condition is FALSE.<br>
+			{end if}
+		</td></tr></table>
+
+		<b>Conditions</b>
+
+		<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+			The standard condition is the comparison of a field's value with a particular string value. The syntax is:
+			<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Table]Field==&quot;Value&quot;<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>- or -</i><br>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Table]Field!=&quot;Value&quot;<br><br>
+			... where &quot;==&quot; signifies &quot;equals&quot;, and &quot;!=&quot; signifies &quot;does not equal&quot;. 
+
+			<br><br>
+
+			The following special conditions are also available:
+			<table cellpadding="5" cellspacing="0" border="1" width="100%">
+				<tr>
+					<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Condition</b></font></th>
+					<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+				</tr>
+				<tr>
+					<td valign="top">[Table]</td>
+					<td valign="top">When a table name is provided alone, the condition will evaluate to TRUE if there are linked records in the table specified.
+					<br><br>
+					For example, on an Object page, the tag {if([Artist])} will evaluate to TRUE if there are Artist records linked to this Object; FALSE if there are not.</td>
+				</tr>
+				<tr>
+					<td valign="top">Shared</td>
+					<td valign="top">If there is an active portfolio record, returns TRUE if that portfolio has been marked 'Shared'.</tr>
+				</tr>
+				<tr>
+					<td valign="top">Can Share</td>
+					<td valign="top">If the current user is logged in to the kiosk user module, returns TRUE if that user has permission to share portfolios.</tr>
+				</tr>
+				<tr>
+					<td valign="top">Logged In</td>
+					<td valign="top">Returns TRUE if the current user is logged in to the kiosk user module.</tr>
+				</tr>
+				<tr>
+					<td valign="top">Multipage</td>
+					<td valign="top">Returns TRUE if the current record selection extends beyond the current layout.</tr>
+				</tr>
+				<tr>
+					<td valign="top">Records</td>
+					<td valign="top">If the current page is an Object page, returns TRUE if there is at least one record in the user's Object selection.
+					<br><br>
+					Otherwise, if the current page is an Artist page, returns TRUE if there is at least one record in the user's Artist selection.
+					<br><br>
+					Otherwise, if the full condition expression is &quot;Records - Artist&quot; (where &quot;Artist&quot; is actually the viewed name for the artist file in EmbARK), returns TRUE if there is at least one record in the user's Artist selection.
+					<br><br>
+					Otherwise, returns TRUE if there is at least one record in the user's Object selection.
+					</tr>
+				</tr>
+				<tr>
+					<td valign="top">Editing Portfolio</td>
+					<td valign="top">Returns TRUE if the current user is logged in to the kiosk user module and has one of their own portfolios open.</tr>
+				</tr>
+				<tr>
+					<td valign="top">Has Image</td>
+					<td valign="top">Returns TRUE if the active record has a web accessible image linked to it.</tr>
+				</tr>
+				<tr>
+					<td valign="top">Has Notes</td>
+					<td valign="top">Returns TRUE if the current object has at least one web accessible note (from EmbARK Notes & Histories) linked to it.</tr>
+				</tr>
+			</table>
+
+		</td></tr></table>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The {else} tag and block are optional.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="include"></a>
+	<h3>Include</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		When many templates share a chunk of HTML code for a particular design element (for example, a top logo banner), this code can be separated into a separate file and simply included in each page where the design element is needed. The primary advantage to this technique is that the code exists in a single file even though it appears throughout the site, and so future updates will be more centralized.
+
+		<br><br>
+
+		To use include files in EmbARK Web Kiosk:
+		<ol>
+		<li>Create a file that contains the code to be included in several pages.
+		<li>Save the file in the <b>Templates\Include Files</b> directory.
+		<li>In order to insert the code into a template, add an {Include} tag with the appropriate filename parameter.
+		</ol>
+
+		<h4>Parameters</h4>
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[required]</td>
+				<td valign="top" nowrap>Filename</td>
+				<td valign="top">Follow the &quot;Include&quot; tag with a space and the name of the file to be included.</td>
+			</tr>
+		</table>
+
+		<h4>Example</h4>
+		<ul>
+		<li>{Include header.inc} will load in the chunk of code as stored in the header.inc text file located at /Templates/Include Files
+		</ul>
+
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="required"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Required Section Tags</h2>
+
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	Some templates contain special tags that are required for proper parsing of the file. If these tags are removed the page will likely break. These tags are listed and described below.
+	<br><br>
+
+    <a name="multirecreq"></a>
+	<h3>Multi-record Pages</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		A multi-record page is any page that loops through multiple records in the selection to draw the page.
+
+		<h4>Template Files</h4>
+		<ul>
+		<li>details.htm
+		<li>indextree.htm
+		<li>portfolioindex.htm
+		<li>sharedportfolioindex.htm
+		<li>surrogates.htm
+		<li>MultipleRecords\artistlist.htm
+		<li>MultipleRecords\artistobjects.htm
+		<li>MultipleRecords\objectlist.htm
+		<li>MultipleRecords\portfolio.htm
+		<li>MultipleRecords\thumbnails.htm
+		<li>MultipleRecords\SearchResults\artist.htm
+		<li>MultipleRecords\SearchResults\object.htm
+		<li>Users\portfolio.htm
+		<li>Users\portfolioindex.htm
+		<li>Users\portfoliosort.htm
+		<li>Users\Reports\AddToPortfolio.htm
+
+		</ul>
+
+		<h4>Required Tags</h4>
+
+		<ul>
+
+		<li>{RecordLoop Start}, {RecordLoop End}<br>
+		These two tags define the section of code that gets repeated for each record in a page.
+
+		</ul>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Some pages in the kiosk allow you to configure multiple columns of records. The kiosk responds to this by inserting table row tags (&lt;tr&gt;) where appropriate as it loops through the records. Therefore, the templates themselves will not have these row tags. Although this will catch the eye of any HTML programmer (and some web design programs), it is important that these table row tags not be added to the templates, for proper functioning of the page.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="quicksearchreq"></a>
+	<h3>Quick Search</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<h4>Template Files</h4>
+		<ul>
+		<li>Search\Object\QuickSearch.htm
+		<li>Search\Artist\QuickSearch.htm
+		</ul>
+
+		<h4>Required Tags</h4>
+		<ul>
+
+		<li>{Scripts}<br>
+			The kiosk inserts JavaScript that is used to control the user interface of field and value popups.
+
+		<li>{LineLoop Start}, {LineLoop End}<br>
+			These tags define the section of code that gets repeated for each line of search criteria that the user creates.
+
+		<li>{SearchType}<br>
+			The kiosk inserts (if appropriate) the conjunction (And, Or, Except) popup which is used for joining multiple lines of search criteria.
+
+		<li>{Field Popup}<br>
+			The kiosk inserts the popup of Quick Search fields.
+
+		<li>{Value Popup}<br>
+			The kiosk inserts the popup of field values. The contents of this popup changes according to the field the user selects.
+
+		<li>{Line Buttons}<br>
+			The kiosk inserts Add/Remove buttons, as appropriate, to enable the user to create up to 6 lines of search criteria.
+
+		</ul>
+
+	</td></tr></table>
+
+	<a name="datesearchreq"></a>
+	<h3>Date Search</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<ul>
+
+		<li>{LineLoop Start}, {Line Loop End}<br>
+			Define the section of code that gets repeated for each search line the user creates.
+
+		<li>{Search Type Start}, {Search Type End}<br>
+			Defines the section of code that draws the operator popup (is circa, is earlier than, is later than).
+
+		<li>{Value Start}, {Value End}
+			Defines the section of code that draws the criteria input box.
+
+		<li>{Line Buttons}
+			The kiosk inserts Add/Remove buttons, as appropriate for creating up to two lines of search criteria.
+
+		<li>{LineCount}
+			The kiosk inserts a hidden field which notes how many lines of search criteria the user has created. This hidden field is required for the page to work.
+
+		</ul>
+
+	</td></tr></table>
+
+	<a name="keywordsearchreq"></a>
+	<h3>Keyword Search</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<ul>
+
+		<li>{Search Scripts}<br>
+			The kiosk inserts JavaScript which is used to control form elements.
+
+		<li>{HiddenValues}<br>
+			The kiosk inserts hidden fields which track information that is required for the search to work.
+
+		<li>{KeywordsFound}<br>
+			The kiosk inserts a list of &lt;option&gt; tags for the keywords that the user has found.
+
+		<li>{KeywordsSelected}<br>
+			The kiosk inserts a list of &lt;option&gt; tags for the keywords that the user has selected to include in the search.
+
+		<li>{KeywordIds}<br>
+			The kiosk inserts hidden fields which track information that is required for the form to work.
+
+		</ul>
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<a name="htmltranslation"></a>
+<h2>HTML Translation</h2>
+
+HTML Translation converts special characters to their HTML equivalents, for proper display in a web page.  The complete list of translations is controlled by a the <b>HTMLTranslations.txt</b> document stored in the <b>Templates</b> directory.
+
+<br><br>
+The following characters get translated as follows:
+<table cellpadding="5" cellspacing="0" border="1" width="100%">
+	<tr>
+		<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Character</b></font></th>
+		<th bgcolor="#cccc99" align="left"><font color="#333366"><b>HTML Translation</b></font></th>
+	</tr>
+	<tr>
+		<td valign="top">Carriage Return</td>
+		<td valign="top">&lt;br&gt;</td>
+	</tr>
+	<tr>
+		<td valign="top">Double Space</td>
+		<td valign="top">&amp;nbsp;&amp;nbsp;</td>
+	</tr>
+	<tr>
+		<td valign="top">Ampersand (&)</td>
+		<td valign="top">&amp;amp;</td>
+	</tr>
+	<tr>
+		<td valign="top">Tab</td>
+		<td valign="top">&lt;dd&gt;</td>
+	</tr>
+	<tr>
+		<td valign="top">Double Quote (&quot;)</td>
+		<td valign="top">&amp;quot;</td>
+	</tr>
+	<tr>
+		<td valign="top">Single Quote (&rsquo;)</td>
+		<td valign="top">&amp;rsquo;</td>
+	</tr>
+	<tr>
+		<td valign="top">http:// or ftp:// link</td>
+		<td valign="top">Activates the link to open in a new window.
+		<br><br>
+		For example, http://my.link.com will be converted to &lt;a href=&quot;http://my.link.com&quot; target=_blank&gt;http://my.link.com&lt;/a&gt;</td>
+	</tr>
+	<tr>
+		<td valign="top">Note</td>
+		<td valign="top">HTML translation may be disabled.
+		See <a href="customizing.html#convert_url">Convert URLs to active links</a> for more information.</td>
+	</tr>
+
+</table>
+
+<br><br>
+Note: If an HTTP link is embedded in an EmbARK data field and is formatted to include LInk Text or other attributes, use single quotes instead of double quotes.
+
+<br><br>
+Example: For more information about Jakuchu, visit &lt;a href='http://en.wikipedia.org/wiki/It%C5%8D_Jakuch%C5%AB' target=_blank&gt;&lt;b&gt;Wikipedia&lt;/b&gt;&lt;/a&gt;.
+
+<br><br>
+It may be necessary to disable <a href="customizing.html#convert_url">Convert URLs to active links</a> for these links to work.
+<br><br>
+Rich Text (or Multi-Style) formatting (only available for Object Notes text fields on the Object Notes & Histories page as of EmbARK 9.5) will be displayed on the Web Kiosk.
+<br><br>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>

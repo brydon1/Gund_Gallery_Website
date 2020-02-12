@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Exhibitions/List.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}% - Exhibition List</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div id="head" class="container"> <!-- title and navigation -->
+        <h1>Exhibitions</h1>
+        
+       <div class="row">
+            <div class="col col-sm col-md-5 col-lg-4 col-xl-4 mr-auto">
+                <form id='popup' name='popup' method='get' action='%{Link;Exhibitions;info;0;query=Current Selection;records=1}%'  style="text-align:center;">
+                    <input type='hidden' name='query' id='query' value='%{Current Selection}%' />
+                    <select class="form-control" name='page' id='page' title='page' onchange='document.forms["popup"].submit()'>
+                        <!--#4DEVAL (gsFunc_SetSelectedRecord(->[Exhibitions]; 1))-->  <!-- loads the first record -->
+                        <!--#4dloop [Exhibitions]-->
+                            <option value='<!--#4Dtext Selected Record number([Exhibitions])-->' <!--#4Dif (lFirstRec = Selected Record number([Exhibitions])) --> selected='selected' <!--#4Dendif-->>
+                                <!--#4Dtext [Exhibitions]Exhibition_Name-->
+                            </option>
+                            <!--#4dendloop -->
+                    </select>
+                </form>
+            </div>
+
+        %{Include pagenavigation.inc}%
+    </div>
+
+    <div style="position: relative;">
+        <div class="container-fluid">
+            <a name="main"></a>
+
+            <div class="row galleryGrid">
+                %{Start Loop}%
+                    <div class="col">
+                        <div class="card hoverOutline" style="width:200px; margin-bottom:10px;">
+                            <div class="card-img-top text-center" style="max-width:200px;max-height:200px;">
+                                <a href="%{Link;Exhibitions;info;0;first=Current Record;query=Current Selection;records=1}%">
+                                    %{If(Has Image)}%
+                                        <img src="%{preview}%" height="%{thumbnail height*1.25}%" width="%{thumbnail width*1.25}%" alt="Thumbnail image of exhibition" />
+                                    %{Else}%
+                                        <img src="/graphics/DefaultPreview.gif" alt="" />
+                                    %{EndIf}%
+                                </a>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    %{[Exhibitions]Exhibition_Name}%
+                                </h5>
+
+                                <p class="card-text small">
+                                    %{[Exhibitions]Start_date}% - %{[Exhibitions]End_date}%<br/>
+                                    Status: %{[Exhibitions]Exhibit_status}%<br/>
+                                    %{if([Exhibitions]Exhibition_type != "")}%
+                                        Type: %{[Exhibitions]Exhibition_type}%<br/>
+                                    %{End If}%
+                                
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                %{End Loop}%
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        %{Include selectiondescription.inc}%
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

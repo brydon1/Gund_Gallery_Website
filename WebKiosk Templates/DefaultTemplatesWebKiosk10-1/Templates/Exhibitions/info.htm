@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Exhibitions/info.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}% - %{[Exhibitions]Exhibition_Name}%</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div class="container">
+        <h2>
+            <!--#4Dtext [Exhibitions]Exhibition_Name-->
+        </h2>
+
+        <div class="row">
+            <div class="col col-sm col-md-5 col-lg-4 col-xl-4 mr-auto">
+                <form id='popup' name='popup' method='get' action='%{Link;Exhibitions;info;0;query=Current Selection;records=1}%'  style="text-align:center;">
+                    <input type='hidden' name='query' id='query' value='%{Current Selection}%' />
+                    <select class="form-control" name='page' id='page' title='page' onchange='document.forms["popup"].submit()'>
+                        <!--#4DEVAL (gsFunc_SetSelectedRecord(->[Exhibitions]; 1))-->  <!-- loads the first record -->
+                        <!--#4dloop [Exhibitions]-->
+                            <option value='<!--#4Dtext Selected Record number([Exhibitions])-->' <!--#4Dif (lFirstRec = Selected Record number([Exhibitions])) --> selected='selected' <!--#4Dendif-->>
+                                <!--#4Dtext [Exhibitions]Exhibition_Name-->
+                            </option>
+                            <!--#4dendloop -->
+                    </select>
+                </form>
+            </div>
+
+            <!--#4DEVAL (gsFunc_EnsureCurRecordisLoaded (->[Exhibitions]))-->  <!-- reloads the record -->
+
+            <div class="col col-sm col-md-4 col-lg-4 col-xl-4"> <!-- display options -->
+                <div class="display-options" style="display:inline;">
+                    <div claass="navtxt">
+                        <a class="btn btn-default" href="%{Link;Exhibitions;list;0;first=Current Record;query=Current Selection;records=25}%" aria-label="Go to Exhibition List view">
+                            <i class="fa fa-th-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        %{Include pagenavigation.inc}%
+    </div>
+
+    <hr/>
+
+    <div class="container">
+        <a name="main"></a>
+
+        <p class="text-right">
+            <a class="btn btn-default" onclick="window.print();return false;" href="#">
+                <i class="fa fa-print"></i> Print this page
+            </a>
+        </p>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <!--#4Dif (gsFunc_HasImage(->[Exhibitions]))-->
+                    <a class="highslide" href="<!--#4Dvar gsFunc_GetImage (->[Exhibitions];"Image Url")-->" onclick="return hs.expand(this, hs.__.paramGallery);" target="_blank">
+                        <img src="<!--#4Dvar gsFunc_GetImage (->[Exhibitions];"Preview Url")-->"
+                             height="<!--#4Dvar gsFunc_GetImage (->[Exhibitions];"Proportional Height max 300")-->"
+                             width="<!--#4Dvar gsFunc_GetImage (->[Exhibitions];"Proportional Width max 300")-->"
+                             alt="Image of <!--#4Dtext [Exhibitions]Exhibition_Name-->"
+                             style="max-width:300px;max-height:300px;" />
+                     </a>
+                <!--#4Delse-->
+                    <p>
+                        <em>This exhibition does not have an image.</em>
+                    </p>
+                <!--#4Dendif-->
+
+                %{SKIP START}%
+                %{if(Has Image)}%
+                    %{if(Image height=="0")}%
+                        <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="200" height="100" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+                            <param name="SRC" value="%{Image Path}%">
+                            <param name="AUTOPLAY" value="true">
+                            <param name="CONTROLLER" value="true">
+                            <embed src="%{Image Path}%" width="%{Image width+100}%" height="%{Image height+100}%" autoplay="true" controller="true" pluginspage="http://www.apple.com/quicktime/download/">
+                            </embed>
+                        </object>
+                    %{else}%
+                        %{if(Image duration=="0")}%
+                            <a class="highslide" href="%{Image Path}%" onclick="return hs.expand(this, hs.__.paramGallery);" target="_blank">
+                                <img class="main" src="%{preview}%?a=%{Sequence}%" width="%{thumbnail width*2.3}%" height="%{thumbnail height*2.3}%" alt="Image: %{[Exhibitions]Exhibition_Name}%" />
+                            </a>
+                            <br>
+                        %{else}%
+                            <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="%{image width}%" height="%{image height}%"> codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+                                <param name="SRC" value="%{Image Path}%">
+                                <param name="AUTOPLAY" value="true">
+                                <param name="CONTROLLER" value="true">
+                                <embed src="%{Image Path}%" width="%{image width}%" height="%{image height+15}%" autoplay="true" controller="true" pluginspage="http://www.apple.com/quicktime/download/">
+                                </embed>
+                            </object>
+                            <br>
+                            <br>
+                        %{end if}%
+                    %{end if}%
+                %{else}%
+                    This exhibition does not have an image.
+                %{end if}%
+                %{SKIP END}%
+                <br>
+            </div>
+
+            <!-- data layout table start -->
+            <div class="col-lg-8 col-md-6 col-sm-12">
+                <!--#4Dif ([Exhibitions]Exhibition_Type # "")-->
+                    <strong>
+                        <!--#4Dtext [Exhibitions]Exhibition_Type-->
+                    </strong><br />
+                <!--#4Dendif-->
+                <!--#4Dtext [Exhibitions]Exhibit_Status--><br />
+                <!--#4Dtext [Exhibitions]Start_Date--> - <!--#4Dtext [Exhibitions]End_Date--><br />
+                <!--#4Dif ([Exhibitions]Organizing_Inst > 0)-->
+                    Organizing institution: <!--#4Dtext gsFunc_GetAgentName([Exhibitions]Organizing_Inst; ->[Agents]Institution)-->
+                <!--#4Dendif-->
+            </div>
+        </div>
+        <!-- data layout table end -->
+
+        <!--#4DEVAL gsFunc_LoadChildRecords (->[Exhibitions]; ->[Objects_1])-->
+        <!--#4Dif (Records in Selection([Objects_1]) > 0)-->
+            <br />
+            <br />
+            <div>
+                <div class="lead p-1 border-bottom bg-light">
+                    Exhibition Objects
+                    <div class="float-right">
+                        <em class="small">
+                            <a href="%{Link;Objects_1;portfolio;0;records=24;query=Exhibitions=_ID}%" aria-label="Browse objects linked to this exhibition in a new window">
+                                Browse as a List &nbsp;
+                            </a>
+                        </em>
+                    </div>
+                </div>
+
+                <div class="row galleryGrid">
+                    <!--#4DLOOP [Objects_1]-->
+                        <div class="col">
+                            <div class="card hoverOutline" style="width:128px; margin-bottom:10px;">
+                                <div class="card-img-top text-center" style="max-width:128px;max-height:128px;">
+                                    <a href="<!--4Dtext gsFunc_Link("Objects_1;info;[Objects_1]_objects_1_id")-->">
+                                        <!--#4Dif (gsFunc_HasImage(->[Objects_1]))-->
+                                            <img src="<!--#4Dvar gsFunc_GetImage (->[Objects_1];"Thumbnail Url")-->"
+                                                 class="rounded"
+                                                 height="<!--#4Dvar gsFunc_GetImage (->[Objects_1];"Proportional Height max 128")-->"
+                                                 width="<!--#4Dvar gsFunc_GetImage (->[Objects_1];"Proportional Width max 128")-->"
+                                                 alt="Image of <!--#4Dtext [Objects_1]Disp_Title-->" />
+                                         <!--#4Delse-->
+                                            <img src="/graphics/DefaultThumbnail.gif"
+                                                 alt="Thumbnail for missing image of <!--#4Dtext [Objects_1]Disp_Access_No-->" />
+                                         <!--#4Dendif-->
+                                    </a>
+                                </div>
+                                <div class="border-top text-center px-2">
+                                    <p class="card-text">
+                                        <a class="noColor" href="<!--4Dtext gsFunc_Link("Objects_1;info;[Objects_1]_objects_1_id")-->">
+                                            <!--#4Dtext [Objects_1]Disp_Title-->
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <!--#4DENDLOOP-->
+                </div>
+            </div>
+        <!--#4Dendif-->
+
+        <!--#4DEVAL gsFunc_LoadChildRecords (->[Exhibitions]; ->[Surrogates]) -->
+        <!--#4Dif (Records in selection([Surrogates]) > 0)-->
+            <br />
+            <br />
+            <div>
+                <div class="lead p-1 border-bottom bg-light">
+                    Exhibition Images
+                </div>
+
+                <div class="row galleryGrid">
+                    <!--#4DLOOP [Surrogates]-->
+                        <div class="col">
+                            <div class="card hoverOutline" style="width:128px; margin-bottom:10px;">
+                                <div class="border-top text-center px-2">
+                                    <a class="item highslide" href="return hs.expand(this, hs.__.paramGallery)">
+                                        <img src="<!--#4Dvar gsFunc_GetImage (->[Surrogates];"Thumbnail Url")-->"
+                                             height="<!--#4Dvar gsFunc_GetImage (->[Surrogates];"Proportional Height max 128")-->"
+                                             width="<!--#4Dvar gsFunc_GetImage (->[Surrogates];"Proportional Width max 128")-->"
+                                             alt="Image: <!--#4Dtext [Surrogates]View_1-->" />
+                                        <!--#4Dtext [Surrogates]View_1-->
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <!--#4DENDLOOP-->
+                </div>
+            </div>
+        <!--#4Dendif-->
+
+        <!--#4DEVAL gsFunc_LoadChildRecords (->[Exhibitions]; ->[Artist_Maker]) -->
+        <!--#4Dif (Records in selection([Artist_Maker]) > 0)-->
+            <br />
+            <br />
+            <div id="artist" class="container-fluid">
+                <div class="lead p-1 border-bottom bg-light">
+                    Artists
+                    <div class="float-right">
+                        <em class="small">
+                            <a href="%{Link;Artist_Maker;list;0;records=25;query=[Exhibitions]_ID=_ID}%" aria-label="Browse objects linked to this exhibition in a new window">
+                                Browse as a List &nbsp;
+                            </a>
+                        </em>
+                    </div>
+                </div>
+                <ul class="ml-5">
+                    <!--#4DLOOP [Artist_Maker]-->
+                    <li>
+                        <a href="<!--4Dtext gsFunc_Link("Artist_Maker;info;[Artist_Maker]_Artist_ID")-->">
+                            <!--#4Dtext [Artist_Maker]Display_Name-->
+                        </a>
+                        <!--#4Dif  ([Artist_Maker]Disp_Maker_Life # "") & ([Artist_Maker]Disp_Maker_Life # "()")-->
+                            <small class="text-muted">
+                                <!--#4Dtext [Artist_Maker]Disp_Maker_Life-->
+                            </small>
+                        <!--#4Dendif-->
+                    </li>
+                    <!--#4DENDLOOP-->
+                </ul>
+            </div>
+        <!--#4Dendif-->
+    </div>
+
+    <div class="container">
+        %{Include selectiondescription.inc}%
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

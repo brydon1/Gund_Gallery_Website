@@ -1,0 +1,592 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>4D Tags</h1>
+
+<a href="#4d_syntax">Overview of 4D Tag Syntax</a>&nbsp;|&nbsp;
+<a href="#variables">Page Variables</a>&nbsp;|&nbsp;
+<a href="#loops">Loops</a>&nbsp;|&nbsp;
+<a href="#image_paths">Image Paths</a>&nbsp;|&nbsp;
+<a href="#others">Others</a>
+
+<br><br>
+
+4D Tags are HTML comments that are executed by the 4D Web Server (which underlies the EmbARK Web Kiosk) to insert dynamic data into the web pages. They are similar to the <a href="kiosktags.html">Kiosk Tags</a>, with these differences:
+<ul>
+<li>All Kiosk Tags in a template are executed first; then all 4D tags.
+<li>4D Tags are native 4D code, whereas the Kiosk Tags are custom to the EmbARK Web Kiosk.
+</ul>
+
+<br><br>
+
+The 4D Tags execute methods (i.e. 'procedures', or 'routines') in the EmbARK Web Kiosk code to find and manipulate data. They can also be used to display information from program variables.
+
+<br><br>
+
+This chapter details the methods and variables that are available for use with the various 4D Tags.
+
+<h4>Notes</h4>:
+<ul>
+<li>For details about the 4D Tag syntax, please see the &quot;Web Services, 4D HTML Tags&quot; chapter of the 4D Language Guide, available from <a href="http://4d.com">http://4d.com</a>.
+<li>The Kiosk Tag language was created by Gallery Systems before 4D Tags were available for use. Over time, we will continue to make more 4D Tag options available, eventually replacing the Kiosk Tag language. Meanwhile, there may be some functions that can be fulfilled with either Kiosk Tags or 4D Tags. When you have a choice between the two, it is generally recommended to use the 4D Tag, as it is likely faster and is the direction for future development.
+</ul>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<a name="4d_syntax"></a>
+<h2>Overview of 4D Tag Syntax</h2>
+
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	This section contains a quick overview of the 4D Tag syntax. However, for details please refer to the &quot;Web Services, 4D HTML Tags&quot; chapter of the 4D Language Guide, available from <a href="http://4d.com">http://4d.com</a>.
+
+	<br><br>
+
+	<a name="4dvar"></a>
+	<h3>4DVAR</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		The 4DVAR command inserts a value from a variable or field into a template.
+
+		<br><br>
+
+		<b>Syntax</b>: &lt;!--4DVAR VariableName --&gt;
+
+		<br><br>
+
+		For a list of variables available for use with this command, please see <a href="#variables">Page Variables</a>.
+
+	</td></tr></table>
+
+	<a name="4dscript"></a>
+	<h3>4DSCRIPT</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		The 4DSCRIPT command executes a method in the EmbARK Web Kiosk code, which may or may not return a value for display in the template. In some cases, a 4DSCRIPT call may be used just to load a particular record selection or set a state that is used in later commands.
+
+		<br><br>
+
+		<b>Syntax</b>: &lt;!--4DSCRIPT/MyMethod/MyParams--&gt;<br>
+		where <b>MyMethod</b> is the name of the kiosk method, and <b>MyParams</b> are the various parameters that can be passed to that method. More details are provided in the descriptions of specific calls below.
+
+	</td></tr></table>
+
+	<a name="4dif"></a>
+	<h3>4DIF, 4DELSE, 4DENDIF</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		The 4DIF commands set blocks of code which conditionally display based on the values of fields or <a href="#variables">Page Variables</a>. All the variables that are available for the 4DVAR command are also available for the 4DIF commands.
+
+		<br><br>
+
+		<b>Syntax</b>:<br>
+		&lt;!--4DIF (expression)--&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code to execute if the expression evaluates to TRUE.<br>
+		&lt;!--4DELSE--&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[optional] code to execute if the expression evaluates to FALSE.<br>
+		&lt;!--4DENDIF--&gt;
+
+	</td></tr></table>
+
+	<a name="4dloop"></a>
+	<h3>4DLOOP</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		The 4DLOOP commands define a block of code that repeats for each iteration of a record selection, array element or method call.
+
+		<br><br>
+
+		<b>Syntax</b>:<br>
+		&lt;!--4DLOOP condition--&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Code to execute for each iteration of the loop.<br>
+		&lt;!--4DENDLOOP--&gt;
+
+		<br><br>
+
+		For details about allowed <b>conditions</b>, please see <a href="#loops">Loops</a>, below.
+
+	</td></tr></table>
+
+	<a name="4dnumsur"></a>
+	<h3>Number of Surrogates</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		The &lt;!--4DVAR NumSurrogates--&gt; displays the count for the number of web-accessible surrogates available with this object record.
+
+		<br><br>
+
+		<b>Syntax</b>:<br>
+		View &lt;!--4DVAR NumSurrogates--&gt; surrogates
+
+	</td></tr></table>
+
+	<a name="4dnumdet"></a>
+	<h3>Number of Details</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		The &lt;!--4DVAR NumDetails--&gt; displays the count for the number of web-accessible detail images available with this object record.
+
+		<br><br>
+
+		<b>Syntax</b>:<br>
+		View &lt;!--4DVAR NumDetails--&gt; details
+
+	</td></tr></table>
+
+	
+	<a name="4dreplace"></a>
+	<h3>Lowercase and Replace</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		This sample 4D script uses the <b>Replace</b> function to look for an empty space and replace ith with an underscore.  It then uses the <b>Lowercase</b> function to display the text in all lowercase letters.  Text like "Bob Smith" would be converted to "bob_smith".
+
+		<br><br>
+
+		<b>Syntax</b>:<br>
+		&lt;!--#4DTEXT Lowercase(Replace string([Objects_1]Disp_Maker_1;" ";"_"))--&gt;
+
+
+	</td></tr></table>
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<a name="variables"></a>
+<h2>Page Variables</h2>
+
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<table cellpadding="5" cellspacing="0" border="1" width="100%">
+		<tr>
+			<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+			<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Type</b></font></th>
+			<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Limitations</b></font></th>
+		</tr>
+		<tr>
+			<td valign="top">pageNum</td>
+			<td valign="top">Long Integer</td>
+			<td valign="top">The number (<a href="#variable_notes">*</a>) of the first record on the page.
+			<br><br>
+			For example, if the user is on the second page of thumbnails for a selection and 8 thumbnails display per page, <b>pageNum</b> would be 9.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">lPerPage</td>
+			<td valign="top">Long Integer</td>
+			<td valign="top">The number of records that display per page.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">lRecords</td>
+			<td valign="top">Long Integer</td>
+			<td valign="top">The number of records in the active selection for the current page.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">NextPage</td>
+			<td valign="top">Long Integer</td>
+			<td valign="top">On pages that display only some of the current record selection, the number of the record (<a href="#variable_notes">*</a>) that would start the next page.
+			<br><br>
+			For example, if the user is on the first page of a list for 20 records, and 10 records display per page, <b>NextPage</b> would be 11.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">HasNext</td>
+			<td valign="top">Boolean</td>
+			<td valign="top">Flag specifying whether the user can scroll to a 'next' page of records from the current page.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">PreviousPage</td>
+			<td valign="top">Long Integer</td>
+			<td valign="top">On pages that display only some of the current record selection, the number of the record (<a href="#variable_notes">*</a>) that would start the previous page.
+			<br><br>
+			For example, if the user is on the third page of a list that shows 12 records per page, <b>PreviousPage</b> would be 13 (the start of the second page).</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">HasPrevious</td>
+			<td valign="top">Boolean</td>
+			<td valign="top">Flag specifying whether the user can scroll to a 'previous' page of records from the current page. This flag is 'false' when the user is on the first page of a selection.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">Next10Page</td>
+			<td valign="top">Long Integer</td>
+			<td valign="top">The number (<a href="#variable_notes">*</a>) of the first record that would display 10 pages forward.
+			<br><br>
+			For example, if the user is on the first page of thumbnails for a selection of 100 records, and 6 thumbnails display per page, <b>Next10Page</a> would be 61 (the first record on the 11th page).</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">HasNext10</td>
+			<td valign="top">Boolean</td>
+			<td valign="top">Flag specifying whether the user can scroll 10 pages of records ahead from the current page.
+			<br><br>
+			If the current record selection can display in less than 10 pages, this flag will always be false.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">Previous10Page</td>
+			<td valign="top">Long Integer</td>
+			<td valign="top">The number (<a href="#variable_notes">*</a>) of the first record that would display 10 pages back.
+			<br><br>
+			For example, if the user is on the twelfth page of thumbnails for a selection of 100 records, and 6 thumbnails display per page, <b>Previous10Page</a> would be 7 (the first record on the 2nd page).</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">HasPrevious10</td>
+			<td valign="top">Boolean</td>
+			<td valign="top">Flag specifying whether the user can scroll 10 pages of records back from the current page.
+			<br><br>
+			This flag does not get set to true until the user has scrolled past the first 10 pages of records.</td>
+			<td valign="top">&nbsp;</td>
+		</tr>
+		<tr>
+			<td valign="top">HasDetails</td>
+			<td valign="top">Boolean</td>
+			<td valign="top">Flag specifying whether the active object record has any detail images linked to it.</td>
+			<td valign="top">This variable only gets set for object pages.</td>
+		</tr>
+		<tr>
+			<td valign="top">HasSurrogates</td>
+			<td valign="top">Boolean</td>
+			<td valign="top">Flag specifying whether the active object record has any surrogate records linked to it.</td>
+			<td valign="top">This variable only gets set for object pages.</td>
+		</tr>
+	</table>
+
+	<a name="variable_notes"></a>
+	<h4>Notes</h4>
+	<ul>
+	<li>&quot;<b>Record Number</b>&quot;, above, refers to the number of a particular record within the active record selection, with the current sort order. For example, &quot;Record Number&quot; 1 refers to the first record in the active selection, &quot;Record Number&quot; 5 refers to the fifth record in the selection, etc.
+	</ul>
+
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<a name="loops"></a>
+<h2>Loops</h2>
+
+Within any 4DLOOP block, a variable called <b>MyCounter</b> tracks the iterations.
+
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<a name="recordselection"></a>
+	<h3>RecordSelection</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Loops through the current selection of Object or Artist records, depending on the type of template that makes the call.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Since this command depends on having a current record selection, it only works from object and artist pages (including Custom Object templates). It can not be used from Kiosk Pages, for example.
+		</ul>
+
+		<h4>Example</h4>
+		&lt;!--4DLOOP RecordSelection--&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Record #&lt;!--4DVAR MyCounter--&gt;: &lt;!--4DVAR [Objects_1]Disp_Title--&gt;<br>
+		&lt;!--4DENDLOOP--&gt;
+
+	</td></tr></table>
+
+	<a name="quicksearchfields"></a>
+	<h3>QuickSearchFields</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Loops through each object quick search field.
+
+		<br><br>
+
+		QuickSearchFields sets the following variables:
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Type</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">pQSValues</td>
+				<td>Pointer to an Array</td>
+				<td>Pointer to an array which holds the distinct values used in the active quick search field.</td>
+			</tr>
+			<tr>
+				<td valign="top">lQSNumValues</td>
+				<td>Long Integer</td>
+				<td>The number of distinct values used in the active quick search field.</td>
+			</tr>
+			<tr>
+				<td valign="top">pQSField</td>
+				<td>Pointer to a Field</td>
+				<td>Pointer to the active Quick Search field.</td>
+			</tr>
+			<tr>
+				<td valign="top">tQSFieldname</td>
+				<td>Text</td>
+				<td>The user-defined name for the active Quick Search field.</td>
+			</tr>
+		</table>
+
+	</td></tr></table>
+
+	<a name="quicksearchvalues"></a>
+	<h3>QuickSearchValues</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		For the active Quick Search Field, loops through each distinct value.
+
+		<br><br>
+
+		This call is only available from within a <a href="#quicksearchfields">QuickSearchFields</a> loop.
+
+		<br><br>
+
+		QuickSearchValues sets the following variables:
+
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Type</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">lQSSelValue</td>
+				<td>Long Integer</td>
+				<td>The loop iteration (i.e. the active element number for the current pQS_Values array).</td>
+			</tr>
+		</table>
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<a name="image_paths"></a>
+<h2>Image Paths</h2>
+
+The 4D tags for image paths are especially useful in conjunction with <a href="xmlshare.html">XML Data Sharing</a>.
+
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<a name="filename"></a>
+	<h3>Filename</h3>
+	
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<b>#4DVAR Filename("[table]")</b> will display the specific filename for the linked media (without the file path).
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This command will work for all the tables that have linked images - Objects, Artists, and Surrogates.  As with all other template coding, it is best to use the internal table name.</li>
+		</ul>
+
+	</td></tr></table>
+	
+	
+	<a name="thumbnailpath"></a>
+	<h3>ThumbnailPath</h3>
+	
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<b>#4DVAR ThumbnailPath("[table]")</b> will display the thumbnail image path for the file in the <b>Thumbnails</b> directory inside <b>Media</b>.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This command will work for all the tables that have linked images - Objects, Artists, and Surrogates.  As with all other template coding, it is best to use the internal table name.</li>
+		</ul>
+
+	</td></tr></table>
+	
+	
+	<a name="previewpath"></a>
+	<h3>PreviewPath</h3>
+	
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<b>#4DVAR PreviewPath("[table]")</b> will display the preview image path (for the file in the <b>Previews</b> directory inside <b>Media</b>.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This command will work for all the tables that have linked images - Objects, Artists, and Surrogates.  As with all other template coding, it is best to use the internal table name.</li>
+		</ul>
+
+	</td></tr></table>
+	
+	
+	<a name="tagimagepath"></a>
+	<h3>TAGImagePath</h3>
+	
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		<b>#4DVAR TAGImagePath("[table]")</b> will display the full image path (for the file in the <b>Images</b> directory inside <b>Media</b>.
+
+		<h4>Notes</h4>
+		<ul>
+		<li>This command will work for all the tables that have linked images - Objects, Artists, and Surrogates.  As with all other template coding, it is best to use the internal table name.</li>
+		</ul>
+
+	</td></tr></table>
+</td></tr></table>
+
+<a name="others"></a>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Others</h2>
+
+<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+	<a name="getdistinctvalues"></a>
+	<h3>GetDistinctValues</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		GetDistinctValues populates an array (atTemp1 by default) with the each unique value used in the specified field. <a href="#4dloop">4DLOOP</a> can then be used to iterate through this array, displaying the values as desired.
+		
+		<br><br><b>Important Note</b>: The GetDistinctValues function will not work properly if special characters such as parentheses are present in the data values.
+		
+		<br><br>
+
+		<h4>Parameters</h4>
+		Parameters for this call are separated with '/'.
+		<table cellpadding="5" cellspacing="0" border="1" width="100%">
+			<tr>
+				<th bgcolor="#cccc99">&nbsp;</th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Name</b></font></th>
+				<th bgcolor="#cccc99" align="left"><font color="#333366"><b>Description</b></font></th>
+			</tr>
+			<tr>
+				<td valign="top">[required]</td>
+				<td valign="top">Field</td>
+				<td valign="top">The user-defined name of the field for which distinct values will be retrieved, formatted as for displaying <a href="kiosktags.html#tablefield">field values</a>.
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top">Selection</td>
+				<td valign="top">Flag specifying whether distinct values should be retrieved for all records or for the current selection.
+				<ul>
+				<li><b>0</b>: run on current record selection
+				<li><b>1</b>: run for all records in the table [default]
+				</ul></td>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top">Minimum Record Count</td>
+				<td valign="top">The minimum number of records in which a value must be used in order for it to be included in the list of distinct values.
+				<br><br>
+				Default: 0.
+				<br><br>
+				A value of 0 signifies that the record count should not be checked. It is therefore more efficient than '1', though both should return the same results.
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">[optional]</td>
+				<td valign="top">Array name</td>
+				<td valign="top">The name of the array in which values should be collected.
+				<br><br>
+				Defaults to atTemp1.
+				<br><br>
+				This parameter must be specified if numeric values will be collected and they should not be converted to strings (i.e. they should be left in their native data types). In these cases, a valid array name of the appropriate type (e.g. alTemp1) must be provided. Otherwise, this parameter should be omitted, and non-string values will be converted to strings and collected in atTemp1.
+				</td>
+			</tr>
+		</table>
+
+		<h4>Example</h4>
+		Medium values used in the current record selection:<br>
+
+		&lt;!--4DSCRIPT/GetDistinctValues/[Object]Medium/0--&gt;<br>
+		&lt;!--4DIF (Size of array(atTemp1)&gt;0)--&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--4DLOOP atTemp1--&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--4DVAR atTemp1{atTemp1}--&gt;&lt;br&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--4DENDLOOP--&gt;<br>
+		&lt;!--4DELSE--&gt;<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There are no values to display.<br>
+		&lt;!--4DENDIF--&gt;<br>
+
+	</td></tr></table>
+
+	<a name="gettimeelapsed"></a>
+	<h3>GetTimeElapsed</h3>
+	<table cellpadding="15" cellspacing="0" border="0" width="100%"><tr><td>
+
+		Returns the number of seconds (rounded to 2 decimal points) that have passed since the request for this page hit the web server.
+
+		<br><br>
+
+		This call should be used from a 4DSCRIPT command.
+
+		<h4>Example</h4>
+		This page was built in &lt;!--4DSCRIPT/GetTimeElapsed/*--&gt; seconds.
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>

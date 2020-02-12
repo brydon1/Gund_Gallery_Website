@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>Setup Checklist</h1>
+
+Use this checklist to make sure you have followed all of the steps needed to create your kiosk.
+
+<br><br>
+
+<ul>
+<li>Use EmbARK to describe your collection thoroughly
+	<ul>
+	<li>Catalog artist and object records
+	<li>Apply keywords to records (optional)
+	<li>Create links among object, artist, and surrogate records
+	</ul>
+	
+<li>Identify the records you want to include in the kiosk.
+
+<li>Mark these records for <a href="prepare_database.html#publish">web access</a>.
+
+<li>Designate long text <a href="prepare_database.html#object_notes">Notes fields</a> for web access (optional)
+
+<li>Make sure the <a href="prepare_database.html#images">images</a> attached to the records are compatible with the Kiosk:
+	<ul>
+	<li>The files are in a web-compatible format (JPG, GIF, or PNG)
+	<li>The file names can be read by web browsers (for example, <b>My_image.jpg</b> rather than <b>My Image</b> with no file extension; use EmbARK <b>Rename</b> function to batch change file names.)
+	<li>All images and image folders are contained in a master folder called <b>Images</b> (or in another folder that you must identify in the kiosk preferences)
+	</ul>
+	
+<li>Group object records into <a href="prepare_database.html#organizing_records">portfolios</a> and mark the portfolios for web access.
+
+<li>Design an Index Tree and link portfolios to it. (optional)
+
+<li>Choose object and artist <a href="prepare_database.html#quick_search">Quick Search</a> fields:
+	<ul>
+	<li>Run Unique Values freport on fields to check for inconsistent data entry
+	<li>Use Replace to fix any inconsistent entries
+	<li>Update Quick Search indices
+	</ul>
+	
+<li>Choose <a href="prepare_database.html#contains_search">Contains search fields</a> and update Contains Search indices (for the Google-like search in the side bar).
+
+<li><a href="setup_server.html#install">Copy the EmbARK datafile and Images</a> folder to the server computer (or configure Prefs for an alternate image server).
+
+<li>Consider using <a href="appendix.html#zoomify">Zoomify</a> to enable zooming of high-resolution files.
+
+<li>Open the Kiosk application on the web server computer.
+
+<li>Set the <a href="customizing.html#preferences">kiosk preferences</a> and <a href="customizing.html#templates">customize the page templates</a> (as desired). Be sure to take advantage of <b>Development Mode</b>.
+
+<li>Adjust the <b>header.inc</b> <a href="customizing.html#include_files">include file</a> to insert a custom logo and adjust the left menu items.
+
+<li>Adjust the <b>kioskstyles.css</b> <a href="customizing.html#css">cascading style sheet</a> in the <a href="setup_server.html#webfolder">webfolder</a> to quickly change overall site colors and font properties.
+
+<li><a href="maintain_kiosk.html#update">Refresh the datafile</a> as necessary by copying from the primary EmbARK site to the web server and restarting.
+</ul>
+
+<br><br>
+
+
+<br><br>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>

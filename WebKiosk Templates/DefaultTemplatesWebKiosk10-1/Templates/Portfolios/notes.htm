@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--PortfolioNotes.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}%</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div id="head" class="container-fluid">
+        <a name="main"></a>
+
+        <h1>
+            <a href="%{Link;Objects_1;portfolio;0;records=12;query=Portfolios=[Portfolios]_Port_ID}%">%{[Portfolios]Port_Name}%</a>
+        </h1>
+
+        &lt;&nbsp;
+        <span class="smalltxt">
+            <a href="%{Link;Objects_1;portfolio;0;records=12;query=Portfolios=[Portfolios]_Port_ID}%">browse objects</a>
+        </span>
+        <br />
+        <br />
+
+        %{If(Has Image)}%
+            <img src="%{Thumbnail}%" vspace="15" hspace="15" align="left" alt="" />
+        %{End If}%
+
+        %{[Portfolios]Notes}%
+
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Security/LoginGeneral.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}% Login</title>
+    %{Include head.inc}%
+    <script type="text/javascript">
+        function cont(tag) {
+            document.forms["Login"].action = "/4DACTION/HANDLECGI/Log" + tag
+            document.forms["Login"].submit()
+        }
+    </script>
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix" class="container">
+    %{Include nav.inc}%
+
+    <div id="head" class="container">
+        <p>A password is required to view this page.</p>
+
+        <div class="well" style="margin:50px 100px;">
+            <p style="margin-bottom:20px;">
+                If you have %{type}% access privileges,
+                please enter the password below and click "Continue".
+            </p>
+
+            <form id="Login" name="Login" method="post" action="/4DACTION/HANDLECGI/LogOK">
+                %{hiddenFields}%
+
+                <div class="form-group row">
+                    <label for="userPassword">Password</label>
+                    <input type="password" size="30" name="password" />
+                </div>
+
+                <div class="form-group row">
+                    <button type="submit" value="Continue" class="btn btn-default">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

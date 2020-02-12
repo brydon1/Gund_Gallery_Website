@@ -1,0 +1,528 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<table cellpadding="0" cellspacing="0" border="0"><tr><td>
+
+<a name="top"></a>
+
+<h1>Preparing the Database</h1>
+
+<a href="#publish">Publishing Records</a>&nbsp;|&nbsp;
+<a href="#images">Preparing Media Files</a>&nbsp;|&nbsp;
+<a href="#cataloguing">Cataloguing Data</a>&nbsp;|&nbsp;
+<a href="#kiosk_setup">Kiosk Setup</a>&nbsp;|&nbsp;
+<a href="#organizing_records">Organizing Records</a>
+
+<br><br>
+
+To appear in the kiosk, records must be flagged for web access and images must be in a format accepted by web browsers.  In addition, the more thorough and consistent your data is, the more useful your kiosk will be.
+
+<br><br>
+
+This section explains how to accomplish these tasks within EmbARK before setting up the kiosk, with chapter references to the EmbARK documentation.
+
+<br><br>
+
+<a name="publish"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Publishing Records</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	You will create (and update) the data in your EmbARK Web Kiosk by copying the latest version of your entire EmbARK datafile to the web server.  Because you may not want all of your records to be available for public viewing, strict controls limit which records display in the kiosk.
+
+	<br><br>
+
+	<ul>
+	<li>An <b>Object record</b> displays only if its 'Web Access' box has been checked.
+	<li>An <b>Artist record</b> displays only if its 'Web Access' box has been checked.
+	<li>A <b>Portfolio record</b> displays only if its 'Web Access' box has been checked.
+	<li>An <b>Object's Primary Image</b> displays only if the 'Web Access' checkbox for its Primary Surrogate has been checked.
+	<li>An <b>Object's Surrogate records</b> display only if the 'Web Access' box has been checked for the linked Surrogates.
+	<li>An <b>Object's Detail records [Deprecated]</b> display only if the 'Web Access' box has been checked for the related Surrogates and the Surrogate is marked as a Detail.
+	<li>An <b>Artist's Surrogate records</b> display only if the 'Web Access' box has been checked for the linked Surrogates.
+	<li>An <b>Object Note</b> displays only if 'Web Access' has been turned on for the appropriate Note field in Setup and the 'Web Access' box has been checked for the linked Object.
+	</ul>
+
+	<br>
+
+	The following sections describe how to set these 'Web Access' flags.
+
+	<br><br>
+
+	<a name="flag_individual"></a>
+	<h3>Flagging Individual Records for Web Access</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		To display any objects, artists, surrogates, portfolios, or object notes on the kiosk, you must select the Web Access checkbox associated with each record in EmbARK.
+
+		<br><br>
+
+		This checkbox is found in the following locations:
+		<ul>
+		<li><b>Objects</b> - in the header of the Modify Object forms.
+		<li><b>Artists</b> - in the header of the Modify Artist forms.
+		<li><b>Surrogates</b> - in the header of the Modify Surrogate forms.
+		<li><b>Portfolios</b> - in the Portfolio Attributes dialog box.<br>
+			[Choose <b>Attributes</b> from the <b>Portfolio</b> menu; see Chapter 16 of the EmbARK User’s Guide for more information.]
+		<li><b>Object Notes</b> - in the Notes Setup dialog box.<br>
+			[See <a href="#object_notes">Object Notes</a> below.]
+		</ul>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>A portfolio can only be designated for web access if all of the objects it contains are also designated for such access.
+		<li>The <b>Publish All by Default</b> setting located at File -> Setup -> <b>Quick Search</b> will automatically mark all new Object, Artist and Surrogate records as web-accessible.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="flag_group"></a>
+	<h3>Flagging Groups of Records for Web Access</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The <b>Replace</b> feature in EmbARK enables you to mark large groups of records for Web Access in a batch process. This is particularly useful in cases where the entire collection should always be published, for example on an intranet site.
+
+		<br><br>
+
+		These directions describe how to use the Replace feature for setting Web Access flags.
+
+		<ol>
+		<li>In EmbARK, select the Object records that you want to flag for Web Access.
+		<li>Choose <b>Replace</b> from the <b>Utilities</b> menu.<br>
+			The EmbARK Replace dialog box appears.<br>
+			<img src="images/replace.gif" width="541" height="413" border="1" vspace="6" alt="Replace Dialog"><br>
+		<li>In &quot;<b>1. Choose the kind of records</b>&quot;, verify that &quot;<b>Object</b>&quot; is selected.
+		<li>In &quot;<b>2. Choose the replacement method</b>&quot;, select the &quot;<b>Replace all values in field</b>&quot; radio button.
+		<li>In &quot;<b>3. Choose the field to replace</b>&quot;, choose &quot;<b>Web Access?</b>&quot;.
+		<li>In the drop-down list for &quot;<b>4. Enter a replacement value</b>&quot;, select &quot;<b>Yes</b>&quot; as the replacement value.
+		<li>In the &quot;<b>Choose the search domain</b>&quot; box, select the radio button for <b>Current Selection of Records</b>.<br>
+			If you want to mark the entire database for web access, choose &quot;<b>All Records in Table</b>&quot;.
+		<li>Click the <b>Replace</b> button.<br>
+			EmbARK will mark every selected object for web access.  It will automatically ask if you wish to make the same change for the Image Web Access field (if the status is changed).
+		<li>Repeat as appropriate Artist, Surrogate, and Portfolio records.
+		</ol>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>You must have specific permission in order to use the Replace feature.  For more information, consult your system administrator or see the online documentation in the EmbARK Support Center.
+		</ul>
+	</td></tr></table>
+
+	<a name="object_notes"></a>
+	<h3>Object Notes</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		If you have system administrator privileges, you can mark long-text Notes fields (from the Notes & Histories page) in all web-accessible object records for web access by following these steps:
+		<ol>
+		<li>Choose <b>Setup</b> from the <b>File</b> menu.<br>
+			The System Administrator Setup dialog box appears.
+		<li>Click the <b>Notes Fields</b> button.<br>
+			The Add/Rename Notes Fields dialog box appears.<br>
+			<img src="images/notes_setup.gif" width="628" height="472" border="1" vspace="6" alt="Notes Setup"><br>
+		<li>Select a Notes field from the column on the left.<br>
+			The attributes for that field are displayed on the right.
+		<li>Click to put a check in the <b>Web Access</b> checkbox, then click <b>Update</b>.
+		<li>Repeat steps 3 and 4 for each Notes field that you want displayed.
+		<li>When you are finished, click <b>Done</b> to exit.
+		</ol>
+
+		In a standard kiosk, any Notes fields marked for web access will appear on the Object Info page for the object that they describe.
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="images"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Preparing Media Files</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	The kiosk can display surrogate images linked to Object and Artist records.  These images, however, will only display if their file format is readable by web browsers and their names and location conform to internet standards.
+
+	<a name="file_format"></a>
+	<h3>What File Format Should I Use?</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Images in the JPEG format (with a file extension of .jpg) are the easiest for web browsers to display. In addition, your kiosk images will be displayed to visitors more quickly if you compress them to a smaller file size. Web Kiosk can also publish sound and movie files (such as .MP3 and .MP4).
+
+		<br><br>
+
+		Thumbnails and previews will display in the kiosk, regardless of the file format of the original source image.
+
+	</td></tr></table>
+
+	<a name="convert_filenames"></a>
+	<h3>Converting Image Filenames</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		If your images are already in a format that web browsers can display but the names of the files are not web-compatible (for example, they contain spaces, or are Macintosh files without extensions), use the EmbARK cataloguing application to follow the steps below.  
+		<ol>
+		<li>Search for the image files whose names you want to change.<br>
+			For example, to find all images that contain spaces, go to Full Search in the Selection menu.  Search for (1) SURROGATE records where (2) the Surrogate: Web Access field is equal to "yes".
+		<li>When the search results are displayed, click the <b>View Related</b> button to load the associated Media records and their metadata.
+		<li>Select all of the Media records that require a change (e.g. illegal characters, no file extension, etc.).<br>
+			<b>Note:</b> If the image files are in incompatible formats (such as TIFF or BMP), you will have to use an application such as Photoshop to create compatible formats.
+		<li>Click the button that says <b>Thumbnails</b> to load a thumbnail view.
+		<li>Click the <b>Rename</b> button in the left button bar.<br>
+			The Rename dialog box appears, with the original image filenames on the left and a separate list for entering new names on the right.  (Images can only be renamed if they are online.  To quickly select online images before doing the Rename, click the Select... button and choose ONLINE.  Online records will be highlighted with a red outline.)
+		<li>Click the <b>Web Style</b> button.<br>
+			A configuration dialog opens.
+		<li>Enter the appropriate file extension (for example, &quot;<b>.jpg</b>&quot; for JPEG files).
+		<li>The <b>Illegal Characters</b> list specifies which characters will get replaced with the replacement character (typically an underscore). Modify this as needed.
+		<li>Click <b>Done</b> to close the dialog.<br>
+			The filenames listed on the right will be converted to web-compatible names (with file extensions, and illegal characters replaced; for example, "My Image" might become "My_Image.jpg"), and the corresponding image files will be renamed.
+		<li>Repeat this process for any additional groups of images.
+		</ol>
+
+			<img src="images/rename.gif" width="526" height="530" border="1" vspace="6" alt="Renaming Image Files"><br>
+
+
+		<h4>Notes</h4>
+		<ul>
+		<li>On some Macintosh systems, image filenames may not be longer than 27 characters.  If there are more than 27 characters, EmbARK may not be able to correct the image filename and still provide a unique filename.  If this occurs, an error log will appear listing the filenames that could not be changed.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="image_location"></a>
+	<h3>Image Location</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Follow these guidelines for organizing images to be included in the EmbARK Web Kiosk.
+
+		<br><br>
+
+		<ul>
+		<li>All your images must be stored within a single folder called <b>Images</b>.
+		<li><b>The Images folder name must appear in the file paths that are stored in EmbARK.</b> On networked Windows machines, this means that a folder <i>above</i> the Images folder must be mapped to a local drive. This ensures that the image path  is stored as I:\Images\myPicture.gif (for example). If the Images folder itself is mapped to a drive letter, the image path in EmbARK will read I:\myPicture.gif, and images will not load correctly in the kiosk.
+		<li>You can create as many subfolders as you wish inside the Images folder, but do not include the word &quot;Images&quot; in the name of any of these subfolders.  
+		<li>The folder or subfolder names must not contain any spaces or other characters that web browsers cannot interpret (for example, use My_Folder instead of My Folder).
+		<li>It is possible to configure the Images directory so that it may be shared by both EmbARK and EmbARK Web Kiosk.  The Images folder must be within the EmbARK Web Kiosk directory or on some other web server space.  This configuration eliminates the need to have two copies of your source images.  IIS may be used to create a <a href="http://support.microsoft.com/kb/172138" target=_blank>virtual directory.</a> The <a href="customizing.html#images_url">Media Directory URL</a> can be set to point to the virtual directory.</ul>
+
+	<img src="images/imagelist.gif" width="796" height="404" border="1" vspace="6" alt="Sample Image List"><br>
+This graphic shows a Media List with valid Windows file paths containing the required "images" folder.
+
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="cataloguing"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Cataloguing Data</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	The kiosk lets visitors search your collection based on &quot;Advanced Search&quot; fields from the Object and Artist records, the Object Creation Date, Keywords, and additional Object fields with the &quot;Quick Search&quot;.
+
+	<br><br>
+
+	For the Advanced Search and keyword searches to work effectively, you must catalog the objects in the collection as thoroughly and consistently as possible. This helps to ensure that potential search results are not &quot;missed&quot; because the data entry for an object was incomplete or did not match entries for similar objects.
+
+	<a name="advanced_search_fields"></a>
+	<h3>Advanced Search Fields</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		On the <b>Advanced Search</b> page, visitors are presented with popups for selecting a field to search. Once they select a field, they are presented with a popup of every value entered in that field for web accessible records. If the selected field contains a large number of unique values, the visitor must first select a beginning letter, then choose from values that begin with that letter.
+
+		<br><br>
+
+		Because the user is presented with value lists, the Advanced Search is most useful for fields where the same value has been used for many records. This both ensures a succinct value list and gives the visitor more satisfying search results.
+
+		<br><br>
+
+		Consistent data entry is critical for creating an effective Advanced Search. The best way to guarantee consistent data entry in these fields is to set up <b>Choice Lists</b> for them early in the data entry process. [See Chapter 2 of the EmbARK User’s Guide.]
+
+		<br><br>
+
+		One of the early steps for setting up an EmbARK Web Kiosk is to determine which fields should be used as &quot;Advanced Search Fields&quot;. The <a href="customizing.html#ObjAdvanced_Search_Fields">Object Advanced Search</a> section details how to configure these fields.
+
+		<br><br>
+
+		Once the Advanced Search fields have been selected, it's worthwhile to take a few minutes to review the data that has been entered in these fields, and clean it up if necessary.
+
+		<br><br>
+
+		In EmbARK, you can use the <b>Unique Values</b> report to make sure that the data entered in your Advanced Search fields is consistent, and the Replace feature to standardize the data in any fields where you find inconsistent data.  To do this, follow these steps:
+
+		<ol>
+		<li>In EmbARK, choose <b>Tools</b> from the <b>Utilities</b> menu (start at the splash screen view).<br>
+			The Tools dialog box appears.
+		<li>Select the <b>Unique Values Report</b> option, then click <b>OK</b>.<br>
+			A field selection dialog box appears.
+		<li>Choose the table and the field whose data you want to review, then click <b>OK</b>.<br>
+			A report showing all of the values entered in the field you chose is printed automatically.  In the report, spaces in any value will be replaced by the text &quot;<b>[SPACE]</b>&quot; so that you can easily identify incorrect or inconsistent spacing.<br>
+			<img src="images/unique_values.gif" width="235" height="205" border="1" vspace="6" alt="Unique Values Report Sample"><br>
+		<li>Review the displayed values and note any inconsistencies.<br>
+			For example, if the Century field contains both &quot;17th Century&quot; and &quot;17th Cent.&quot; as values, this is an inconsistency that should be fixed.
+		<li>Choose <b>Replace</b> from the <b>Utilities</b> menu.<br>
+			The Replace dialog box appears.
+		<li>In lines 1 and 3, choose a table and field with inconsistent data.<br>
+			For example, to fix the inconsistency mentioned in step 4, you would choose <b>Object</b> in line 1 and <b>Century</b> in line 3.
+		<li>In line 4, type the inconsistent text that you want to change (for example, &quot;<b>17th Cent.</b>&quot;).
+		<li>In line 5, type the text that you want to use as the consistent text for this value (for example, &quot;<b>17th Century</b>&quot;).
+		<li>Click <b>Replace</b>.<br>
+			EmbARK will change all values matching the text in line 4 to match the text in line 5. (For example, &quot;17th Cent.&quot; will be changed to &quot;17th Century&quot;.)
+		</ol>
+
+		<h4>Notes</h4>
+		<ul>
+		<li>The best Advanced Search fields are those where the same value applies to several records (for example, Medium or Object Type) rather than fields where the information for each record is likely to be unique (for example, Display Title or Accession Number).
+		<li>If you do need to let kiosk visitors search for objects by using a field with many unique values (such as Display Title), you can help them by designating the field for use in the Quick Search, which looks for partial information (for example, any object with &quot;Mask&quot; in the title).  [See <a href="prepare_database.html#quick_search">Choosing Fields for the Quick Search</a> for details.]
+		</ul>
+
+	</td></tr></table>
+
+	<a name="keywords"></a>
+	<h3>Keywords</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Kiosk visitors can also search your collection by keyword.
+
+		<br><br>
+
+		Through the kiosk they can run searches to find keyword terms that have been used on web accessible Objects in EmbARK. This includes each component of hierarchical keywords such as <b>animals:dogs:hounds:basset</b>. They can then select up to 6 of these words to find related Objects.
+
+		<br><br>
+
+		[See Chapters 12 and 14 of the EmbARK User's Guide for details about cataloguing with keywords.]
+
+		<br><br>
+
+		The more thoroughly you have used keywords to describe your collection, the more useful these searches will be.  In fact, because some kiosk users may prefer keyword searches to field-based searches, you may wish to enter the values used in one or more of your Quick Search fields (for example, Medium) as keywords.  Similarly, you might enter values from fields that are not included in the Quick Search list as keywords, in order to offer users an indirect way to search your kiosk based on the information in those fields.
+
+	</td></tr></table>
+
+	
+	<a name="surrogates"></a>
+	<h3>Surrogate Records and Images</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		EmbARK allows you to attach multiple media files to an object through the use of <b>Surrogates</b>. Surrogates allow for the display of detailed information about the image using fields from the Surrogate record.  From the Object &quot;Description&quot; web page, the kiosk visitor can click into a page of all the web accessible Surrogates linked to the object (or the surrogates can be viewed as "Additional Images" on the same page).
+
+		<br><br>
+
+		Movie, sound, PDF and other web-compatible file types may also be marked for display. <br>
+			
+	<img src="images/surrogates.gif" width="854" height="587" border="1" vspace="6" alt="Modify Object record showing surrogates">	
+	
+	</td></tr></table>
+
+	<a name="details"></a>
+	<h3>Detail Images [Deprecated]</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		EmbARK allows you to display multiple media files for an object through the use of <b>Details</b>. In fact, details are merely surrogate records that have been given a special flag (and there is little reason to use them). From the Object &quot;Description&quot; web page, the kiosk visitor can click into a page of all the details linked to the object.  
+		<br><br>
+
+		The default label for each detail is the image filename. To change the caption value, simply adjust the value in the <b>View</b> field in the Modify Surrogate record.
+
+		<br><br>
+		If the Details screen is loaded in EmbARK, you may use drag-and-drop to manually adjust the display order of the Detail images.
+		
+	</td></tr></table>
+
+</td></tr></table>
+
+<a name="quicksearch_setup"></a>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Quick Search Setup</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	Quick Search Setup (previously called Kiosk Setup) contains a few legacy controls that impact searching in Web Kiosk. Most of these controls are now available in <a href="customizing.html#preferendes">Preferences</a>. To display the Quick Search Setup dialog box:
+
+	<ol>
+	<li>Choose <b>Setup</b> from the <b>File</b> menu.<br>
+		The Setup dialog opens.
+	<li>Click the <b>Quick Search</b> button.
+	</ol>
+
+	The Quick Search button provides an interface to select the fields that will be indexed for EmbARK's internal Quick Search function (in the <b>Find</b> search).  If Stop Words are entered, both EmbARK and Web Kiosk will make use of these values.
+
+	
+	<a name="stop_words"></a>
+	<h3>Stop Words</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		Eliminating small words (such as <b>a</b> and <b>the</b>) from consideration makes the Quick Search more efficient.  Click the <b>Stop Words</b> tab in the Quick Search Setup dialog box to choose the words to ignore (known as <i>stop words</i>).<br>
+		<img src="images/stop_words_setup.gif" width="638" height="479" border="1" vspace="6" alt="Quick Search Setup Dialog"><br>
+
+		<br><br>
+
+		Stop words may be imported from a plain text file. To import a list:
+		<ol>
+		<li>Click the <b>Import</b> button.<br>
+			A file selection dialog opens.
+		<li>Find and select the text file.<br>
+			Once imported, the stop words will be listed on the right side of the Stop Words tab.
+		</ol>
+
+		To add a word to the list, type it in the <b>New Word</b> box, then click <b>Add</b>.
+
+		<br><br>
+
+		To remove an existing stop word, select it in the list, then click <b>Remove</b>. (Note that you cannot edit words that are already in the list; if a stop word is misspelled, remove it and then add the correct word.)
+
+	</td></tr></table>
+
+
+</td></tr></table>
+
+<a name="organizing_records"></a>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+<h2>Organizing Records</h2>
+
+<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+	In addition to letting visitors search for records, the EmbARK Web Kiosk provides two ways for you to organize records for browsing. These provide a means for organizing your collection or guiding a visitor through the highlights.
+
+	<br><br>
+
+	<a name="portfolios"></a>
+	<h3>Portfolios (aka Portfolio List)</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The portfolios that you create in EmbARK can be made available in the kiosk.  The <b>Portfolio Index</b> page in the kiosk presents visitors with an alphabetical list of all web accessible portfolios from the datafile. Clicking a portfolio name opens a page of thumbnail images and field information for the objects included in that portfolio.<br>
+
+		<img src="images/portfolio_index.gif" width="576" height="506" border="1" vspace="6" alt="Portfolio Index Web Page">
+
+		<br><br>
+
+		To enhance the effectiveness of your kiosk portfolios:
+		<ol>
+		<li>Attach a representative image to each portfolio.
+		<li>Enter general information about the Object grouping in the Portfolio Notes field in the Portfolio Attributes dialog box. Visitors will be able to see this text by clicking the Notes button on a kiosk portfolio page.<br>
+		<img src="images/portfolio_notes.gif" width="576" height="506" border="1" vspace="6" alt="Portfolio Notes Web Page">
+		</ol>
+
+		[For more information on creating portfolios in EmbARK and attaching representative images, see Chapter 16 of the EmbARK User’s Guide and Chapter 3 of the EmbARK Public Access Guide.]
+
+		<h4>Notes</h4>
+		<ul>
+		<li>Web accessible Portfolios whose names begin with &quot;&lt;!-- --&gt;&quot; will not display in the standard Portfolio Index in EmbARK. This is a trick that some EmbARK clients use for including portfolios in the Index Tree (Browse the Collections) without including them in the Portfolio Index.
+		<li>Certain types of data sets may be too tedious to maintain as portfolios.  Consider using <a href="appendix.html#dynamic_portfolios">Dynamic Portfolios</a> based on key data fields to load logical data sets.
+		</ul>
+
+	</td></tr></table>
+
+	<a name="index_tree"></a>
+	<h3>Index Tree (aka Browse the Collections)</h3>
+
+	<table cellpadding="15" cellspacing="0" border="0"><tr><td>
+
+		The Index Tree of the kiosk is a series of paths (or branches) that you design for your collection, along any organizational guidelines you prefer.  Each path may lead in turn to additional levels of branches.
+
+		<br><br>
+
+		Each branch may have descriptive text and an image associated with it.  At the end of each pathway, the user will be linked to either a portfolio of thumbnail records or simply a page with descriptive text information.<br>
+		<img src="images/index_tree.gif" width="578" height="552" border="1" vspace="6" alt="Index Tree Web Page">
+
+		<br><br>
+
+		Before you can link a portfolio to the Index Tree, you must mark that portfolio for web access. As a result, every portfolio that is linked to the Index Tree will also be listed in the Portfolio Index. To mark a portfolio for web access but exclude it from the Portfolio Index, you must begin the Portfolio Name with the text &quot;&lt;!-- --&gt;&quot; (without quotation marks).
+
+		<br><br>
+
+
+		<h4>Notes</h4>
+		<ul>
+		<li>&quot;Portfolio Index&quot; portfolios will also display in the popup on the Collections pages of the live web kiosk.
+		<li>Before portfolios can be used in the Index Tree, they must be marked as web accessible. [See <a href="#publish">Publishing Records</a> for details.]
+		</ul>
+	</td></tr></table>
+
+</td></tr></table>
+
+
+</td></tr></table>
+
+<br><br>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</td></tr></table>
+
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Artist-Maker/info.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}% - %{[Artist_Maker]Full_Name}%</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div id="head" class="container">
+        <h1>Artist Results</h1>
+
+        <div class="row">
+            <div class="col col-sm col-md-5 col-lg-4 col-xl-4 mr-auto">
+                <form id='popup' name='popup' method='get' action='%{Link;Artist_Maker;info;0;query=Current Selection;records=1}%'  style="text-align:center;">
+                    <input type='hidden' name='query' id='query' value='%{Current Selection}%' />
+                    <select class="form-control" name='page' id='page' title='page' onchange='document.forms["popup"].submit()'>
+                        %{Start loop(Current Selection)}%
+                            <option value='%{Loop Index}%' %{If(First Record=Loop Index)}% selected='selected' %{End if}%>
+                                %{[Artist_Maker]Sort_Name}%
+                            </option>
+                        %{End loop}%
+                    </select>
+                </form>
+            </div>
+
+            <div class="col col-sm col-md-4 col-lg-4 col-xl-4"> <!-- display options -->
+                <div class="display-options" style="display:inline;">
+                    <div claass="navtxt">
+                        <a class="btn btn-default" href="%{Link;Artist_Maker;list;0;first=Current Record;query=Current Selection;records=25}%" aria-label="Go to Artist List view">
+                            <i class="fa fa-th-list"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        %{Include pagenavigation.inc}%
+
+    </div>
+
+    <hr/>
+
+    <div style="position: relative;">
+
+        <div class="container">
+            <a name="main"></a>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    %{if(Has Image)}%
+                        %{if(Image height=="0")}%
+                            <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="200" height="100" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+                                <param name="SRC" value="%{Image Path}%">
+                                <param name="AUTOPLAY" value="true">
+                                <param name="CONTROLLER" value="true">
+                                <embed src="%{Image Path}%" width="%{Image width+100}%" height="%{Image height+100}%" autoplay="true" controller="true" pluginspage="http://www.apple.com/quicktime/download/">
+                                </embed>
+                            </object>
+                        %{else}%
+                            %{if(Image duration=="0")}%
+                                <a class="highslide" href="%{Image Path}%" onclick="return hs.expand(this, hs.__.paramGallery);" target="_blank">
+                                    <img class="main" src="%{preview}%?a=%{Sequence}%" width="%{thumbnail width*2.3}%" height="%{thumbnail height*2.3}%" alt="Image: %{[Objects_1]Disp_Title}%" />
+                                </a>
+                                <br>
+                            %{else}%
+                                <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" width="%{image width}%" height="%{image height}%" codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+                                    <param name="SRC" value="%{Image Path}%">
+                                    <param name="AUTOPLAY" value="true">
+                                    <param name="CONTROLLER" value="true">
+                                    <embed src="%{Image Path}%" width="%{image width}%" height="%{image height+15}%" autoplay="true" controller="true" pluginspage="http://www.apple.com/quicktime/download/">
+                                    </embed>
+                                </object>
+                                <br>
+                                <br>
+                            %{end if}%
+                        %{end if}%
+                    %{else}%
+                        <small><em>This artist does not have an image.</em></small>
+                    %{end if}%
+
+                    <p>
+                        <a onclick="window.print();return false;" href="#">Print This Page</a>
+                    </p>
+                </div>
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <!-- data cell start -->
+                    <strong>%{[Artist_Maker]Display_Name}%</strong>
+                    <br />
+                    %{[Artist_Maker]Artist_Label}%<br />
+                    %{if ([Artist_Maker]Nat_Culture_L2 != "")}%
+                        %{[Artist_Maker]Nat_Culture_L2}%<br />
+                    %{end if}%
+                    %{if ([Artist_Maker]Disp_Maker_Life != "")}%
+                        %{if ([Artist_Maker]Disp_Maker_Life != "()")}%
+                            %{[Artist_Maker]Disp_Maker_Life}%<br />
+                        %{end if}%
+                    %{end if}%
+                    %{if ([Artist_Maker]Name_Elab != "")}%
+                        %{[Artist_Maker]Name_Elab}%<br />
+                    %{end if}%
+                    <br />
+                    <br />
+                    %{if([objects_1])}%
+                        View the <a href="%{Link;Objects_1;artist-objects;0;records=60;query=Artist_Maker=_ID}%">objects</a> by this artist.
+                    %{end if}%
+                    <!-- data cell end -->
+                </div>
+                <!-- data layout table end -->
+            </div>
+
+            <br>
+
+            %{if ([Artist_Maker]Biography != "")}%
+                <h4>Biography</h4>
+                %{[Artist_Maker]Biography}%
+            %{end if}%
+
+            %{if ([Surrogates])}%
+                <br>
+                <hr>
+                <br>
+
+                <h4>Additional Images</h4>
+                %{Start Loop([Surrogates];Order by [Surrogates]_ID)}%
+                    <div class="objsur-record-box">
+                        <div class="objsur-thumbnail">
+                            <a class="item highslide" href="%{Image Path}%" onclick="return hs.expand(this, hs.__.paramGallery);">
+                                <img src="%{thumbnail}%" height="%{thumbnail height}%" width="%{thumbnail width}%" alt="Image: %{[Surrogates]View_1}%" />
+                            </a>
+                        </div>
+                        <div class="objsur-label" style="margin-bottom:20px;">
+                            %{[Surrogates]View_1}%
+                        </div>
+                    </div>
+                %{End Loop}%
+            %{end if}%
+
+            <br>
+            <br>
+
+            %{Include selectiondescription.inc}%
+        </div>
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

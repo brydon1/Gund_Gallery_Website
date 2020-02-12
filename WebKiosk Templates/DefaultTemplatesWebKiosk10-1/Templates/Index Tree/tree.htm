@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--IndexTree.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}% - Browse the Collection</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div class="container"> <!-- title and navigation -->
+        <h1>
+            <!--#4Dif gsFunc_IsTopLevel (->[_PictTree]) -->
+                Browse the Collections
+            <!--#4Delse-->
+               <!--#4Dtext ([_PictTree]Button_String)-->
+            <!--#4Dendif-->
+        </h1>
+
+        <p class="lead">
+            Click any image below to begin browsing through the collection.
+        </p>
+
+        <!-- Hide 'back to Browse the Collections' at top level -->
+        <!--#4Dif not(gsFunc_IsTopLevel (->[_PictTree])) -->
+            &lt;
+            <a href="/index-tree/tree/-1" style="text-decoration: none">back to Browse the Collections</a>
+            <br/><br/>
+        <!--#4Dendif-->
+    </div>
+
+    <div style="position: relative;">
+
+        <div class="container-fluid">
+            <a name="main"></a>
+
+            <div class="row galleryGrid">
+                <!-- child branches start -->
+
+                <!--#4Dtext gsFunc_LoadChildRecords (->[_PictTree]) -->
+                <!--#4DEVAL (gsFunc_SetSelectedRecord(->[Objects_1]; 1))-->  <!-- loads the first record -->
+                <!--#4DLOOP [_PictTree] -->
+                    <div class="col text-center">
+                        <div class="card hoverOutline text-center" style="width:128px; margin-bottom:10px;">
+                            <div class="card-img-top text-center" style="max-width:128px;max-height:128px;">
+                                <a href="<!--#4Dtext gsFunc_IndexTreeLink("portfolio"; 20)-->" style="text-decoration:none;">
+                                    <!--#4Dif (gsFunc_HasImage(->[_PictTree]))-->
+                                        <img src="<!--#4Dvar gsFunc_GetImage (->[_PictTree];"Thumbnail Url")-->" style="max-width:128px;max-height:128px;"
+                                             alt="Cover image for <!--#4Dtext ([_PictTree]Button_String)-->" />
+                                     <!--#4Delse-->
+                                        <img src="/graphics/DefaultThumbnail.gif" style="max-width:128px;max-height:128px;"
+                                             alt="This branch does not have a cover image." />
+                                     <!--#4Dendif-->
+                                </a>
+                            </div>
+                            <div class="border-top text-center px-2 pt-3 pb-3">
+                                <p class="card-text">
+                                    <a class="noColor" href="<!--#4Dtext gsFunc_IndexTreeLink("portfolio"; 20)-->" style="text-decoration:none;">
+                                        <!--#4Dtext ([_PictTree]Button_String)-->
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--#4DENDLOOP-->
+                <!-- child branches end -->
+            </div>
+        </div>
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

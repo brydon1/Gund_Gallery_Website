@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--kiosk/search.htm-->
+<html lang="en">
+
+<head>
+    <title>%{Include title.inc}% - Advanced Search</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+
+    <script language="javascript" type="text/javascript">
+        function setHier(selectName, parentField, childField) {
+            var selItem = document.forms["Search"].elements[selectName].selectedIndex;
+            var selValue = document.forms["Search"].elements[selectName].options[selItem].value;
+
+            if (selValue.substring(0, 5) == "sub::") {
+                document.forms["Search"].elements[childField].value = selValue;
+            } else {
+                document.forms["Search"].elements[parentField].value = selValue;
+                document.forms["Search"].elements[childField].value = "";
+            }
+        };
+    </script>
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div id="head" class="container">
+        <a name="main"></a>
+
+        <ul class="nav nav-tabs mt-2" role="navigation">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" href="/kiosk/search.htm">Object Advanced Search</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="/kiosk/search_exhibition.htm">Exhibition Search</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="/kiosk/search_artist.htm">Artist Search</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="/kiosk/search_acquisition.htm">Acquisition Search</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" href="/kiosk/search_biblio.htm">Bibliography Search</a>
+            </li>
+        </ul>
+
+        <!-- <h1>Object Advanced Search</h1> -->
+        <br/>
+
+        <form id="Search" name="Search" action="/4DACTION/HANDLECGI/Search" method="post" class="form-horizontal" style="max-width:900px;">
+            <input type="hidden" name="SearchTable" value="Objects_1" />
+            <input type="hidden" name="display" value="list" />
+            <input type="hidden" name="records" value="10" />
+            <!-- For each new search field, you need to add 2 variables to the form:
+            1) "SearchField#": make sure the # is sequential; set value to the name of the field you want to search.
+            2) "SearchValue#": make sure the # matches the # from SearchField; the user must be able to set the value to the desired search value; a wildcard will be appended before and after the search value
+            -->
+
+            <input type="hidden" name="SearchOp0"    value="contains" />
+            <input type="hidden" name="SearchField0" value="Disp_Title" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="title">Title</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="SearchValue0" id="title" value="" />
+                </div>
+            </div>
+
+            <input type="hidden" name="SearchOp1"    value="contains" />
+            <input type="hidden" name="SearchField1" value="sort_Artist" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="artist">Artist</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="SearchValue1" id="artist" value="" />
+                </div>
+            </div>
+
+            <input type="hidden" name="SearchOp14"    value="equals" />
+            <input type="hidden" name="SearchField14" value="curator" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="curator">Curator</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="SearchValue14" id="curator" value="" />
+                </div>
+            </div>
+
+            <!--#4DSCRIPT/GetDistinctValues/[Objects_1]disp_obj_type/1/1-->
+            <!--#4DIF (Size of array(atGDVValues)>0)-->
+                <input type="hidden" name="SearchOp5" value="equals" />
+                <input type="hidden" name="SearchField5" value="disp_Obj_type" id="objtype" />
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="objtype">Object Type</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="SearchValue5" id="objtype">
+                            <option selected="selected" value=""></option>
+                            <!--#4DLOOP atGDVValues-->
+                                <!--#4Dif (atGDVValues{atGDVValues}#"")-->
+                                    <option value="<!--#4DTEXT atGDVValues{atGDVValues}-->">
+                                        <!--#4DTEXT atGDVValues{atGDVValues} + " ("+string(alGDVCounts{atGDVValues})+")"-->
+                                    </option>
+                                <!--#4Dendif-->
+                            <!--#4DENDLOOP-->
+                        </select>
+                    </div>
+                </div>
+            <!--#4DENDIF-->
+
+            <!--4DSCRIPT/GetDistinctValues/[Objects_1]_CP_4_ID/1/1/CHOICELIST/atCLParent1/alCLParent1-->
+        	<!--4DIF (Size of array(atCLParent1)>0)-->
+                <input type="hidden" name="SearchField15" value="_CP_4_ID"/><input type="hidden" name="SearchValue15"/>
+                <input type="hidden" name="SearchField16" value="Creation_Place4"/><input type="hidden" name="SearchValue16"/></td>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="medium">Creation Place</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="place" onChange="setHier('place','SearchValue15','SearchValue16')">
+                    		<option value="" checked></option>
+                        		<!--4DLOOP alCLParent1-->
+                                    <!--4DIF (alCLParent1{alCLParent1}>0)-->
+                            			<option value="<!--4DVAR alCLParent1{alCLParent1}-->" style="font-weight:bold;"><!--4DVAR atCLParent1{alCLParent1}--> </option>
+                        				<!--4DSCRIPT/GetDistinctSubValues/[Objects_1]Creation_Place4/alCLParent1//1/1/atCLTemp2-->
+                        				<!--4DLOOP atCLTemp2-->
+                        					<!--4DIF (atCLTemp2{atCLTemp2}#"")-->
+                        						<option value="sub::<!--4DVAR alCLParent1{alCLParent1}-->::<!--4DVAR atCLTemp2{atCLTemp2}-->">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!--4DVAR atCLTemp2{atCLTemp2}-->
+                                                </option>
+                        					<!--4DENDIF-->
+                        				<!--4DENDLOOP-->
+                            		<!--4DENDIF-->
+                                <!--4DENDLOOP-->
+                        </select>
+                    </div>
+                </div>
+        	<!--4DENDIF-->
+
+            <input type="hidden" name="SearchOp3" value="contains" />
+            <input type="hidden" name="SearchField3" value="Disp_Medium" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="medium">Medium (free text)</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="SearchValue3" id="medium" value="" />
+                </div>
+            </div>
+
+            <input type="hidden" name="SearchOp2" value=">" />
+            <input type="hidden" name="SearchField2" value="Period" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="period">Period</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="SearchValue2" id="period" value="" />
+                </div>
+            </div>
+
+            <!--#4DSCRIPT/GetDistinctValues/[Objects_1]century/1/1-->
+            <!--#4DIF (Size of array(atGDVValues)>0)-->
+                <input type="hidden" name="SearchOp6" value="equals" />
+                <input type="hidden" name="SearchField6" value="Century" />
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="century">Century</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="SearchValue6" id="century">
+                            <option selected="selected" value=""></option>
+                            <!--#4DLOOP atGDVValues-->
+                                <!--#4Dif (atGDVValues{atGDVValues}#"")-->
+                                    <option value="<!--#4DTEXT atGDVValues{atGDVValues}-->">
+                                        <!--#4DTEXT atGDVValues{atGDVValues} + " ("+string(alGDVCounts{atGDVValues})+")"-->
+                                    </option>
+                                <!--#4Dendif-->
+                            <!--#4DENDLOOP-->
+                        </select>
+                    </div>
+                </div>
+            <!--#4DENDIF-->
+
+
+            <!--#4DSCRIPT/GetDistinctValues/[Objects_1]creation_place1/1/1-->
+            <!--#4DIF (Size of array(atGDVValues)>0)-->
+                <input type="hidden" name="SearchOp12" value="equals" />
+                <input type="hidden" name="SearchField12" value="Creation_place1" />
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="region">Region-Continent</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" name="SearchValue12" id="region">
+                            <option selected="selected" value=""></option>
+                            <!--#4DLOOP atGDVValues-->
+                                <!--#4Dif (atGDVValues{atGDVValues}#"")-->
+                                    <option value="<!--#4DTEXT atGDVValues{atGDVValues}-->">
+                                        <!--#4DTEXT atGDVValues{atGDVValues} + " ("+string(alGDVCounts{atGDVValues})+")"-->
+                                    </option>
+                                <!--#4Dendif-->
+                            <!--#4DENDLOOP-->
+                        </select>
+                    </div>
+                </div>
+            <!--#4DENDIF-->
+
+            <input type="hidden" name="SearchOp9" value="equals" />
+            <input type="hidden" name="SearchField9" value="Disp_Access_No" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="accnum">Accession Number</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" size="80" name="SearchValue9" id="accnum" value="" />
+                </div>
+            </div>
+
+            <input type="hidden" name="SearchOp10" value=">=" />
+            <input type="hidden" name="SearchField10" value="Start Date" />
+            <input type="hidden" name="SearchOp11" value="<=" />
+            <input type="hidden" name="SearchField11" value="End Date" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="creationdate">Created</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" size="30" name="SearchValue10" id="creationdate" value="" placeholder="created on or after"/>
+                </div>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" size="30" name="SearchValue11" value="" placeholder="created on or before"/>
+                </div>
+            </div>
+
+            <input type="hidden" name="SearchField13" value="lgl_stts_date"/>
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="accnum">Legal Status Date</label>
+                <div class="col-sm-8">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <select class="form-control" name="SearchOp13" id="lgl_stts_date">
+                                <option value="">is</option>
+                                <option value="<">is before</option>
+                                <option value=">">is after</option>
+                            </select>
+                        </div>
+                        <input class="form-control" type="text" size="25" name="SearchValue13" id="SearchValue13" value=""/>
+                        <script>
+                            $('#SearchValue13').datepicker({
+                                autoclose: true
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" name="SearchOp7" value="contains" />
+            <input type="hidden" name="SearchField7" value="Combo::Disp_Obj_Type;;Disp_Title" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="objtypetitle">Combo Object Type / Title Search</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" size="80" name="SearchValue7" id="objtypetitle" value="" />
+                </div>
+            </div>
+
+            <input type="hidden" name="SearchOp4" value="any" />
+            <input type="hidden" name="SearchField4" value="mfs" />
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="quicksearch">Quick Search</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" size="80" name="SearchValue4" id="quicksearch" value="" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Search Results Match</label>
+                <div class="col-sm-8">
+                    <div class="radio-inline">
+                        <input type="radio" name="SearchType" title="SearchType" value="all" />
+                        <strong>ALL</strong> provided search terms
+                    </div>
+                    <div class="radio-inline">
+                        <input type="radio" name="SearchType" title="SearchType" value="any" checked />
+                        <strong>ANY</strong> provided search terms
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Sort Results by</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="sort" title="sort">
+                        <option value="9">Title</option>
+                        <option value="7">Artist</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">&nbsp;</label>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-primary" aria-label="Search Collection" name="doSubmit">
+		                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		                Search
+		            </button>
+                </div>
+            </div>
+
+        </form>
+
+        %{if(Records)}%
+            <p>
+                <br />
+                <br />
+                <strong>Your current selection of %{Records - Object}% records is:</strong>
+                <br />
+                %{Selection Name Object}%
+            </p>
+        %{end if}%
+
+        <!-- <p>
+            <strong>Other Search Options:</strong>
+            <br />
+            Object Advanced |
+            <a href="/kiosk/search_exhibition.htm">Exhibition</a> |
+            <a href="/kiosk/search_artist.htm">Artist</a> |
+            <a href="/kiosk/search_acquisition.htm">Acquisition</a> |
+            <a href="/kiosk/search_biblio.htm">Bibliography</a>
+        </p> -->
+
+    </div>
+    %{Include footer.inc}%
+
+</body>
+
+</html>

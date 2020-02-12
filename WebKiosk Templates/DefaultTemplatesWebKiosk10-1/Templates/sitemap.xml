@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <sitemap>
+        <loc>
+            https://webkiosk.gallerysystems.com/sitemap_objects.xml
+        </loc>
+        <lastmod><!--#4DTEXT gsFunc_GetInfo ("Mod Date")--></lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>
+            https://webkiosk.gallerysystems.com/sitemap_artists.xml
+        </loc>
+        <lastmod><!--#4DTEXT gsFunc_GetInfo ("Mod Date")--></lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>
+            https://webkiosk.gallerysystems.com/sitemap_portfolios.xml
+        </loc>
+        <lastmod><!--#4DTEXT gsFunc_GetInfo ("Mod Date")--></lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>
+            https://webkiosk.gallerysystems.com/sitemap_exhibitions.xml
+        </loc>
+        <lastmod><!--#4DTEXT gsFunc_GetInfo ("Mod Date")--></lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>
+            https://webkiosk.gallerysystems.com/sitemap_bibliography.xml
+        </loc>
+        <lastmod><!--#4DTEXT gsFunc_GetInfo ("Mod Date")--></lastmod>
+    </sitemap>
+    <sitemap>
+        <loc>
+            https://webkiosk.gallerysystems.com/sitemap_acquisitions.xml
+        </loc>
+        <lastmod><!--#4DTEXT gsFunc_GetInfo ("Mod Date")--></lastmod>
+    </sitemap>
+    <sitemap></sitemap>
+</sitemapindex>

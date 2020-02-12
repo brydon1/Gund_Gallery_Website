@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Kiosk/BrowseGeography.htm-->
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>%{include title.inc}% - Browse by Geography</title>
+    %{Include head.inc}%
+    %{Include scripts.inc}%
+</head>
+
+<body class="clearfix">
+    %{Include nav.inc}%
+
+    <div id="head" class="container">
+        <a name="main"></a>
+
+        <h1>Browse the Collections by Geography</h1>
+
+        <p class="lead">
+            Click any Region/Continent below to browsing through the objects from that area.
+        </p>
+
+        <!--#4DSCRIPT/GetDistinctValues/[Objects_1]creation_place1/1/1-->
+        <ul>
+            <!--#4DLOOP atGDVValues-->
+                <!--#4Dif (atGDVValues{atGDVValues}#"")-->
+                    <li>
+                        <a href="/objects-1/list?records=10&query=Creation_place1%3D%22<!--#4Dtext atGDVValues{atGDVValues}-->%22&sort=9">
+                            <!--#4DTEXT atGDVValues{atGDVValues}-->
+                        </a>
+                        <span class="text-muted">(<!--#4DTEXT alGDVCounts{atGDVValues}-->)</span>
+                    </li>
+                <!--#4Dendif-->
+            <!--#4DENDLOOP-->
+		</ul>
+
+        <br />
+    </div>
+    %{Include footer.inc}%
+
+</body>
+
+</html>

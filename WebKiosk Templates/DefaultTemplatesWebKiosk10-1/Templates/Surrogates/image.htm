@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--FullView/Surrogate.htm-->
+<html lang="en">
+
+<head>
+    <title>TriArte | RTI Test</title>
+    <link rel="stylesheet" type="text/css" href="/kioskstyles.css" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link type="text/css" href="/RTI/webViewer/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="Stylesheet">
+    <link type="text/css" href="/RTI/webViewer/css/webrtiviewer.css" rel="Stylesheet">
+    <script type="text/javascript" src="/RTI/webViewer/js/jquery.js"></script>
+    <script type="text/javascript" src="/RTI/webViewer/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/RTI/webViewer/spidergl/spidergl_min.js"></script>
+    <script type="text/javascript" src="/RTI/webViewer/spidergl/multires_min.js"></script>
+</head>
+
+<body>
+    %{include header.inc}%
+
+    <strong>RTI images</strong>
+    %{Include activerecords.inc}%
+
+    <br>
+
+    %{Include pagenavigation.inc}%
+
+    <div id="viewerContainer">
+        <script type="text/javascript">
+            createRtiViewer("viewerContainer", "%{Zoom;blank.gif;}%", 900, 600);
+        </script>
+    </div>
+
+    <p>
+        <div>
+            <br>
+            <h2>RTIViewer Software</h2>
+        </div>
+    </p>
+
+    <div>
+        <p>
+            <center>
+                <h2>
+                    If you would like to view a higher quality file and have additional options, please download the RTIViewer and contact: artandartifacts@brynmawr.edu for the zip file(s) for the %{[Objects_1]Disp_Title}%.
+                    <strong>
+                        <a href="http://culturalheritageimaging.org/What_We_Offer/Downloads/View/index.html">RTIViewer Download Site</a>
+                    </strong>
+                    <br>
+                </h2>
+            </center>
+        </p>
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>

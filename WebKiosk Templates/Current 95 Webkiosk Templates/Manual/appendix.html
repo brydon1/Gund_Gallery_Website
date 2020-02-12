@@ -1,0 +1,556 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>Appendix</h1>
+
+<a href="#dynamic_portfolios">Dynamic Portfolios</a>&nbsp;|&nbsp;
+<a href="#zoomify">Zoomify</a>&nbsp;|&nbsp;
+<a href="#service">Running as a Service</a>&nbsp;|&nbsp;
+<a href="#update">Automated Update</a>&nbsp;|&nbsp;
+<a href="#testserver">Using a Test Server</a>&nbsp;|&nbsp;
+<a href="#robots">Managing Robots</a>&nbsp;|&nbsp;
+<a href="#analytics">Tracking Hits with Google Analytics</a>&nbsp;|&nbsp;
+<a href="#ldap">LDAP Image Security</a>&nbsp;|&nbsp;
+<a href="#bookmark">Bookmark</a>
+<a href="#maps">Google Maps</a>
+<a href="#emuseumnetwork">eMuseum Network</a>
+<br><br>
+
+<hr>
+
+<br>
+
+<a name="dynamic_portfolios">
+<h2>Dynamic Portfolios</h2>
+
+Nearly any search criteria that can be assembled in Kiosk can be used to create a dynamic clickable link. Rather than maintaining a standard portfolio that may require considerable maintenance, the dynamic portfolio concept uses catalogued data fields as the basis for the grouping.
+
+<br><br>
+One easy trick for quickly building a query URL is to temporarily change the form method in a search template from <b>POST</b> to <b>GET</b>.
+
+<br><br>
+<img src="images/dynamic_portfolio.gif" border="1" vspace="6" alt="Dynamic Portfolios query">
+<br><br>
+
+By using the GET, a URL will be generated that can be saved as an A HREF link. <br>
+<blockquote>Example: http://127.0.0.1:5000/4DACTION/HANDLECGI/QSF2?whichfield=1&field1=1&value1=Anonymous%2C+Edo+Period&lineCount=1&RefineSearch=NewSelection&sort=7&sid=1</blockquote>
+This URL may be modified to create even more flexible queries.  For example, the search value can be expanded by using the wild card "@" in the query (instead of a complete data string). Another good example is shown with the Browse_Geography.htm template in the Kiosk Pages directory.  It is based on having the Object:Region-Continent field as the 5th advanced search field.<br>  You can include fields in the Advanced Search but limit the <a href="customizing.html#number_fields_object">Number of fields</a> that actually display -- leaving the remaining fields to build dynamic portfolios.
+<br>
+
+<blockquote>
+Example:<br> 	<ul>
+	<li>/4DACTION/HANDLECGI/QSF2?display=por&whichfield=1&field1=5&lineCount=1&RefineSearch=NewSelection&value1=@africa&sid={sessionid}">Africa</li>
+	<li>/4DACTION/HANDLECGI/QSF2?display=por&whichfield=1&field1=5&lineCount=1&RefineSearch=NewSelection&value1=@asia&sid={sessionid}">Asia</li>
+	<li>/4DACTION/HANDLECGI/QSF2?display=por&whichfield=1&field1=5&lineCount=1&RefineSearch=NewSelection&value1=@europe&sid={sessionid}">Europe</li>
+	<li>/4DACTION/HANDLECGI/QSF2?display=por&whichfield=1&field1=5&lineCount=1&RefineSearch=NewSelection&value1=@north america&sid={sessionid}">North America</li>
+	<li>/4DACTION/HANDLECGI/QSF2?display=por&whichfield=1&field1=5&lineCount=1&RefineSearch=NewSelection&value1=@oceania&sid={sessionid}">Oceania</li>
+	<li>/4DACTION/HANDLECGI/QSF2?display=por&whichfield=1&field1=5&lineCount=1&RefineSearch=NewSelection&value1=@south america&sid={sessionid}">South America</li>
+	</ul>
+	</blockquote>
+<br><br>
+
+Browsing from the Description page for an Object can even be enabled.  Instead of including an actual data value in the URL, it can instead be encoded with the data field internal value.  The default templates show a similar technique for making Keywords clickable.
+<br>
+<br>
+
+<blockquote>
+Example:<br>
+/4DACTION/HANDLECGI/QSF4?display=por&sid={SessionId}&KW0={[Keywords]_New_Pathnums}&KWID0={[Keywords]_New_ID}&SearchType=ALL&RefineSearch=NewSelection">{[Keywords]Word}
+</blockquote>
+
+<br><br>
+
+<hr>
+
+<br>
+
+<a name="zoomify">
+<h2>Zoomify</h2>
+
+One of the most impressive features for the end user on your site is the option to zoom into high-resolution images.  By default, EmbARK Web Kiosk is designed to publish only your original digital image files (typically JPEG images).  While the EmbARK application itself has built-in functionality for zooming into the JPEG files, that same functionality is not available by default with standard HTML web pages.  One of the best solutions for providing zooming is to make use of a third-party utility called <a href="http://www.zoomify.com" target=_blank>Zoomify (http://www.zoomify.com)</a>.
+
+<br><br>
+
+Zoomify provides the capability for displaying extremely high-resolution images via a Web interface (it is even possible to publish files that have a size of several gigabytes!).  The reason this works is that the Zoomify conversion utility converts the original image from a single file into a folder with hundreds (if not thousands) of small tiles (sort of like looking down on a pyramid).  Furthermore, no matter what the pixel dimensions of the original source image, Zoomify will make sure that the zoomable image always displays in a space of fixed size (the size of which can be controlled by the HTML code).  Zoomify also prevents the web user from being able to download the image to their own computer (although they can likely still use screen shot utilities to capture parts of it).
+
+<h3>Displaying Zoomify Images</h3>
+
+The EmbARK Web Kiosk application is delivered with all of the files necessary for displaying Zoomify images in place.  
+<ul>
+<li>A <b>zoomifyViewer.swf</b> is located in the WebFolder directory.  Note: Adobe Flash pages will not function on iOS devices like iPad or iPhone. To maintain be compatible with these devices, Gallery Systems's recommends the purchase of Zoomify's <a href="http://www.zoomify.com/html5.htm" target=_blank>HTML 5</a> viewer. Once obtained, javascript file can be stored in the <b>WebFolder/scripts</b> directory of Web Kiosk.
+<li>A <b>Zoom</b> folder is located at <b>WebFolder/Media/Zoom/</b>. See details below, but this is the default location for the converted Zoomify images (which will be in <i>folder</i> format).
+<li>The <b>ObjectInfo.htm</b> template has a link to a custom template for displaying the Zoomify image.<br><br>
+Note: You may choose to use the Zoomify image as your default option, but this requires moving code from the custom template over to the default display template, <b>Templates/FullView/Object.htm</b>.<br><br>
+<li>The custom template for displaying the Zoomify images is located at <b>Templates/Custom/zoomobject.htm</b>. The HTML5 version of the template is located at <b>Templates/Custom/zoomobject5.htm</b>.
+</ul>
+
+<br><br>
+
+The <b>Zoom</b> directory within the <b>Media</b> directory should have a folder structure that parallels that of the <b>Images</b> directory.  The zoomobject.htm custom template makes use of the <a href="kiosktags.html#zoom">ZOOM</a> tag for controlling this location.  For example, take the image file the following file path:  <b>C:\EmbARK_Server\Images\2008\group1\12345.jpg</b>.  For proper display on the Kiosk page, the <b>Images</b> and <b>Zoom</b> folders should be structured as follows.
+
+<br><br>
+<pre>
+Images
+	2008
+		group1
+			12345.jpg
+
+Zoom
+	2008
+		group1
+			12345.jpg
+</pre>
+
+The default look of the button controls on the Zoomify image can be customized using configuration tools provided by Zoomify.  Please contact Zoomify directly for more information.
+
+<br><br>
+
+Note: As a courtesy to Zoomify, it is highly recommended that you provide a link from your Web site back to Zoomify.com so that more people can be aware of their powerful technology.
+
+<h3>Creating Zoomify Images</h3>
+
+The easiest way to convert your images to Zoomify format is to download <b>ZoomifyEZ</b> from the <a href="http://www.zoomify.com" target=_blank>Zoomify Web site</a>.  ZoomifyEZ is available in both Macintosh and Windows format.  Once the utility is installed, simply drag-and-drop an image onto the application icon.  The converted <b>folder</b> will typically be saved to the same location as the original image file.  As the file is converting, you may see a representation on-screen of how ZoomifyEZ is dividing the image into tiles.  Double-click the folder to see the result.
+
+<br><br>
+
+It is not necessary to convert the same image file that you have linked to the EmbARK data record.  For example, you may have a small 200 K image called "12345.jpg" linked to your EmbARK record (it is often convenient to work with a file of this size on a regular basis).  However, if you have a <b>high-resolution</b> version of the same image - say a 30 MB TIFF file called "12345.tif", you could convert that instead.  The result will still provide a folder in Zoomify format named "12345".  Just be sure to follow the guidelines above to ensure that the file is saved to the proper location.  Converting the higher-resolution file will provide the end user with much more depth for zooming online.
+
+<br><br>
+
+Note: It is possible to drag-and-drop groups of images at one time onto the ZoomifyEZ application.
+
+<br><br>
+
+<b>Tip!</b>  If the image does not display, use the <b>View Page Source</b> command from the web browser View menu.  This will show you the code that Web Kiosk is generating to display the file and allow for comparison with the location of your Zoomify file.
+
+<br><br>
+
+<h4>Batch Conversion to Zoomify using Zoomify Enterprise</h4>
+
+On special request, Zoomify, Inc. and Gallery Systems may provide a copy of a scriptable application called <b>Zoomify Enterprise</b>.  Zoomify Enterprise can be used in conjunction with source management tools provided within the EmbARK application.  This option can prove to be a huge time-saver if you are converting thousands of images -- especially if they are located in a complicated network of sub-directories.  While the use of this is obvious for the initial conversion of images, it may also be used to convert subsequent batches (by querying for records that have been modified since the previous update date).
+
+<br><br>
+
+In order to use Zoomify Enterprise, the EmbARK User must have the <b>Can make Zoomify script</b> option enabled for their account on the Media File Access tab of User Setup.
+
+<br><br>
+
+<b>Batch Conversion (Windows)</b>
+
+<br><br>
+
+Save the Zoomify Enterprise application to a folder on the work station (typicaly Program Files).
+
+<br><br>
+<ol>
+<li>Load the records to be converted into a Thumbnails view.
+<li>Select the records, then click the <b>Zoomify</b> button in the left bar. <br><br>
+<img src="images/zoom.jpg" width="719" height="612" border="1" vspace="6" alt="Zoom with Zoomify Enterprise">
+<br><br>
+<li>Click the <b>Application Location</b> button and navigate to the saved location of the Zoomify Enterprise executable file.
+<li>Enter a logfile name, if desired.
+<li>Click the <b>Destination Folder</b> button and specify the location where the converted files should be saved.
+	<ul>
+		<li>If left blank, the Zoomify images will be saved to the same location as the original source files.
+		<li>If saved to a local folder such as <b>C:\Zoom</b>, you will likely be required to move the files to their proper location on the Web server.  However, this technique helps to ensure that no spaces will be present in the output file path.
+	</ul>
+<li>Be sure that the setting for <b>Folder-based</b> is selected.
+<li>Click the <b>Make Script</b> button and save the file to a location such as the Desktop.
+<li>Dialogs will ask you to save the file with a <i>.bat</i> extension and provide a summary report.
+<li>Locate the <i>.bat</i> file and double-click it to execute the script.  Note: You can open the file with a text editor by right-clicking the file and sending it to a utility such as WordPad.
+<li>As Zoomify Enterprise processes the files, the tiling process will display on screen.  The resulting files will be at the Destination Directory location (in nested sub-directories, as appropriate).
+</ol>
+
+<br><br>
+
+<b>Batch Conversion (Macintosh)</b>
+
+<br><br>
+
+Save the Zoomify Enterprise application to a folder on the work station (typicaly Applications).  The folder and application names may be abbreviated.
+
+<br><br>
+<ol>
+<li>Load the records to be converted into a Thumbnails view.
+<li>Select the records, then click the <b>Zoomify</b> button in the left bar. <br><br>
+<img src="images/zoom_mac.jpg" width="699" height="551" border="1" vspace="6" alt="Zoom with Zoomify Enterprise">
+<br><br>
+<li>Click the <b>Application Location</b> button and navigate to the saved location of the Zoomify Enterprise executable. 
+<li>Click the <b>Make Script</b> button.  Save the file to a folder on the workstation such as <b>Temp</b>.  Reminder: If spaces are present in the file path, the script may fail to generate.
+<li>Launch the <b>Terminal</b> application from the <b>Applications:Utilities:</b> folder.
+<li>Use Unix commands to navigate to the <b>Temp</b> directory, e.g. <b>cd ..</b>, then <b>cd Temp</b>.
+<li>By default, this text file is not executable (double-clickable), so it is necessary to change permissions.  Type the following script: <b>chmod 744 script_filename</b> (where script_filename is the name of the script file generated).
+<li>To execute the file, type <b>./script_filename</b>
+<li>As Zoomify Enterprise processes the files, the tiling process will display on screen.  The output files will be saved to the same location as the original image files.  Note: With the Mac version, it is not possible to specify that the files get saved to an alternate location.
+</ol>
+
+Note: It is important that your original image file names and file paths in EmbARK do not contain any blank spaces (after the <b>Images</b> directory. If spaces are present, the Zoomify batch conversion utility will likely fail to produce a result.
+
+<br>
+<br><hr><br>
+
+<a name="service">
+<h2>Running as a Service</h2>
+
+There are many advantages to running an application as a "service." If you use the client/server version of EmbARK on Windows, you may have already set EmbARK to run in this mode.  Essentially, running as a service helps to ensure that the application will start up automatically every time the server is restarted.  Additionally, it provides better security because you can "log off" the machine without closing the program.
+
+<br><br>
+The directions below describe the use of a free utility from Microsoft in the <b>Resource Kit</b>.  Alternatively, you can purchase a product called <a href="http://www.coretechnologies.com/products/AlwaysUp/" target=_blank">AlwaysUp</a> (which has a nicer user-interface and is more compatible with current operating systems).
+
+<br><br>
+
+<b>Important Note: If you use the User Portfolio feature of EmbARK Web Kiosk, please make sure that the portfolio data has been manually exported before stopping the service.  Otherwise, the data will likely not be saved.</b>
+
+
+<h3>How to Install an EmbARK Web Kiosk Service (Windows)</h3>
+
+The EmbARK Web Kiosk application does not have a built-in "services" function (like the client/server EmbARK provides).  However, the instructions below describe how you can use utilities provided by Microsoft to run any application as a service on Windows.
+
+<br><br>
+
+IMPORTANT: This tip contains information about editing the registry. Before you edit the registry, make sure you understand how to restore it if a problem occurs. For information on how to do this, view the "Restoring the Registry" or the "Restoring a Registry Key" online Help topics in Registry Editor.
+
+<br><br>
+
+You can read the Microsoft Knowledge Base Article on this topic (137890) by clicking this <a href="http://support.gallerysystems.com/resources/webkiosk/downloads/makeservice.pdf" target=_blank">link</a>.  Customized directions specifically for EmbARK Web Kiosk are adapted below.
+
+
+<ol>
+<li>If you do not have it already, it is necessary to download the Microsoft Resource Kit to your EmbARK Web Kiosk server machine.  Unzip the download file and move it to the root of your C drive, e.g. C:\Resource Kit\.
+<li>At a MS-DOS command prompt(running CMD.EXE), type the following command: <b>C:\Resource Kit\Instsrv.exe WebKiosk C:\Resource Kit\Srvany.exe</b>
+<br><br>
+      Note: The "space" in the folder name Resource Kit may cause trouble.  In some cases, it helps to remove the space from the folder name on the c drive and not use it in the command prompt line.
+<br><br>
+      If you are successful, you will see a message that the service was created.
+<li>Run Registry Editor by going to the Start menu and typing <b>Regedit</b> in the Run open box.
+<li>Locate and highlight the following subkey:<br>
+      HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WebKiosk
+<li>From the Edit menu, select New and then Key.
+<li>Type in <b>Parameters</b> as the name of the new key.
+<li>Highlight the Parameters key.  From the Edit menu, select <b>New</b> and then <b>String</b> Value.
+<li>Type in <b>Application</b> as the name of the new string value.
+<li>Double-click the Application string value.
+<li>In the box labeled "Value Data", type: C:\Program Files\EmbARK Web Kiosk\EmbARK_Web_Kiosk.exe<br>
+      Note: If your Web Kiosk is installed in a different location, you must adjust the path as appropriate.
+<li>Close Registry Editor.
+<li>To access the services list, go to the Start menu and choose Settings\Control Panel\Administrative Tools\ and click the Services icon.
+<li>Scroll to the bottom of the list of services and double-click <b>WebKiosk</b>.
+<li>Click the "Log-on" tab, then fill in the check box for "Allow Service to Interact with desktop".  This will ensure that you will see the application on the screen when it starts up.
+<li>On the "General" tab, click the <b>Start</b> button.  The Kiosk will start (you may need to maximize the window that displays).
+<li>To stop the Kiosk in the future, it is best to return to the Services panel and click the <b>Stop</b> button.
+
+</ol>
+
+<h3>Automatic Login (Macintosh)</h3>
+
+The best method for automatic launch on Macintosh servers is to set the EmbARK Web Kiosk application as an automatic login.
+
+<ol>
+<li>Choose System Preferences from the Apple menu.
+<li>Choose <b>Accounts</b>.
+<li>Select an Administrator account, then click the <b>Login Items</b> tab.
+<li>Click the <b>+</b> icon, then navigate to the EmbARK Web Kiosk application located by default at <b>Macintosh HD:Applications:EmbARK Web Kiosk</b>
+<li>Note: It is best to have <b>Automatic Login</b> enabled.  If there are security concerns, there are screen saver utilities with password-protection that can be scheduled to launch automatically as well.
+</ol>
+
+<br><hr><br>
+
+<a name="update">
+<h2>Automated Update</h2>
+
+There are various techniques for automatically updating the content on the Kiosk site.  The script below shows an example that works in conjunction with stopping and starting automatic <a href="#service">services</a>.  The script must be customized to meet variables of your local environment.
+
+<br><br>
+<blockquote>
+net stop "WebKiosk"<br>
+net stop "4D Server: EmbARK_Server"<br>
+"c:\Program Files\Windows Resource Kits\Tools\robocopy.exe" <br>
+e:\Embark\Datafile\ "f:\EmbARK Web Kiosk\datafile" Collection_data.4DD <br>
+"c:\Program Files\Windows Resource Kits\Tools\robocopy.exe" <br>
+e:\Embark\Datafile\ "f:\EmbARK Web Kiosk\datafile"  Collection_Data.4DIndx <br>
+"c:\Program Files\Windows Resource Kits\Tools\robocopy.exe" <br>
+e:\Embark\Datafile\ "f:\EmbARK Web Kiosk\datafile"  Collection_Data.Match <br>
+"c:\Program Files\Windows Resource Kits\Tools\robocopy.exe" <br>
+e:\Embark\Datafile\ "f:\EmbARK Web Kiosk\datafile"  Collection_Data.Journal <br>
+net start "4D Server: EmbARK_Server"<br>
+net start "WebKiosk"
+</blockquote>
+
+<br><br>
+
+<hr>
+
+<br>
+
+<a name="testserver">
+<h2>Test Server</h2>
+
+Users of Web Kiosk are authorized to have more than one installation of the application.  Gallery Systems recommends that a <b>TEST</b> Web Kiosk be installed on a user's workstation (or on the same server machine if the user has sufficient access).  There are good benefits to this type of workflow:
+
+<br><br>
+<ul>
+<li>While customizing the templates during initial implementation, the user has ready access to all system files.  The templates folder may be copied to the live server at any time.
+<li>Data updates can be streamlined: the test server can perform all of the data initialization that takes place when a data file is launched with Web Kiosk.  Once the test site is running smoothly, the data file can be copied to the live server and restarted with minimal down-time.<br><br>
+Note: The <b>Media Directory</b> path can be set to the location of the Media directory on the live Kiosk so that thumbnail and preview images will be exported there directly.  The <b>Media Directory URL</b> can also be set to the HTTP location of the live server so that the full source images will display.<br><br>
+Note2: If the user portfolio feature is in use, it will be necessary to perform a <b>manual</b> import of the user data when the live server is launched. (The auto-import option is only triggered with a data file that has never been opened with Kiosk before.)
+</ul>
+
+<br><br>
+
+If the test kiosk is installed on the same machine as the live version, it will be necessary to configure an <a href="setup_server.html#alternate_port">alternate port number</a>.  Otherwise, it is likely that a message stating <b>This database cannot be published</b> will appear.
+<br>
+
+<br><hr><br>
+
+<a name="robots">
+<h2>Robots</h2>
+
+To ensure that web pages show up in their search results, the search engine companies send <a href="http://www.javascriptkit.com/howto/robots.shtml" target=_blank><b>crawlers</b> or <b>robots</b></a> out across the Internet.  When a robot indexes a site created dynamically with a tool like EmbARK Web Kiosk, there is practically no end to the number of links it can follow; this can create a large load on the web server (and possibly make it crash).
+
+<br><br>
+
+In order to control robots, the standard procedure is to place a <b>robots.txt</b> file on the web server.  This file provides instructions to the robot of what it may index.  Of course, not all robots follow the protocol, but it works pretty well.  (If a non-conforming robot is discovered, you can block it specifically in Kiosk <a href="customizing.html#block_ip">security</a> settings.)
+
+<br><br>
+EmbARK Web Kiosk provides a default <b>robots.txt</b> file in the <b>WebFolder</b> directory.  It is configured to block access to nearly all of the dynamically generated pages.  
+
+<br><br>
+
+<pre>
+###############################
+#
+#
+User-agent: *
+Disallow: /O*
+Disallow: /A*
+Disallow: /P*
+Disallow: /F*
+Disallow: /IT*
+Disallow: /L*
+Disallow: /P*
+Disallow: /Q*
+Disallow: /S*
+Disallow: /T*
+Disallow: /U*
+Disallow: /V*
+Disallow: /Graphics/
+Disallow: /help/
+Disallow: /Media/
+Disallow: /default.htm
+Disallow: /kiosk/*.htm$
+Disallow: /Templates/
+Disallow: /manual/
+Disallow: /4d Extensions/
+Disallow: /Database/
+Disallow: /datafile/
+Disallow: /Kiosk datafile/
+Disallow: /Licenses/
+Disallow: /Plugins/
+Disallow: /quicktime/
+Disallow: /userportdata/
+Disallow: /*.css
+###############################
+</pre>
+
+<br><br>
+
+The one file type that it does leave open for indexing is anything in the <b>Kiosk Pages</b> directory with the file extension of <b>.html</b> (<b>.htm</b> is blocked).  A default <b>robots.html</b> is provided in the Kiosk Pages directory.  It is designed to list Title, Artist, Medium, and Object Type information for each object in the database.  To allow for indexing on other fields, simply configure them into the loop.
+
+<br><br>
+
+The header of the robots.html template provides further instructions to the robots.  In this case, they indicate that the page may be indexed, but it should not follow any of the links.
+
+
+<div class=Section1>
+
+<p class=MsoNormal style='text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New"'>&lt;head&gt;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New"'>    &lt;meta name=&quot;robots&quot;
+content=&quot;index,nofollow&quot;&gt;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New"'>    &lt;title&gt;EmbARK Web Kiosk&lt;/title&gt;</span></p>
+
+<p class=MsoNormal style='text-autospace:none'><span style='font-size:10.0pt;
+font-family:"Courier New"'>    &lt;link rel=&quot;stylesheet&quot;
+type=&quot;text/css&quot; href=&quot;/kioskstyles.css&quot;/&gt;</span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:"Courier New"'>&lt;/head&gt;</span></p>
+
+</div>
+
+If you are publishing a significant number of objects on your site, you may choose to create multiple robots.html files that provide access to smaller subsets of records.  Simply adjust the query in the Start Loop to define a specific set of records.
+
+<br><br>
+
+If you pro-actively register your site for indexing with a search engine, use the following URL:  <b>http://yoursite.com/kiosk/robots.html</b>
+
+<br>
+<br><hr><br>
+
+<br>
+
+<a name="analytics">
+<h2>Tracking Hits with Google Analytics</h2>
+
+<a href="http://www.google.com/analytics/" target=_blank>Google Analytics</a> is a great way to track how your Web Kiosk site is being accessed.  Once you have a Google account, you can register the URL for your Web Kiosk site.  You will be provided with a text string to save to your site.  The best place to save this text string is the <a href="customizing.html#include_files">include file</a> <b>footer.inc</b>.  This will ensure that the Google code is present on each dynamically created page generated by Web Kiosk.
+
+<br><br>
+The default tracking code generated by the Google tools may not function properly.  Code such as the following has been used successfully:
+<br><br>
+<blockquote>
+
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'>&lt;script type=&quot;text/<span class=SpellE>javascript</span>&quot;&gt;<o:p></o:p></p>
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span class=SpellE><span class=GramE>var</span></span> <span
+class=SpellE>gaJsHost</span> = ((&quot;https:&quot; == <span class=SpellE>document.location.protocol</span>)
+? &quot;https<span class=GramE>:/</span>/ssl.&quot; : &quot;http://www.&quot;);<o:p></o:p></p>
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span class=SpellE><span class=GramE>document.write</span></span><span
+class=GramE>(</span><span class=SpellE>unescape</span>(&quot;%3Cscript <span
+class=SpellE>src</span>='&quot; + <span class=SpellE>gaJsHost</span> +
+&quot;google-analytics.com/ga.js'
+type='text/javascript'%3E%3C/script%3E&quot;));<o:p></o:p></p>
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'>&lt;/script&gt;<o:p></o:p></p>
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'>&lt;script type=&quot;text/<span class=SpellE>javascript</span>&quot;&gt;<o:p></o:p></p>
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span class=SpellE><span class=GramE>var</span></span> <span
+class=SpellE>pageTracker</span> = _gat._<span class=SpellE>getTracker</span>(&quot;UA-2669603-1&quot;);<o:p></o:p></p>
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'><span class=SpellE>pageTracker</span>._<span class=SpellE><span
+class=GramE>trackPageview</span></span><span class=GramE>(</span>);<o:p></o:p></p>
+<p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal'>&lt;/script&gt;</p>
+</blockquote>
+<br><br>
+
+Note: If you block access to your site with a <a href="#robots"><b>robots.txt</b></a> file, Google Analytics may not be able to provide a complete report of hits on your site.
+
+<br>
+
+<br><hr><br>
+
+<a name="ldap">
+<h2>LDAP Image Security</h2>
+
+EmbARK Web Kiosk does not have functionality for integration with LDAP security controls.  LDAP can be a very effective means for managing security rights for the viewing of full resolution images.
+
+<br><br>
+Fortunately, the Web Kiosk does not require that images be hosted locally within the 4D web server environment (i.e. WebFolder/Media/Images).  Web Kiosk may be redirected to an <a href="customizing.html#images_url">alternate web server</a> by adjusting the Preferences settings.  Other web servers such as Microsoft Internet Information Server (IIS) or Apache allow for LDAP authentication control.
+
+<br><br>
+When LDAP is implemented on the images directory, the first time a user attempts to load an image they will be presented with a password prompt.  As long as the session id of the user is maintained, it should not be necessary to re-enter the password during the connected session.
+
+<br>
+
+<br><hr><br>
+
+<a name="bookmark">
+<h2>AddThis for Bookmarking</h2>
+
+Every page of the Web Kiosk has a bookmarkable URL.  For example, all Object records use the internal ID for the record in the URL, e.g. http://webkiosk.gallerysystems.com/OBJ149 (where <b>149</b> is the internal ID for that record in EmbARK).
+
+<br><br>
+
+However, to ensure best overall functionality in the Kiosk environment, <a href="kiosktags.html#sessionid">session ids</a> are appended to each URL (which helps to manage security and maintain separate search results for different users).  Accordingly, the default URL is not very bookmarkable because it looks like this: <br><br>
+<b>http://webkiosk.gallerysystems.com/Obj149?sid=63&x=44824</b>.
+
+<br><br>
+
+The solution is to add a custom bookmark graphic using a tool like <a href="http://www.addthis.com" target=_blank>AddThis</a>.  Create an account, then register your URL.  You will be provided with some generic code.  One component of that code will be the <b>addthis_url</b>.  It should be replaced with the folowing code so that the URL is saved with only the Object ID and not the Session ID information.
+
+<p class=MsoNormal><b>addthis_url='http://127.0.0.1:5000/Obj&lt;!--#4DVAR
+[Objects_1]_Objects_1_ID--&gt;';<o:p></o:p></b></p>   (replace <b>127.0.0.1:5000</b> with your URL)
+
+<br><br>
+
+<hr>
+
+<br>
+
+<a name="maps">
+<h2>Google Maps</h2>
+
+An example of Google Map integration is included with the <b>ObjectInfo.htm</b> template.  The function relies on <a href="customizing.html#javascript">Javascript</a> code in the <b>head</b> section and <b><a href="customizing.html#css">CSS</a></b> in the stylesheet. Two Object text fields are adapted to catalog Latitude and Longitude data.  Finally, a simple &lt;div&gt; section in the body of the template serves as the placeholder for display of the map.
+
+<br><br>
+
+<img src="images/googlemaps.gif" width="660" height="608" border="1" vspace="6" alt="Google Map integration">
+
+<br><br>
+
+<hr>
+
+<br>
+
+<a name="emuseumnetwork">
+<h2>eMuseum Network</h2>
+
+Web Kiosk users are encouraged to participate in the <a href="http://www.emuseum.net" target=blank>eMuseum Network Project</a>.  As of 2014, the eMuseum Network sites provides access to the collections of over 60 participants sharing 1.6 million records.  Data from EmbARK Web Kiosk is easily loaded using a <b>.shtml</b> template built using <a href="/xmlshare.html">XML Data Sharing</a>. Once the template is in place and the fields are adjusted for your specific data configuration, the content can be accessed via URL.  eMuseum Network not only exposes your data to a larger audience, but there are links within the pages that lead browsers directly to your site.  Contact <a href="mailto:emuseumnetwork@gallerysystems.com">emuseumnetwork@gallerysystems.com</a> for more information.
+
+<br><br>
+
+<img src="images/emuseumnetwork.gif" width="853" height="782" border="1" vspace="6" alt="eMuseum Network">
+
+<br><br>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>EmbARK Web Kiosk Manual Index</h1>
+
+<ul>
+<li><a href="prepare_database.html">Preparing the Database</a>
+	<ul>
+	<li><a href="prepare_database.html#publish">Publishing Records</a>
+		<ul>
+		<li><a href="prepare_database.html#flag_individual">Flagging Individual Records for Web Access</a>
+		<li><a href="prepare_database.html#flag_group">Flagging Groups of Records for Web Access</a>
+		<li><a href="prepare_database.html#object_notes">Object Notes</a>
+		</ul>
+	<li><a href="prepare_database.html#images">Preparing Media Files</a>
+		<ul>
+		<li><a href="prepare_database.html#file_format">What File Format Should I Use?</a>
+		<li><a href="prepare_database.html#convert_filenames">Converting Image Filenames</a>
+		<li><a href="prepare_database.html#image_location">Image Location</a>
+		</ul>
+	<li><a href="prepare_database.html#cataloguing">Cataloguing Data</a>
+		<ul>
+		<li><a href="prepare_database.html#advanced_search_fields">Advanced Search Fields</a>
+		<li><a href="prepare_database.html#keywords">Keywords</a>
+		<li><a href="prepare_database.html#details">Detail Images [Deprecated]</a>
+		<li><a href="prepare_database.html#surrogates">Surrogate Records and Images</a>
+		</ul>
+	<li><a href="prepare_database.html#quicksearch_setup">Quick Search Setup</a>
+		<ul>
+		<li><a href="prepare_database.html#stop_words">Stop Words</a>
+		</ul>
+	<li><a href="prepare_database.html#organizing_records">Organizing Records</a>
+		<ul>
+		<li><a href="prepare_database.html#portfolios">Portfolios</a>
+		<li><a href="prepare_database.html#index_tree">Index Tree</a>
+		</ul>
+	</ul>
+<li><a href="setup_server.html">Setting up the Server</a>
+	<ul>
+	<li><a href="setup_server.html#install">Installing the Kiosk</a>
+	<li><a href="setup_server.html#start">Starting the Kiosk</a>
+		<ul>
+		<li><a href="setup_server.html#initialization">Datafile Initialization</a>
+		<li><a href="setup_server.html#alternate_port">Configuring the Kiosk to run at an alternate port</a>
+		</ul>
+	<li><a href="setup_server.html#webfolder">WebFolder (HTML Root)</a>
+	<li><a href="setup_server.html#media_management">Media Management</a>
+		<ul>
+		<li><a href="setup_server.html#source_files">Source Files</a>
+		<li><a href="setup_server.html#previews">Previews</a>
+		<li><a href="setup_server.html#thumbnails">Thumbnails</a>
+		<li><a href="setup_server.html#generate_thumbnails">Generating Thumbnails and Previews</a>
+		</ul>
+	<li><a href="setup_server.html#test">Testing the Kiosk</a>
+	</ul>
+<li><a href="maintain_kiosk.html">Maintaining the Kiosk</a>
+	<ul>
+	<li><a href="maintain_kiosk.html#update">Updating the Kiosk</a>
+	<li><a href="maintain_kiosk.html#view">Viewing Connections</a>
+		<ul>
+		<li><a href="maintain_kiosk.html#logweb">Logweb.txt</a>
+		<li><a href="maintain_kiosk.html#connections_log">Connections Log</a>
+		</ul>
+	</ul>
+<li><a href="customizing.html">Customizing the Kiosk</a>
+	<ul>
+	<li><a href="customizing.html#preferences">Setting Preferences</a>
+		<ul>
+		<li><a href="customizing.html#general_tab">General Tab</a>
+			<ul>
+			<li><a href="customizing.html#default_page">Default Page</a>
+			<li><a href="customizing.html#convert_url">Convert URLs to active links</a>
+			<li><a href="customizing.html#field_names">User-defined field names</a>
+			<li><a href="customizing.html#images_url">Media Directory URL</a>
+			<li><a href="customizing.html#images_folder">Media Directory</a>
+			<li><a href="customizing.html#graphics_url">Graphics URL</a>
+			<li><a href="customizing.html#single_directory">Store all images in a single directory</a>
+			<li><a href="customizing.html#smtp_server">SMTP Server</a>
+			<li><a href="customizing.html#submitfile_delimiters">SubmitFile Delimiters</a>
+			<li><a href="customizing.html#datafilepath">Datafile</a>
+			<li><a href="customizing.html#reset_for_embark">Reset for EmbARK Button</a>
+			<li><a href="customizing.html#fast_indexes">Fast Indexes</a>
+			<li><a href="customizing.html#open_log">Open Log</a>
+			<li><a href="customizing.html#export_images">Export Images</a>
+			<li><a href="customizing.html#reset_defaults">Reset to Defaults</a>
+			<li><a href="customizing.html#web_server">Web Server Prefs</a> (customizing port number)
+			</ul>
+		<li><a href="customizing.html#searchconfig_tab">Search Config Tab</a>
+			<ul>
+			<li><a href="customizing.html#search_results_max">Maximimum # of records in search results</a>
+			<li><a href="customizing.html#max_records_message">Message to display when too many records are found</a>
+			<li><a href="customizing.html#defaultsortobject">Default object sort field</a>
+			<li><a href="customizing.html#defaultsortartist">Default artist sort field</a>
+			<li><a href="customizing.html#maximum_qs_values">Maximum # of values to display in search popups</a>
+			<li><a href="customizing.html#blank_keyword">Text for blank Keyword boxes</a>
+			<li><a href="customizing.html#maximum_keywords">Maximum # of keywords to display</a>
+			<li><a href="customizing.html#update_keywords">Update Keyword Lists</a>
+			<li><a href="customizing.html#custsearchdefault">Text search default</a>
+			<li><a href="customizing.html#artist_obj_descriptor">Artist's Objects Selection Descriptor</a>
+			<li><a href="customizing.html#portfolio_sel_descriptor">Portfolio Selection Descriptor</a>
+			</ul>
+		<li><a href="customizing.html#searchconfig_tab">Search Fields Tab</a>
+			<ul>
+			<li><a href="customizing.html#quick_search_fields">Quick Search</a>
+			<li><a href="customizing.html#minimum_size">Minimum Search Term Size</a>
+			<li><a href="customizing.html#ObjAdvanced_Search_Fields">Object Advanced Search</a>		
+			<li><a href="customizing.html#number_fields_object">Number of Object Fields to Display</a>
+			<li><a href="customizing.html#ArtistAdvanced_Search_Fields">Artist Advanced Search</a	
+			<li><a href="customizing.html#number_fields_artist">Number of Artist Fields to Display</a>
+			<li><a href="customizing.html#update_search">Update Search Fields</a>
+			</ul>
+		<li><a href="customizing.html#tables_tab">Tables Tab</a>
+			<ul>
+			<li><a href="customizing.html#disable_tables">Disable Table Checkboxes</a>
+			<li><a href="customizing.html#include_primary">Include primary image</a>
+			</ul>
+		<li><a href="customizing.html#security_tab">Security Tab</a>
+			<ul>
+			<li><a href="customizing.html#security_type">Type (Kiosk/Source Image)</a>
+			<li><a href="customizing.html#ip_only">IP Only</a>
+			<li><a href="customizing.html#password">Password</a>
+			<li><a href="customizing.html#both">Both</a>
+			<li><a href="customizing.html#restrict_ip">Restrict Access to IP Addresses starting with:</a>
+			<li><a href="customizing.html#block_ip">Block access to these IP Addresses:</a>
+			<li><a href="customizing.html#timeout">Timeout</a>
+			</ul>
+		<li><a href="customizing.html#startup_tab">Startup Tab</a>
+			<ul>
+			<li><a href="customizing.html#use_saved_settings">Use Saved Settings at Startup</a>
+			<li><a href="customizing.html#alerts_off">Turn Off Alerts</a>
+			<li><a href="customizing.html#enable_execute">Enable Execute</a>
+			</ul>
+		<li><a href="customizing.html#extra_pref">Extra Preference Settings</a>
+			<ul>
+			<li><a href="customizing.html#session_state">Session State</a>
+			<li><a href="customizing.html#wild_card">Default Wild Card</a>
+			</ul>
+		</ul>
+	<li><a href="customizing.html#users">User Accounts</a>
+		<ul>
+		<li><a href="customizing.html#create">Creating User Accounts</a>
+		<li><a href="customizing.html#deactive">Deactivate User Accounts</a>
+		<li><a href="customizing.html#delete">Deleting User Accounts</a>
+		<li><a href="customizing.html#rename">Renaming Users</a>
+		<li><a href="customizing.html#password">Changing Passwords</a>
+		<li><a href="customizing.html#privileges">Changing User Privileges</a>
+		<li><a href="customizing.html#update">Updating the Datafile</a>
+		</ul>
+	<li><a href="customizing.html#templates">Customizing Templates</a>
+		<ul>
+		<li><a href="customizing.html#development_mode">Development Mode</a>
+		<li><a href="customizing.html#kioskpages">Kiosk Pages</a>
+		<li><a href="customizing.html#intro_pages">Creating Introductory Pages</a>
+		<li><a href="customizing.html#editing">Editing Template Pages</a>
+		<li><a href="customizing.html#mergefield">Merging Data Fields from the EmbARK Database</a>
+		<li><a href="customizing.html#custom_templates">Creating Custom Templates</a>
+		<li><a href="customizing.html#custom_search">Custom Search</a>
+		<li><a href="customizing.html#include_files">Include Files</a>
+		<li><a href="customizing.html#user_portfolios">User Portfolios</a>
+		<li><a href="customizing.html#css">Cascading Style Sheets (CSS) - kioskstyles.css</a>
+		<li><a href="customizing.html#javascript">Javascript</a>
+		<li><a href="customizing.html#filtering">Filtering</a>
+		<li><a href="customizing.html#forms">Forms</a>
+		</ul>
+	</ul>
+<li><a href="kiosktags.html">Kiosk Tags</a>
+	<ul>
+	<li><a href="kiosktags.html#display">Displaying Information</a>
+		<ul>
+		<li><a href="kiosktags.html#_id">_ID</a>
+		<li><a href="kiosktags.html#port_name">[Portfolios]Port_Name</a>
+		<li><a href="kiosktags.html#tablefield">[Table]Field</a>
+		<li><a href="kiosktags.html#branchtext">Branch Text</a>
+		<li><a href="kiosktags.html#branchtitle">Branch Title</a>
+		<li><a href="kiosktags.html#concat">Concat</a>
+		<li><a href="kiosktags.html#currentpage">Current Page</a>
+		<li><a href="kiosktags.html#currentrecord">Current Record</a>
+		<li><a href="kiosktags.html#detailcaption">Detail Caption</a>
+		<li><a href="kiosktags.html#imageheight">Image Height</a>
+		<li><a href="kiosktags.html#imagename">Image Name</a>
+		<li><a href="kiosktags.html#imagepath">Image Path</a>
+		<li><a href="kiosktags.html#imagerotation">Image Rotation</a>
+		<li><a href="kiosktags.html#imagesize">Image Size</a>
+		<li><a href="kiosktags.html#imagetype">Image Type</a>
+		<li><a href="kiosktags.html#imagewidth">Image Width</a>
+		<li><a href="kiosktags.html#keywordpath">KeywordPath</a>
+		<li><a href="kiosktags.html#keywords">Keywords</a>
+		<li><a href="kiosktags.html#message">Message</a>
+		<li><a href="kiosktags.html#moddate">Modification Date</a>
+		<li><a href="kiosktags.html#notes">Notes</a>
+		<li><a href="kiosktags.html#portfolioname">Portfolio Name</a>
+		<li><a href="kiosktags.html#portfolionotes">Portfolio Notes</a>
+		<li><a href="kiosktags.html#portfoliosize">Portfolio Size</a>
+		<li><a href="kiosktags.html#portowner">PortOwner</a>
+		<li><a href="kiosktags.html#preview">Preview</a>
+		<li><a href="kiosktags.html#raw">Raw</a>
+		<li><a href="kiosktags.html#records">Records</a>
+		<li><a href="kiosktags.html#related">Related Objects</a>
+		<li><a href="kiosktags.html#selectionname">Selection Name</a>
+		<li><a href="kiosktags.html#sequence">Sequence</a>
+		<li><a href="kiosktags.html#sessionid">SessionID</a>
+		<li><a href="kiosktags.html#sort">Sort</a>
+		<li><a href="kiosktags.html#sortorder">Sort Order</a>
+		<li><a href="kiosktags.html#thumbnail">Thumbnail</a>
+		<li><a href="kiosktags.html#thumbnailheight">Thumbnail Height</a>
+		<li><a href="kiosktags.html#thumbnailwidth">Thumbnail Width</a>
+		<li><a href="kiosktags.html#username">Username</a>
+		<li><a href="kiosktags.html#zoom">Zoom</a>
+		</ul>
+	<li><a href="kiosktags.html#navigation">Navigation</a>
+		<ul>
+		<li><a href="kiosktags.html#notesbutton">Notes Button</a>
+		<li><a href="kiosktags.html#portfolionotelink">Portfolio Note Link</a>
+		<li><a href="kiosktags.html#fieldnumber">Field Number</a>
+		<li><a href="kiosktags.html#objectinfo">Object Info</a>
+		<li><a href="kiosktags.html#artistinfo">Artist Info</a>
+		<li><a href="kiosktags.html#details">Details</a>
+		<li><a href="kiosktags.html#surrogates">Surrogates</a>
+		<li><a href="kiosktags.html#objectthumbnails">Object Thumbnails</a>
+		<li><a href="kiosktags.html#artistobjects">Artist's Objects</a>
+		<li><a href="kiosktags.html#listartists">List Artists</a>
+		<li><a href="kiosktags.html#listobjects">List Objects</a>
+		<li><a href="kiosktags.html#list1">List 1</a>
+		<li><a href="kiosktags.html#list2">List 2</a>
+		<li><a href="kiosktags.html#bfullview">Full View</a>
+		<li><a href="kiosktags.html#popupusers">Popup;Users</a>
+		<li><a href="kiosktags.html#popup">Popup</a>
+		<li><a href="kiosktags.html#previous">Previous</a>
+		<li><a href="kiosktags.html#next">Next</a>
+		<li><a href="kiosktags.html#firstpage">First Page</a>
+		<li><a href="kiosktags.html#lastpage">Last Page</a>
+		<li><a href="kiosktags.html#portfolio">Portfolio</a>
+		<li><a href="kiosktags.html#lastrecord">Last Record</a>
+		<li><a href="kiosktags.html#custom">Custom</a>
+		<li><a href="kiosktags.html#parentlink">ParentLink</a>
+		<li><a href="kiosktags.html#indextree">Index Tree</a>
+		</ul>
+	<li><a href="kiosktags.html#buttons">Buttons</a>
+		<ul>
+		<li><a href="kiosktags.html#bartinfo">bArtInfo</a>
+		<li><a href="kiosktags.html#bobjinfo">bObjInfo</a>
+		<li><a href="kiosktags.html#bartobj">bArtObj</a>
+		<li><a href="kiosktags.html#bdetails">bDetails</a>
+		<li><a href="kiosktags.html#bsurrogates">bSurrogates</a>
+		<li><a href="kiosktags.html#bfull">bFull</a>
+		<li><a href="kiosktags.html#bnext">bNext</a>
+		<li><a href="kiosktags.html#bprevious">bPrevious</a>
+		</ul>
+	<li><a href="kiosktags.html#flow">Flow Control</a>
+		<ul>
+		<li><a href="kiosktags.html#portfoliolist">Start Portfolio List, End Portfolio List</a>
+		<li><a href="kiosktags.html#loop">Start Loop, End Loop</a>
+		<li><a href="kiosktags.html#if">If, Else, End If</a>
+		<li><a href="kiosktags.html#include">Include</a>
+		</ul>
+	<li><a href="kiosktags.html#required">Required Section Tags</a>
+		<ul>
+		<li><a href="kiosktags.html#multirecreq">Multi-record Pages</a>
+		<li><a href="kiosktags.html#quicksearchreq">Quick Search</a>
+		<li><a href="kiosktags.html#datesearchreq">Date Search</a>
+		<li><a href="kiosktags.html#keywordsearchreq">Keyword Search</a>
+		</ul>
+	<li><a href="kiosktags.html#htmltranslation">HTML Translation</a>
+	</ul>
+<li><a href="4dtags.html">4D Tags</a>
+	<ul>
+    <li><a href="4dtags.html#4d_syntax">Overview of 4D Tag Syntax</a>
+    	<ul>
+    	<li><a href="4dtags.html#4dvar">4DVAR</a>
+    	<li><a href="4dtags.html#4dscript">4DSCRIPT</a>
+    	<li><a href="4dtags.html#4dif">4DIF, 4DELSE, 4DENDIF</a>
+    	<li><a href="4dtags.html#4dloop">4DLOOP</a>
+    	<li><a href="4dtags.html#4dif">4DIF, 4DELSE, 4DENDIF</a>
+    	<li><a href="4dtags.html#4dloop">4DLOOP</a>
+    	<li><a href="4dtags.html#4dnumsur">4DLOOP</a>
+    	<li><a href="4dtags.html#4dnumdet">4DLOOP</a>
+		 <li><a href="4dtags.html#4dreplace">Replace and Lowercase</a>
+    <li><a href="4dtags.html#variables">Page Variables</a>
+      <li><a href="4dtags.html#loops">Loops</a>
+    	<ul>
+    	<li><a href="4dtags.html#recordselection">RecordSelection</a>
+    	<li><a href="4dtags.html#quicksearchfields">QuickSearchFields</a>
+    	<li><a href="4dtags.html#quicksearchvalues">QuickSearchValues</a>
+    	</ul>
+	<li><a href="4dtags.html#image_paths">Image Paths</a>
+    	<ul>
+    	<li><a href="4dtags.html#filename">Filename</a>
+    	<li><a href="4dtags.html#thumbnailpath">ThumbnailPath</a>
+		<li><a href="4dtags.html#previewpath">PreviewPath</a>
+		<li><a href="4dtags.html#tagimagepath">TAGImagePath</a>
+
+    	</ul>
+    </ul>
+    <li><a href="4dtags.html#others">Others</a>
+    	<ul>
+    	<li><a href="4dtags.html#getdistinctvalues">GetDistinctValues</a>
+    	<li><a href="4dtags.html#gettimeelapsed">GetTimeElapsed</a>
+    	</ul>
+    </ul>
+<li><a href="4dtags.html">XML Data Sharing</a>
+	<ul>
+		<li><a href="xmlshare.html">XML Data Sharing</a>
+	</ul>
+<li><a href="appendix.html">Appendix</a>
+	<ul>
+		<li><a href="appendix.html#dynamic_portfolios">Dynamic Portfolios</a>
+		<li><a href="appendix.html#zoomiy">Zoomify</a>
+		<li><a href="appendix.html#service">Running as a Service</a>
+		<li><a href="appendix.html#update">Automated Update</a>
+		<li><a href="appendix.html#testserver">Using a Test Server</a>
+		<li><a href="appendix.html#robots">Managing Robots</a>
+		<li><a href="appendix.html#analytics">Tracking Hits with Google Analytics</a>
+		<li><a href="appendix.html#ldap">LDAP Image Security</a>
+		<li><a href="appendix.html#bookmark">Bookmarking</a>
+		<li><a href="appendix.html#maps">Google Maps</a>		
+		<li><a href="appendix.html#emuseumnetwork">eMuseum Network</a>		
+
+	</ul>
+</ul>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,1359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<title>EmbARK Web Kiosk Manual</title>
+	<style type="text/css">
+
+	h1 {
+		font-family: arial,sans-serif;
+		font-size: 16pt;
+		color: #333366;
+	}
+
+	h2 {
+		margin-bottom: 2pt;
+		font-family: arial,sans-serif;
+		font-size: 13pt;
+		color: #333366;
+	}
+
+	h3 {
+		margin-bottom: 2pt;
+		margin-top: 6pt;
+		font-family: arial,sans-serif;
+		font-size: 11pt;
+		color: #333366;
+	}
+
+	h4 {
+		margin-bottom: 0pt;
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+		color: #666699;
+	}
+
+	body {
+		font-family: arial,sans-serif;
+		font-size: 10pt;
+	}
+
+	ul {
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	</style>
+</head>
+
+<body>
+
+<a name="top"></a>
+
+<h1>XML Data Sharing</h1>
+
+This document describes special URLs that can be built to query and return results from EmbARK Web Kiosk systems.  Please refer to sample template files located in the <b>WebFolder</b> directory of the default EmbARK Web Kiosk installation.  The possible uses for this feature are limitless.  A custom template may be created to generate XML output of collection data with another software tool.   For example, data may be formatted in the CDWA Lite or <a href="http://www.lido-schema.org/schema/v1.0/lido-v1.0-schema-listing.html" target=_blank>LIDO</a> standard formats. Such data may be exported directly to a file; or, a data harvester could access the URL and essentially import the data directly. Note: Links to XML data could be restricted to <a href="kiosktags.html#if"><b>logged in</b></a> authorized users.
+
+<br><br>
+<a href="#create">Creating a Template</a>&nbsp;|&nbsp;
+<a href="#request">Request</a>&nbsp;|&nbsp;
+<a href="#response">Response</a>&nbsp;
+
+<br><br>
+
+<h2><a name="create"></a><span style='mso-bookmark:
+_Toc175117439'>Creating A Template</span></h2>
+
+The recommended method for creating a template is to copy a sample one and rename the file.  The template may be modified to meet the specific data requirements for the project.  Standard conventions for the creation of XML namespaces apply but are not documented in this manual.
+
+<br><br>
+
+The templates make use of <a href="4dtags.html">4D Tag Syntax</a> for the display of data.  Fields from the primary table may be displayed.  Additionally, data from most related tables may be displayed through the use of <b>4D Loops</b>.  Data may be displayed conditionally through the use of the <b>4DIF</b> tag.
+
+<br><br>
+
+<hr>
+
+<h2><a name="request"></a><span style='mso-bookmark:
+_Toc175117439'>Request</span></a></h2>
+
+<h3><a name="_Toc175117440"></a><a name="_Toc171757981"><span style='mso-bookmark:
+_Toc175117440'>Required Querystring Parameters</span></a></h3>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=144 valign=top style='width:1.5in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Parameter Name<o:p></o:p></b></p>
+  </td>
+  <td width=95 valign=top style='width:71.25pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Values<o:p></o:p></b></p>
+  </td>
+  <td width=409 valign=top style='width:306.75pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=144 valign=top style='width:1.5in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>layout</p>
+  </td>
+  <td width=95 valign=top style='width:71.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>string</p>
+  </td>
+  <td width=409 valign=top style='width:306.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>This string must exactly match the name of the template
+  that should be used to render results, not including the file extension. Templates
+  should have a file extension of “.shtml”, unless the “format” parameter
+  specifies otherwise. (See below.) This template must exist in the root web
+  directory, as specified in the EmbARK Web Kiosk preferences.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td width=144 valign=top style='width:1.5in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>query</p>
+  </td>
+  <td width=95 valign=top style='width:71.25pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>See “Query Parameter Format” below.</p>
+  </td>
+  <td width=409 valign=top style='width:306.75pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The conditions that will be used to retrieve a result set.</p>
+  </td>
+ </tr>
+</table>
+
+<h3><a name="_Toc175117441"></a><a name="_Toc171757982"><span style='mso-bookmark:
+_Toc175117441'>Optional Querystring Parameters</span></a></h3>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=149 valign=top style='width:1.55in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Parameter Name<o:p></o:p></b></p>
+  </td>
+  <td width=91 valign=top style='width:68.35pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Values<o:p></o:p></b></p>
+  </td>
+  <td width=408 valign=top style='width:306.05pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=149 valign=top style='width:1.55in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>format</p>
+  </td>
+  <td width=91 valign=top style='width:68.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>“shtml” (default), “xml”, etc.</p>
+  </td>
+  <td width=408 valign=top style='width:306.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>By default, the kiosk will look for a file with an
+  extension of <b style='mso-bidi-font-weight:normal'>“.shtml</b>” to display
+  results. To use a different format, such as xml, you may use this parameter
+  to override the default.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=149 valign=top style='width:1.55in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>startRecord</p>
+  </td>
+  <td width=91 valign=top style='width:68.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>integer</p>
+  </td>
+  <td width=408 valign=top style='width:306.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Specifies the first record in the selection to display. Specifying
+  a value larger than the number of records in the selection returns an error.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=149 valign=top style='width:1.55in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>maximumRecords</p>
+  </td>
+  <td width=91 valign=top style='width:68.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>integer</p>
+  </td>
+  <td width=408 valign=top style='width:306.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Specifies the maximum number of records to render in the
+  page. <b style='mso-bidi-font-weight:normal'>Defaults to 10.</b>  A value of <b>-1</b> will return all records that match the query criteria.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td width=149 valign=top style='width:1.55in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>recordType</p>
+  </td>
+  <td width=91 valign=top style='width:68.35pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>string: internal or user name of EmbARK table</p>
+  </td>
+  <td width=408 valign=top style='width:306.05pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The type of record to display in the page. <b
+  style='mso-bidi-font-weight:normal'>Defaults to</b> <b style='mso-bidi-font-weight:
+  normal'>Object </b>records (“Objects_1”). If the “Viewed table and field
+  names” Preference is turned on, recordType must be the user-defined file
+  name. Otherwise, it should be the internal table name from EmbARK.</p>
+  </td>
+ </tr>
+</table>
+
+<h3><a name="_Toc175117442"></a><a name="_Toc171757983"><span style='mso-bookmark:
+_Toc175117442'>Query Parameter Format</span></a></h3>
+
+<p class=MsoNormal>The general format for a query strings is [field] [relation]
+[term]. For example, title=dog will return all records where the title is
+“dog”.</p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><u>NOTE</u>: </b>We
+should/will support the use of quotation marks. But we don’t yet… As a result,
+using reserved conjunction or relation words in your term will result in an invalid search!</p>
+
+<h4>Field</h4>
+
+<p class=MsoNormal>If the “Viewed table and field names” Preference is turned
+on, then the field name should be the user-defined field name from EmbARK. (See
+“<b style='mso-bidi-font-weight:normal'><a href="#encoded_characters">Encoded characters</a></b> below.)
+Otherwise, the field name should be the internal field name from EmbARK.</p>
+
+<p class=MsoNormal>By default, the field is assumed to be in the table from
+which results will be returned (see <b style='mso-bidi-font-weight:normal'>recordType</b>
+parameter, above).</p>
+
+<p class=MsoNormal>To query based on a field in a different table, prefix the
+field name with the table name, in the format [table]field. If the “Viewed
+table and field names” Preference is turned on, use the user-defined file name
+(e.g. [object]title); otherwise, use the internal table name from EmbARK (e.g.
+[objects_1]disp_title). After conducting the search in the related table, the
+EmbARK Web Kiosk will retrieve all of the linked records from the results
+table. For example, if <b style='mso-bidi-font-weight:normal'>recordType=object</b>,
+and the query string is [<b style='mso-bidi-font-weight:normal'>artist]nationality=French</b>,
+the EmbARK Web Kiosk will first query for all artists whose nationality is
+“French” (case-insensitive), then will return all of the object records linked
+to all these artists. That is, the search returns all objects that are linked
+to artists whose nationality is “French”.</p>
+
+
+<p class=MsoNormal>For ease-of-use, the following special field names are also
+available:</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=156 valign=top style='width:117.0pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Field name<o:p></o:p></b></p>
+  </td>
+  <td width=492 valign=top style='width:369.0pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=156 valign=top style='width:117.0pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>_ID</p>
+  </td>
+  <td width=492 valign=top style='width:369.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>internal id (numeric)</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=156 valign=top style='width:117.0pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>mfs</p>
+  </td>
+  <td width=492 valign=top style='width:369.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>“MFS” is a multi-field google-like search. It will search
+  across multiple fields as defined by the EmbARK Administrator. This option is
+  only available for object records.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+  <td width=156 valign=top style='width:117.0pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>keyword</p>
+  </td>
+  <td width=492 valign=top style='width:369.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Searches through the hierarchical keyword terms applied to
+  an object. Because keywords are hierarchical, a search for “keyword=animal”
+  will include objects with keywords such as “bird”, “horse”, etc. This option
+  is only available for object records.</p>
+  </td>
+ </tr>
+  <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+  <td width=156 valign=top style='width:117.0pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>within current selection</p>
+  </td>
+  <td width=492 valign=top style='width:369.0pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b>query=[Objects_1]_Objects_1_id within Current Selection</b> can be used to create a display link within a standard Kiosk page and will load the current record set.<br><br>
+  Example:<br>
+  &lt;a href="results.html?sid={SessionId}&layout=lido&format=xml&maximumrecords=-1&recordType=objects_1&query=[Objects_1]_Objects_1_id within Current Selection" target=_blank&gt;LIDO XML&lt;/a&gt;
+  </p>
+  </td>
+ </tr>
+</table>
+
+<h4>String parameters</h4>
+
+<p class=MsoNormal>The following relations are available for string (alpha or
+text) fields:</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Relation<o:p></o:p></b></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>=</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Exact match. Note: this relation must be percent-encoded
+  as %3D. (See “<b style='mso-bidi-font-weight:normal'><a href="#encoded_characters">Encoded characters</a></b>”
+  below.) For example, to do a search for title=hen, the query must be encoded
+  in the URL as “query=title%3Dhen”.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>exact</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Exact match. This relation must have a space on either
+  side. e.g. “title exact hen” is the same as “title=hen” and “title = hen”,
+  but “titleexacthen” is invalid.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>any</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The term will be broken into words, then results will
+  include records that match at least one of those words. This relation must
+  have a space on either side. e.g. “title any hen rooster” will search for
+  records that have “hen” or “rooster” (or both) as words in the title.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>all</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The term will be broken into words, then results will
+  include only those records that match all of the term words, in any order.
+  This relation must have a space on either side. e.g. “title all hen rooster”
+  will search for records that have both “hen” and “rooster” as words in the
+  title.</p>
+  </td>
+ </tr>
+</table>
+
+
+<p class=MsoNormal>To do a ‘contains’ search, just append @ to your search
+term, percent-encoded as %40 (see “<b style='mso-bidi-font-weight:normal'><a href="#encoded_characters">Encoded characters</a></b>” below). For example, to do a search that returns both “hen” and
+“hens”, use “hen%40” as your search term. To return “hen”, “hens” and “then”,
+use “%40hen%40”.</p>
+
+<p class=MsoNormal>EmbARK Web Kiosk searches are always case-insensitive.</p>
+
+<h4>Numeric parameters</h4>
+
+<p class=MsoNormal>The following relations are available for numeric (integer,
+longint or real) fields.</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Relation<o:p></o:p></b></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>=</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>equals</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;<o:p>&nbsp;</o:p></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>less than</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&gt;<o:p>&nbsp;</o:p></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>greater than</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;=</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>less than or equal to</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&gt;=</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>greater than or equal to</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6;mso-yfti-lastrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;&gt;<o:p>&nbsp;</o:p></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>not equal to</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><o:p>&nbsp;</o:p></b></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Note:</b> Any time an
+equals sign appears in a relation, it must be percent-encoded as %3D (see “<b
+style='mso-bidi-font-weight:normal'><a href="#encoded_characters">Encoded characters</a></b>” below). So, for
+example, a search for _id=257 must be encoded in the URL as “query=_id%3D257”.</p>
+
+<h4>Date parameters</h4>
+
+<p class=MsoNormal>The following relations are available for string (alpha or
+text) fields:</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Relation<o:p></o:p></b></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>=</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>equals</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;<o:p>&nbsp;</o:p></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>less than</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&gt;<o:p>&nbsp;</o:p></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>greater than</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;=</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>less than or equal to</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&gt;=</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>greater than or equal to</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>&lt;&gt;<o:p>&nbsp;</o:p></p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>not equal to</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7;mso-yfti-lastrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>within</p>
+  </td>
+  <td width=552 valign=top style='width:5.75in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The term will be split into two dates, then results will
+  include records whose date falls anywhere between those two dates.</p>
+  </td>
+ </tr>
+</table>
+
+<h4>Joining multiple search parameters</h4>
+
+<p class=MsoNormal>To do a query that includes multiple parameters, use the
+format:</p>
+
+<p class=MsoNormal style='text-indent:.5in'>[field] [relation] [term] [conjunction]
+[field] [relation] [term]</p>
+
+<p class=MsoNormal><span style='mso-bidi-font-size:10.0pt;font-family:Arial;
+color:navy'>http://webkiosk.gallerysystems.com/results.html?layout=vg&amp;format=xml&amp;recordType=objects_1&amp;query=_id=482%20or%20_id=2196<o:p></o:p></span></p>
+
+<p>(Use the template called "vg.xml" to display Objects where the _ID equals 482 or _ID equals 2196)</p>
+
+<p class=MsoNormal>There is no limit to how many parameters you may include in
+a query, though more parameters of course slow down the execution of the query.</p>
+
+<p class=MsoNormal>Allowed conjunctions are:</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Conjunction<o:p></o:p></b></p>
+  </td>
+  <td width=533 valign=top style='width:5.55in;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>and</p>
+  </td>
+  <td width=533 valign=top style='width:5.55in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Both query parameters must be met.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>or</p>
+  </td>
+  <td width=533 valign=top style='width:5.55in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>Either the first or the second parameter must be met.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+  <td width=115 valign=top style='width:1.2in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>not</p>
+  </td>
+  <td width=533 valign=top style='width:5.55in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The first parameter must be met, but the second parameter
+  must not be met.</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>Conjunctions must have a space on either side in order to
+get parsed correctly.</p>
+
+<u><span style='font-size:12.0pt;mso-bidi-font-size:14.0pt;font-family:"Trebuchet MS";
+mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:"Times New Roman";
+mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA;
+mso-bidi-font-weight:bold'><br clear=all style='page-break-before:always'>
+</span></u>
+
+<a name="encoded_characters"></a>
+<h4>Encoded characters</h4>
+
+<p class=MsoNormal>The following characters must be percent-encoded in the
+query parameter of the URL:</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=240
+ style='width:2.5in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b
+  style='mso-bidi-font-weight:normal'>character<o:p></o:p></b></p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b
+  style='mso-bidi-font-weight:normal'>percent encoded<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>=</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%3D</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>/</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%2F</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>space</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%20</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>!</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%21</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>*</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%2A</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>‘</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%27</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>(</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%28</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>)</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%29</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>;</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%3B</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:10'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>:</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%3A</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:11'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>@</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%40</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:12'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>&amp;</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%26</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:13'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>+</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%2B</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:14'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>$</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>$24</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:15'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>,</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%2C</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:16'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>?</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%3F</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:17'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%25</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:18'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>#</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%23</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:19'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>[</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%5B</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:20;mso-yfti-lastrow:yes'>
+  <td width=96 valign=top style='width:1.0in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>]</p>
+  </td>
+  <td width=144 valign=top style='width:1.5in;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'>%5D</p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><u>Note</u></b>: The
+EmbARK Web Kiosk uses 4D Web Server technology. 4D does not treat accented
+characters any differently from characters without accents. So a search for
+“naivete” will include results of “naïveté”.</p>
+
+<h3><a name="_Toc171757984"></a><a name="_Toc175117443"><span style='mso-bookmark:
+_Toc171757984'>Examples</span></a><span style='mso-bookmark:_Toc171757984'></span></h3>
+
+<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l14 level1 lfo16;
+tab-stops:list .25in'><span style='mso-bookmark:_Toc171757984'><![if !supportLists]><span
+style='mso-bidi-font-size:10.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b style='mso-bidi-font-weight:normal'>results.html?layout=thumbnails&amp;query=title%3d%40girl%40<o:p></o:p></b></span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'>Finds
+all records where the title contains “girl”, and returns these results in the
+thumbnails.shtml template.</span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l14 level1 lfo16;
+tab-stops:list .25in'><span style='mso-bookmark:_Toc171757984'><![if !supportLists]><span
+style='mso-bidi-font-size:10.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b style='mso-bidi-font-weight:normal'>results.html?layout=pachyderm&amp;format=xml&amp;query=mfs
+any basket cup<span style='mso-spacerun:yes'>    </span><i style='mso-bidi-font-style:
+normal'>or</i><o:p></o:p></b></span></p>
+
+<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l14 level1 lfo16;
+tab-stops:list .25in'><span style='mso-bookmark:_Toc171757984'><![if !supportLists]><span
+style='mso-bidi-font-size:10.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b style='mso-bidi-font-weight:normal'>results.html?layout=pachyderm&amp;format=xml&amp;query=mfs%20any%20basket%20cup<o:p></o:p></b></span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'>Performs
+a “quick search” with the terms “basket” and “cup”, returning all results that
+have at least one of these terms. A “quick search” uses pre-configured indexes
+to look across multiple fields which have been selected by the EmbARK
+Administrator for the database. The results will be formatted with the
+pachyderm.xml template.</span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l14 level1 lfo16;
+tab-stops:list .25in'><span style='mso-bookmark:_Toc171757984'><![if !supportLists]><span
+style='mso-bidi-font-size:10.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b style='mso-bidi-font-weight:normal'>results.html?layout=list&amp;query=[artist]last
+name=matisse<span style='mso-spacerun:yes'>        </span><i style='mso-bidi-font-style:
+normal'>or</i><o:p></o:p></b></span></p>
+
+<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l14 level1 lfo16;
+tab-stops:list .25in'><span style='mso-bookmark:_Toc171757984'><![if !supportLists]><span
+style='mso-bidi-font-size:10.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b style='mso-bidi-font-weight:normal'>results.html?layout=list&amp;query=[artist]last%20name=matisse<o:p></o:p></b></span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'>Finds
+all records linked to artists where the last name is matisse. Results are
+returned in the list.shtml template.</span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'><o:p>&nbsp;</o:p></span></p>
+
+<p class=MsoNormal style='margin-left:.25in;text-indent:-.25in;mso-list:l14 level1 lfo16;
+tab-stops:list .25in'><span style='mso-bookmark:_Toc171757984'><![if !supportLists]><span
+style='mso-bidi-font-size:10.0pt;font-family:Symbol;mso-fareast-font-family:
+Symbol;mso-bidi-font-family:Symbol'><span style='mso-list:Ignore'>·<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><b style='mso-bidi-font-weight:normal'>results.html?layout=pachyderm&amp;format=xml&amp;query=keyword%3d%40birds<o:p></o:p></b></span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'>Finds
+all object records that include the keyword “birds”. This will also include
+objects that have keywords such as “rooster”, “ostrich” or “pigeon” which are
+nested under the “bird” keyword. Results will be formatted with the
+pachyderm.xml template.</span></p>
+
+<p class=MsoNormal style='margin-left:27.0pt'><span style='mso-bookmark:_Toc171757984'><o:p>&nbsp;</o:p></span></p>
+
+<hr>
+
+<h2><span style='mso-bookmark:_Toc171757984'><a name="response">Response</a></span></h2>
+
+<h3><a name="_Toc175117445"></a><a name="_Toc171757985"><span style='mso-bookmark:
+_Toc175117445'>Available Template Variables</span></a></h3>
+
+<p class=MsoNormal>The following variables can be incorporated into a template
+using the standard syntax &lt;!--#<span style='mso-tab-count:1'>          </span>4DVAR
+variableName--&gt;.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=648
+ style='width:6.75in;margin-left:23.4pt;border-collapse:collapse;border:none;
+ mso-border-alt:solid windowtext .5pt;mso-yfti-tbllook:480;mso-padding-alt:
+ 0in 5.4pt 0in 5.4pt;mso-border-insideh:.5pt solid windowtext;mso-border-insidev:
+ .5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Variable name<o:p></o:p></b></p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Description<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>startRecord</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The first record to display. <b style='mso-bidi-font-weight:
+  normal'>Defaults to 1.</b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>numberOfRecords</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The number of records in the result set. <b
+  style='mso-bidi-font-weight:normal'>Defaults to 10.</b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>nextRecordPosition</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The number of the record immediately following those
+  displayed on the current page. If there are no remaining records, returns -1.
+  For example, if there are 25 records in the result set and records 11-20 are
+  currently displaying, nextRecordPosition = 21.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>lastRecord</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>The last record in the returned result set. For example,
+  if there are 25 records in the result set and records 11-20 are currently
+  displaying, lastRecord = 20.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>atQueryFields</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>An array of the fields that were searched.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:6'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>atQueryRelations</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>An array of the relations that were used to conduct the
+  search, in the same order as atQueryFields.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:7'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>atQueryTerms</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>An array of the terms that were searched for, in the same
+  order as atQueryFields and atQueryRelations.</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:8'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>atConjunctions</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>An array of the conjunctions that join a given query
+  parameter to the next query parameter (for multi-parameter searches).</p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:9;mso-yfti-lastrow:yes'>
+  <td width=142 valign=top style='width:106.8pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>pResultsTable</p>
+  </td>
+  <td width=506 valign=top style='width:379.2pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal>A pointer to the table that is being queried.</p>
+  </td>
+ </tr>
+</table>
+
+<h3><a name="_Toc175117446">Available Template Scripts</a></h3>
+
+<p class=MsoNormal>The format for using the following scripts is
+&lt;!--#4DSCRIPT/MethodName/Parameter--&gt;.</p>
+
+<h4>FormatString</h4>
+
+<p class=MsoNormal>This script is just an entry point into 4D’s standard STRING
+command. See the 4D documentation for details.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>The parameter should be a field name, formatted as
+[Table]Field, followed by a slash and the format string.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Example</b>:
+&lt;!--#4DSCRIPT/[Table]NumberField/0000--&gt; will format the number that’s in
+[Table]NumberField to display as 4 digits, with leading zeroes if necessary.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'>Notes</b>:</p>
+
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal style='mso-list:l16 level1 lfo18;tab-stops:list .5in'>4D’s
+     options for formatting dates are limited to 8 options. To use this
+     feature, use the number for the format, not the text equivalent. For
+     example, you would use “3” instead of “Long”.</li>
+</ul>
+
+<h4>Year</h4>
+
+<p class=MsoNormal>This script just runs 4D’s standard YEAR OF command.</p>
+
+
+<p class=MsoNormal>The parameter should be a date field name, formatted as
+[Table]DateField.</p>
+
+<p class=MsoNormal><span style='mso-bidi-font-size:10.0pt;mso-bidi-font-family:
+"Trebuchet MS"'>&lt;!--#4DSCRIPT/Year/</span><span style='mso-bidi-font-size:
+10.0pt;font-family:"Courier New"'>[Objects_1]_Disp_End_Date</span><span
+style='mso-bidi-font-size:10.0pt;mso-bidi-font-family:"Trebuchet MS"'>--&gt;</span></p>
+
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr><td align="right"><a href="#top">back to top</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<hr></td></tr>
+</table>
+
+</body>
+
+</html>
