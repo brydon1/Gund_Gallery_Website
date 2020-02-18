@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Portfolios/list.htm-->
+<html lang="en">
+<head>
+    <title>Gund Gallery Database Home Page</title>
+    <!--%{Include head.inc}%
+    %{Include scripts.inc}%-->
+    <link rel="stylesheet" type="text/css" href="css/kioskstyles.css"/>
+</head>
+
+<!--Not sure if onload needed or not???-->
+<body onload="setMenu('portfolios');" class="clearfix">
+    <!--%{Include nav.inc}%-->
+
+    <!-- Added left-menu -->
+    <div id="left-menu">
+
+        <div class="menu-item">
+            <form name="searchForm" id="searchForm" action="/4DACTION/HANDLECGI/CTN3" method="post">
+                <input type="hidden" name="sid" value="61386"/>
+                <input type="hidden" name="SearchType" value="all"/>
+                <input type="hidden" name="WholeWord" value="0"/>
+                <input type="hidden" name="RefineSearch" value="NewSelection"/>
+
+                <input type="text" name="theKW" size="10" style="background-color: #CCCCCC; width: 85;"/>
+                <input type="button" onclick="document.searchForm.submit()" value="search"/>
+            </form>
+        </div>
+
+        <div class="menu-item" id="home" onmouseover="menuOn('home');" onmouseout="menuOff('home');" onclick="document.location='/';"><a href="/?sid=61386&x=5263880">Home</a></div>
+
+        <div class="menu-item" id="collections" onmouseover="menuOn('collections');" onmouseout="menuOff('collections');" onclick="document.location='/IT_-1?sid=61386&x=5263881';"><a href="/kiosk/browseartist.htm?sid=61386&x=5263882">Browse Artist <!--Themes--></a></div>
+
+        <!--<div class="menu-item" id="portfolios" onmouseover="menuOn('portfolios');" onmouseout="menuOff('portfolios');" onclick="document.location='/POR1?sid={SessionId}&x={Sequence}';"><a href="/POR1?sid={SessionId}&x={Sequence}">Collections</a></div>-->
+
+        <!--<div class="menu-item" id="community" onmouseover="menuOn('community');" onmouseout="menuOff('community');" onclick="document.location='/SPOR1?sid={SessionId}&x={Sequence}';"><a href="/SPOR1?sid={SessionId}&x={Sequence}">User Galleries</a></div>-->
+
+        <!--<div class="menu-item" id="search" onmouseover="menuOn('search');" onmouseout="menuOff('search');" onclick="document.location='/QS_2?sid={SessionId}&x={Sequence}';"><a href="/QS_2?sid={SessionId}&x={Sequence}">Search</a></div>-->
+
+        
+            <!--<div class="menu-item" id="logon" onmouseover="menuOn('logon');" onmouseout="menuOff('logon');" onclick="document.location='/ULOG?sid={SessionID}&x={Sequence}'"><a href="/ULOG?sid={SessionId}&x={Sequence}">Log on</a></div>-->
+        
+
+        <div class="menu-item" id="help" onmouseover="menuOn('help');" onmouseout="menuOff('help');"><a href="/kiosk/help.htm" target="_blank">Help</a></div>
+    </div> 
+
+    <div class="container" id="content"> <!-- title and navigation -->
+        <p>The Gund Gallery Collection is dedicated to 20th and 21st century art.  This focus was chosen to expose students and our community to the rich array of material, conceptual techniques and methodologies deployed by artists of the 20th and 21st centuries.  The collection fosters opportunities to contribute to Kenyon College’s liberal arts curricula and the community through exhibitions and collections-dependent programs. </p>
+        <p>The Gund Gallery Collection is made up of works collected by the college over its history and was seeded by a recent gift of 80 works of important contemporary art generously donated by Mr. and Mrs. Graham and Ann Gund. Graham Gund, a noted architect, collector and philanthropist, is a 1963 graduate of Kenyon. The substantial donation includes work by Bernd &amp; Hilla Becher, Ingrid Calame, Dale Chihuly, Christo and Jeanne-Claude, Antony Gormley, Philip Guston, Roy Lichtenstein, Paul Manship, Laura McPhee, Henry Moore, Kenneth Noland, Claes Oldenberg, Pablo Picasso, Robert Rauschenberg, James Rosenquist, Joel Sternfeld, and other eminent artists of the 20th and 21st centuries. </p>
+        
+
+
+
+
+
+<!-- Continue Editing Here -->
+        <!-- Maybe delete? -->
+        <h1>Browse the Portfolios</h1>
+        <p class="lead">
+            Click any image below to begin browsing through the portfolio.
+        </p>
+
+        <div class="row">
+            <div class="col col-sm col-md-5 col-lg-4 col-xl-4 mr-auto">
+                <form id='popup' name='popup' title='popup' method='get' action='%{Link;Objects_1;portfolio;records=12}%'>
+                    <input type='hidden' name='records' value='9' />
+                    <select class="form-control" name='query' id='query' title='query' onchange='document.forms["popup"].submit()'>
+                        <!--#4DEVAL gsFunc_AllFilteredRecords(->[Portfolios]; ->[Portfolios]Port_Name)-->
+                        <!--#4dloop [Portfolios]-->
+                            <option value='Portfolios=<!--#4Dtext [Portfolios]_Port_ID-->' <!--#4Dif (lFirstRec = Selected Record number([Portfolios])) --> selected='selected' <!--#4Dendif-->>
+                                <!--#4Dtext ([Portfolios]Port_Name)-->
+                            </option>
+                        <!--#4dendloop -->
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        %{Include pagenavigation.inc}%
+
+    </div>
+
+    <div style="position: relative;">
+        <div class="container-fluid">
+            <a name="main"></a>
+
+            <!--#4DEVAL (gsFunc_SetSelectedRecord(->[Portfolios]; gsFunc_GetCount("First Record")))-->  <!-- loads the first record -->
+            <!--#4DEVAL $i:=gsFunc_GetCount("First Record")-->                          <!-- set temp counter for the loop -->
+
+            <!-- The following will repeat for each record in the page. -->
+            <div class="row galleryGrid">
+                <!--#4DLOOP ($i <= gsFunc_GetCount("Last Record"))-->                       <!-- loop based on the temp counter -->
+                    <!--#4DEVAL $i:=$i+1-->                                                 <!-- increment the temp counter -->
+                    <div class="col text-center">
+                        <div class="card hoverOutline" style="width:128px; margin-bottom:10px;">
+                            <div class="card-img-top text-center" style="max-width:128px;max-height:128px;">
+                                <a href="<!--4Dtext gsFunc_Link("Objects_1;portfolio;0;records=12;query=Portfolios=[Portfolios]_Port_ID")-->" >
+                                    <!--#4Dif (gsFunc_HasImage(->[Portfolios]))-->
+                                        <img src="<!--#4Dvar gsFunc_GetImage (->[Portfolios];"Thumbnail Url")-->"
+                                             class="rounded"
+                                             height="<!--#4Dvar gsFunc_GetImage (->[Portfolios];"Proportional Height max 128")-->"
+                                             width="<!--#4Dvar gsFunc_GetImage (->[Portfolios];"Proportional Width max 128")-->"
+                                             alt="Cover thumbnail for <!--#4Dtext ([Portfolios]Port_Name)-->" />
+                                     <!--#4Delse-->
+                                        <img src="/graphics/DefaultThumbnail.gif"
+                                             alt="Thumbnail for missing image of <!--#4Dtext [Portfolios]Port_Name-->" />
+                                     <!--#4Dendif-->
+                                </a>
+                            </div>
+                            <div class="border-top text-center px-2">
+                                <p class="card-title">
+                                    <a class="noColor" href="<!--4Dtext gsFunc_Link("Objects_1;portfolio;0;records=12;query=Portfolios=[Portfolios]_Port_ID")-->" style="text-decoration:none;">
+                                        <!--#4Dtext ([Portfolios]Port_Name)-->
+                                    </a>
+                                    <br/>
+                                    <small class="card-text text-muted">
+                                        <!--#4Dtext ([Portfolios]PortSize)--> record(s)
+                                    </small>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--#4DEVAL NEXT RECORD([Portfolios])-->                                 <!-- load the next record -->
+                <!--#4DENDLOOP-->
+            </div>
+        </div>
+    </div>
+
+    %{Include footer.inc}%
+</body>
+
+</html>
